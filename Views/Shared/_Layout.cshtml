@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script>
+        function zegarek()
+        {
+            var data = new Date();
+            var godzina = data.getHours();
+            var minuta = data.getMinutes();
+            var sekunda = data.getSeconds();
+            var dzien = data.getDate();
+            var dzienN = data.getDay();
+            var miesiac = data.getMonth();
+            var rok = data.getFullYear();
+
+            if (minuta < 10) minuta = "0" + minuta;
+            if (sekunda < 10) sekunda = "0" + sekunda;
+
+            var dni = new Array("niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota");
+            var miesiace = new Array("stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca", "lipca", "sierpnia", "września", "października", "listopada", "grudnia");
+
+            var pokazDate = '&nbsp;' + dni[dzienN] + ' | ' + dzien + ' ' + miesiace[miesiac] + ' ' + rok + " | " + godzina + ':' + minuta + ':' + sekunda;
+            document.getElementById("zegar").innerHTML = pokazDate;
+
+            setTimeout(zegarek, 1000);
+        }
+    </script>
+
+
+</head>
+<body onload="zegarek()">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("SARS-Cov2", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Role", "Index", "Role")</li>
+
+
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- dodano zegar -->
+    <div id="zegar" style="text-align: center; font-weight:bold; color: red; font-family: Arial, sans-serif;
+         font-size: 16px;"></div>
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <table>
+                <tr>
+                    <td style="font-weight:bold;">&copy; @DateTime.Now.Year - My ASP.NET Application &nbsp; </td>
+                    <td style="font-weight:bold;"> &nbsp;|&nbsp;Praca inżynierska PŁ WEEIA &nbsp; &nbsp;|&nbsp;</td>
+                    <td style="font-weight:bold;"> &nbsp;&nbsp;Mariusz Witczak indeks: 218186 &nbsp;|&nbsp;</td>
+
+                </tr>
+            </table>
+        </footer>
+        <hr />
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
