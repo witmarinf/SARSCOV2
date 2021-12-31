@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="miasta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="miasto" Type="varchar" MaxLength="50" />
+          <Property Name="populacja" Type="int" />
+        </EntityType>
+        <EntityType Name="pow_source">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wojewodztwo" Type="varchar" MaxLength="50" />
+          <Property Name="powiat_miasto" Type="varchar" MaxLength="50" />
+          <Property Name="liczba_przypadkow" Type="int" />
+          <Property Name="liczba_na_10_tys_mieszkancow" Type="varchar" MaxLength="50" />
+          <Property Name="zgony" Type="int" />
+          <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="int" />
+          <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="int" />
+          <Property Name="liczba_zlecen_poz" Type="int" />
+          <Property Name="liczba_ozdrowiencow" Type="int" />
+          <Property Name="liczba_osob_objetych_kwarantanna" Type="int" />
+          <Property Name="liczba_wykonanych_testow" Type="int" />
+          <Property Name="liczba_testow_z_wynikiem_pozytywnym" Type="int" />
+          <Property Name="liczba_testow_z_wynikiem_negatywnym" Type="int" />
+          <Property Name="liczba_pozostalych_testow" Type="int" />
+          <Property Name="teryt" Type="varchar" MaxLength="50" />
+          <Property Name="stan_rekordu_na" Type="date" />
+        </EntityType>
+        <EntityType Name="pow_target">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wojewodztwo" Type="varchar" MaxLength="50" />
+          <Property Name="powiat_miasto" Type="varchar" MaxLength="50" />
+          <Property Name="liczba_przypadkow" Type="int" />
+          <Property Name="liczba_na_10_tys_mieszkancow" Type="varchar" MaxLength="50" />
+          <Property Name="zgony" Type="int" />
+          <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="int" />
+          <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="int" />
+          <Property Name="liczba_zlecen_poz" Type="int" />
+          <Property Name="liczba_ozdrowiencow" Type="int" />
+          <Property Name="liczba_osob_objetych_kwarantanna" Type="int" />
+          <Property Name="liczba_wykonanych_testow" Type="int" />
+          <Property Name="liczba_testow_z_wynikiem_pozytywnym" Type="int" />
+          <Property Name="liczba_testow_z_wynikiem_negatywnym" Type="int" />
+          <Property Name="liczba_pozostalych_testow" Type="int" />
+          <Property Name="teryt" Type="varchar" MaxLength="50" />
+          <Property Name="stan_rekordu_na" Type="date" />
+        </EntityType>
+        <EntityType Name="woj_source">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wojewodztwo" Type="varchar" MaxLength="50" />
+          <Property Name="liczba_przypadkow" Type="int" />
+          <Property Name="liczba_na_10_tys_mieszkancow" Type="varchar" MaxLength="50" />
+          <Property Name="zgony" Type="int" />
+          <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="int" />
+          <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="int" />
+          <Property Name="liczba_zlecen_poz" Type="int" />
+          <Property Name="liczba_ozdrowiencow" Type="int" />
+          <Property Name="liczba_osob_objetych_kwarantanna" Type="int" />
+          <Property Name="liczba_wykonanych_testow" Type="int" />
+          <Property Name="liczba_testow_z_wynikiem_pozytywnym" Type="int" />
+          <Property Name="liczba_testow_z_wynikiem_negatywnym" Type="int" />
+          <Property Name="liczba_pozostalych_testow" Type="int" />
+          <Property Name="teryt" Type="varchar" MaxLength="50" />
+          <Property Name="stan_rekordu_na" Type="date" />
+        </EntityType>
+        <EntityType Name="woj_target">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wojewodztwo" Type="varchar" MaxLength="50" />
+          <Property Name="liczba_przypadkow" Type="int" />
+          <Property Name="liczba_na_10_tys_mieszkancow" Type="float" />
+          <Property Name="zgony" Type="int" />
+          <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="int" />
+          <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="int" />
+          <Property Name="liczba_zlecen_poz" Type="int" />
+          <Property Name="liczba_ozdrowiencow" Type="int" />
+          <Property Name="liczba_osob_objetych_kwarantanna" Type="int" />
+          <Property Name="liczba_wykonanych_testow" Type="int" />
+          <Property Name="liczba_testow_z_wynikiem_pozytywnym" Type="int" />
+          <Property Name="liczba_testow_z_wynikiem_negatywnym" Type="int" />
+          <Property Name="liczba_pozostalych_testow" Type="int" />
+          <Property Name="teryt" Type="varchar" MaxLength="50" />
+          <Property Name="stan_rekordu_na" Type="date" />
+        </EntityType>
+        <EntityType Name="wojewodztwa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wojewodztwo" Type="varchar" MaxLength="50" />
+          <Property Name="populacja" Type="int" />
+          <Property Name="code" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityContainer Name="DBModelStoreContainer">
+          <EntitySet Name="miasta" EntityType="Self.miasta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pow_source" EntityType="Self.pow_source" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pow_target" EntityType="Self.pow_target" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="woj_source" EntityType="Self.woj_source" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="woj_target" EntityType="Self.woj_target" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wojewodztwa" EntityType="Self.wojewodztwa" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="miasta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="miasto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="populacja" Type="Int32" />
+        </EntityType>
+        <EntityType Name="pow_source">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wojewodztwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="powiat_miasto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="liczba_przypadkow" Type="Int32" />
+          <Property Name="liczba_na_10_tys_mieszkancow" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zgony" Type="Int32" />
+          <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="Int32" />
+          <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="Int32" />
+          <Property Name="liczba_zlecen_poz" Type="Int32" />
+          <Property Name="liczba_ozdrowiencow" Type="Int32" />
+          <Property Name="liczba_osob_objetych_kwarantanna" Type="Int32" />
+          <Property Name="liczba_wykonanych_testow" Type="Int32" />
+          <Property Name="liczba_testow_z_wynikiem_pozytywnym" Type="Int32" />
+          <Property Name="liczba_testow_z_wynikiem_negatywnym" Type="Int32" />
+          <Property Name="liczba_pozostalych_testow" Type="Int32" />
+          <Property Name="teryt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stan_rekordu_na" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="pow_target">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wojewodztwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="powiat_miasto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="liczba_przypadkow" Type="Int32" />
+          <Property Name="liczba_na_10_tys_mieszkancow" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zgony" Type="Int32" />
+          <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="Int32" />
+          <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="Int32" />
+          <Property Name="liczba_zlecen_poz" Type="Int32" />
+          <Property Name="liczba_ozdrowiencow" Type="Int32" />
+          <Property Name="liczba_osob_objetych_kwarantanna" Type="Int32" />
+          <Property Name="liczba_wykonanych_testow" Type="Int32" />
+          <Property Name="liczba_testow_z_wynikiem_pozytywnym" Type="Int32" />
+          <Property Name="liczba_testow_z_wynikiem_negatywnym" Type="Int32" />
+          <Property Name="liczba_pozostalych_testow" Type="Int32" />
+          <Property Name="teryt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stan_rekordu_na" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="woj_source">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wojewodztwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="liczba_przypadkow" Type="Int32" />
+          <Property Name="liczba_na_10_tys_mieszkancow" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zgony" Type="Int32" />
+          <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="Int32" />
+          <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="Int32" />
+          <Property Name="liczba_zlecen_poz" Type="Int32" />
+          <Property Name="liczba_ozdrowiencow" Type="Int32" />
+          <Property Name="liczba_osob_objetych_kwarantanna" Type="Int32" />
+          <Property Name="liczba_wykonanych_testow" Type="Int32" />
+          <Property Name="liczba_testow_z_wynikiem_pozytywnym" Type="Int32" />
+          <Property Name="liczba_testow_z_wynikiem_negatywnym" Type="Int32" />
+          <Property Name="liczba_pozostalych_testow" Type="Int32" />
+          <Property Name="teryt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stan_rekordu_na" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="woj_target">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wojewodztwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="liczba_przypadkow" Type="Int32" />
+          <Property Name="liczba_na_10_tys_mieszkancow" Type="Double" />
+          <Property Name="zgony" Type="Int32" />
+          <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="Int32" />
+          <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="Int32" />
+          <Property Name="liczba_zlecen_poz" Type="Int32" />
+          <Property Name="liczba_ozdrowiencow" Type="Int32" />
+          <Property Name="liczba_osob_objetych_kwarantanna" Type="Int32" />
+          <Property Name="liczba_wykonanych_testow" Type="Int32" />
+          <Property Name="liczba_testow_z_wynikiem_pozytywnym" Type="Int32" />
+          <Property Name="liczba_testow_z_wynikiem_negatywnym" Type="Int32" />
+          <Property Name="liczba_pozostalych_testow" Type="Int32" />
+          <Property Name="teryt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stan_rekordu_na" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="wojewodztwa">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wojewodztwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="populacja" Type="Int32" />
+          <Property Name="code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="miasta" EntityType="Self.miasta" />
+          <EntitySet Name="pow_source" EntityType="Self.pow_source" />
+          <EntitySet Name="pow_target" EntityType="Self.pow_target" />
+          <EntitySet Name="woj_source" EntityType="Self.woj_source" />
+          <EntitySet Name="woj_target" EntityType="Self.woj_target" />
+          <EntitySet Name="wojewodztwa" EntityType="Self.wojewodztwa" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBEntities">
+          <EntitySetMapping Name="miasta">
+            <EntityTypeMapping TypeName="DBModel.miasta">
+              <MappingFragment StoreEntitySet="miasta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="miasto" ColumnName="miasto" />
+                <ScalarProperty Name="populacja" ColumnName="populacja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pow_source">
+            <EntityTypeMapping TypeName="DBModel.pow_source">
+              <MappingFragment StoreEntitySet="pow_source">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="wojewodztwo" ColumnName="wojewodztwo" />
+                <ScalarProperty Name="powiat_miasto" ColumnName="powiat_miasto" />
+                <ScalarProperty Name="liczba_przypadkow" ColumnName="liczba_przypadkow" />
+                <ScalarProperty Name="liczba_na_10_tys_mieszkancow" ColumnName="liczba_na_10_tys_mieszkancow" />
+                <ScalarProperty Name="zgony" ColumnName="zgony" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" />
+                <ScalarProperty Name="liczba_zlecen_poz" ColumnName="liczba_zlecen_poz" />
+                <ScalarProperty Name="liczba_ozdrowiencow" ColumnName="liczba_ozdrowiencow" />
+                <ScalarProperty Name="liczba_osob_objetych_kwarantanna" ColumnName="liczba_osob_objetych_kwarantanna" />
+                <ScalarProperty Name="liczba_wykonanych_testow" ColumnName="liczba_wykonanych_testow" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_pozytywnym" ColumnName="liczba_testow_z_wynikiem_pozytywnym" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_negatywnym" ColumnName="liczba_testow_z_wynikiem_negatywnym" />
+                <ScalarProperty Name="liczba_pozostalych_testow" ColumnName="liczba_pozostalych_testow" />
+                <ScalarProperty Name="teryt" ColumnName="teryt" />
+                <ScalarProperty Name="stan_rekordu_na" ColumnName="stan_rekordu_na" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pow_target">
+            <EntityTypeMapping TypeName="DBModel.pow_target">
+              <MappingFragment StoreEntitySet="pow_target">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="wojewodztwo" ColumnName="wojewodztwo" />
+                <ScalarProperty Name="powiat_miasto" ColumnName="powiat_miasto" />
+                <ScalarProperty Name="liczba_przypadkow" ColumnName="liczba_przypadkow" />
+                <ScalarProperty Name="liczba_na_10_tys_mieszkancow" ColumnName="liczba_na_10_tys_mieszkancow" />
+                <ScalarProperty Name="zgony" ColumnName="zgony" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" />
+                <ScalarProperty Name="liczba_zlecen_poz" ColumnName="liczba_zlecen_poz" />
+                <ScalarProperty Name="liczba_ozdrowiencow" ColumnName="liczba_ozdrowiencow" />
+                <ScalarProperty Name="liczba_osob_objetych_kwarantanna" ColumnName="liczba_osob_objetych_kwarantanna" />
+                <ScalarProperty Name="liczba_wykonanych_testow" ColumnName="liczba_wykonanych_testow" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_pozytywnym" ColumnName="liczba_testow_z_wynikiem_pozytywnym" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_negatywnym" ColumnName="liczba_testow_z_wynikiem_negatywnym" />
+                <ScalarProperty Name="liczba_pozostalych_testow" ColumnName="liczba_pozostalych_testow" />
+                <ScalarProperty Name="teryt" ColumnName="teryt" />
+                <ScalarProperty Name="stan_rekordu_na" ColumnName="stan_rekordu_na" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="woj_source">
+            <EntityTypeMapping TypeName="DBModel.woj_source">
+              <MappingFragment StoreEntitySet="woj_source">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="wojewodztwo" ColumnName="wojewodztwo" />
+                <ScalarProperty Name="liczba_przypadkow" ColumnName="liczba_przypadkow" />
+                <ScalarProperty Name="liczba_na_10_tys_mieszkancow" ColumnName="liczba_na_10_tys_mieszkancow" />
+                <ScalarProperty Name="zgony" ColumnName="zgony" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" />
+                <ScalarProperty Name="liczba_zlecen_poz" ColumnName="liczba_zlecen_poz" />
+                <ScalarProperty Name="liczba_ozdrowiencow" ColumnName="liczba_ozdrowiencow" />
+                <ScalarProperty Name="liczba_osob_objetych_kwarantanna" ColumnName="liczba_osob_objetych_kwarantanna" />
+                <ScalarProperty Name="liczba_wykonanych_testow" ColumnName="liczba_wykonanych_testow" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_pozytywnym" ColumnName="liczba_testow_z_wynikiem_pozytywnym" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_negatywnym" ColumnName="liczba_testow_z_wynikiem_negatywnym" />
+                <ScalarProperty Name="liczba_pozostalych_testow" ColumnName="liczba_pozostalych_testow" />
+                <ScalarProperty Name="teryt" ColumnName="teryt" />
+                <ScalarProperty Name="stan_rekordu_na" ColumnName="stan_rekordu_na" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="woj_target">
+            <EntityTypeMapping TypeName="DBModel.woj_target">
+              <MappingFragment StoreEntitySet="woj_target">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="wojewodztwo" ColumnName="wojewodztwo" />
+                <ScalarProperty Name="liczba_przypadkow" ColumnName="liczba_przypadkow" />
+                <ScalarProperty Name="liczba_na_10_tys_mieszkancow" ColumnName="liczba_na_10_tys_mieszkancow" />
+                <ScalarProperty Name="zgony" ColumnName="zgony" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" />
+                <ScalarProperty Name="liczba_zlecen_poz" ColumnName="liczba_zlecen_poz" />
+                <ScalarProperty Name="liczba_ozdrowiencow" ColumnName="liczba_ozdrowiencow" />
+                <ScalarProperty Name="liczba_osob_objetych_kwarantanna" ColumnName="liczba_osob_objetych_kwarantanna" />
+                <ScalarProperty Name="liczba_wykonanych_testow" ColumnName="liczba_wykonanych_testow" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_pozytywnym" ColumnName="liczba_testow_z_wynikiem_pozytywnym" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_negatywnym" ColumnName="liczba_testow_z_wynikiem_negatywnym" />
+                <ScalarProperty Name="liczba_pozostalych_testow" ColumnName="liczba_pozostalych_testow" />
+                <ScalarProperty Name="teryt" ColumnName="teryt" />
+                <ScalarProperty Name="stan_rekordu_na" ColumnName="stan_rekordu_na" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wojewodztwa">
+            <EntityTypeMapping TypeName="DBModel.wojewodztwa">
+              <MappingFragment StoreEntitySet="wojewodztwa">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="wojewodztwo" ColumnName="wojewodztwo" />
+                <ScalarProperty Name="populacja" ColumnName="populacja" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
