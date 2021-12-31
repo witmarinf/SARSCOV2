@@ -12,7 +12,7 @@ namespace SARSCOV2.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, manager")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -20,7 +20,7 @@ namespace SARSCOV2.Controllers
             return View();
         }
         
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin, manager")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
