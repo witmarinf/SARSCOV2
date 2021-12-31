@@ -11,7 +11,8 @@ namespace SARSCOV2.ModelsDB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class woj_source
     {
         public int id { get; set; }
@@ -29,6 +30,7 @@ namespace SARSCOV2.ModelsDB
         public Nullable<int> liczba_testow_z_wynikiem_negatywnym { get; set; }
         public Nullable<int> liczba_pozostalych_testow { get; set; }
         public string teryt { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public Nullable<System.DateTime> stan_rekordu_na { get; set; }
     }
 }

@@ -4,81 +4,247 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+
+
+<head>
+    <style>
+
+        table {
+            border: solid;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: solid;
+            padding: 2px 2px 2px 2px;
+        }
+
+            th div {
+                transform: rotate(270deg);
+                height: 120px;
+                width: 100px;
+                padding: 0px 0px 0px 0px;
+            }
+    </style>
+</head>
+
+
+
+<h2>Dane</h2>
+
+
+
+<p style="color: red;">
+    data pierwszej aktualizacji: @Model.Min(model => model.stan_rekordu_na)
+    <br />
+    data ostatniej aktualizacji: @Model.Max(model => model.stan_rekordu_na)
+    <br />
+
+    @{int RowNo = 0;}
+    @foreach (var item in Model)
+    {RowNo++;}
+    liczba rekordów: @RowNo
+
+    <br/>
+    <table style="width:80%">
+        <tr>
+            <th></th>
+            <th>Sum</th>
+            <th>Min</th>
+            <th>Avg</th>
+            <th>Max</th>
+        </tr>
+        <tr>
+            <th>liczba przypadków</th>
+            <td>@Model.Sum(model => model.liczba_przypadkow)</td>
+            <td>@Model.Min(model => model.liczba_przypadkow)</td>
+            <td>@((int?)Model.Average(model => model.liczba_przypadkow))</td>
+            <td>@Model.Max(model => model.liczba_przypadkow)</td>
+        </tr>
+
+        <tr>
+            <th>zgony</th>
+            <td>@Model.Sum(model => model.zgony)</td>
+            <td>@Model.Min(model => model.zgony)</td>
+            <td>@((int?)Model.Average(model => model.zgony))</td>
+            <td>@Model.Max(model => model.zgony)</td>
+        </tr>
+
+        <tr>
+            <th>zgony w wyniku covid bez chorób współistniejących</th>
+            <td>@Model.Sum(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)</td>
+            <td>@Model.Min(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)</td>
+            <td>@((int?)Model.Average(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych))</td>
+            <td>@Model.Max(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)</td>
+        </tr>
+
+        <tr>
+            <th>zgony w wyniku covid i chorób współistniejących</th>
+            <td>@Model.Sum(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)</td>
+            <td>@Model.Min(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)</td>
+            <td>@((int?)Model.Average(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych))</td>
+            <td>@Model.Max(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)</td>
+        </tr>
+
+        <tr>
+            <th>liczba zlecen</th>
+            <td>@Model.Sum(model => model.liczba_zlecen_poz)</td>
+            <td>@Model.Min(model => model.liczba_zlecen_poz)</td>
+            <td>@((int?)Model.Average(model => model.liczba_zlecen_poz))</td>
+            <td>@Model.Max(model => model.liczba_zlecen_poz)</td>
+        </tr>
+
+        <tr>
+            <th>liczba ozdrowieńców</th>
+            <td>@Model.Sum(model => model.liczba_ozdrowiencow)</td>
+            <td>@Model.Min(model => model.liczba_ozdrowiencow)</td>
+            <td>@((int?)Model.Average(model => model.liczba_ozdrowiencow))</td>
+            <td>@Model.Max(model => model.liczba_ozdrowiencow)</td>
+        </tr>
+
+        <tr>
+            <th>liczba osób objętych kwarantanną</th>
+            <td>@Model.Sum(model => model.liczba_osob_objetych_kwarantanna)</td>
+            <td>@Model.Min(model => model.liczba_osob_objetych_kwarantanna)</td>
+            <td>@((int?)Model.Average(model => model.liczba_osob_objetych_kwarantanna))</td>
+            <td>@Model.Max(model => model.liczba_osob_objetych_kwarantanna)</td>
+        </tr>
+
+        <tr>
+            <th>liczba wykonanych testów</th>
+            <td>@Model.Sum(model => model.liczba_wykonanych_testow)</td>
+            <td>@Model.Min(model => model.liczba_wykonanych_testow)</td>
+            <td>@((int?)Model.Average(model => model.liczba_wykonanych_testow))</td>
+            <td>@Model.Max(model => model.liczba_wykonanych_testow)</td>
+        </tr>
+
+        <tr>
+            <th>liczba wykonanych testów z wynikiem pozytywnym</th>
+            <td>@Model.Sum(model => model.liczba_testow_z_wynikiem_pozytywnym)</td>
+            <td>@Model.Min(model => model.liczba_testow_z_wynikiem_pozytywnym)</td>
+            <td>@((int?)Model.Average(model => model.liczba_testow_z_wynikiem_pozytywnym))</td>
+            <td>@Model.Max(model => model.liczba_testow_z_wynikiem_pozytywnym)</td>
+        </tr>
+
+        <tr>
+            <th>liczba wykonanych testów z wynikiem negatywnym</th>
+            <td>@Model.Sum(model => model.liczba_testow_z_wynikiem_negatywnym)</td>
+            <td>@Model.Min(model => model.liczba_testow_z_wynikiem_negatywnym)</td>
+            <td>@((int?)Model.Average(model => model.liczba_testow_z_wynikiem_negatywnym))</td>
+            <td>@Model.Max(model => model.liczba_testow_z_wynikiem_negatywnym)</td>
+        </tr>
+
+        <tr>
+            <th>liczba pozostałych testów</th>
+            <td>@Model.Sum(model => model.liczba_pozostalych_testow)</td>
+            <td>@Model.Min(model => model.liczba_pozostalych_testow)</td>
+            <td>@((int?)Model.Average(model => model.liczba_pozostalych_testow))</td>
+            <td>@Model.Max(model => model.liczba_pozostalych_testow)</td>
+        </tr>
+
+
+    </table>
+
+    <hr />
+
+<p><b>Dane dzienne z poszczególnych województw</b></p>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<p>Dane dzienne z poszczególnych województw</p>
 <table class="table ">
     <tr>
         <th>
-            data
-           <!-- @Html.DisplayNameFor(model => model.stan_rekordu_na) -->
+            <div> data</div>
+            <!-- @Html.DisplayNameFor(model => model.stan_rekordu_na) -->
         </th>
 
+        <th></th>
+
         <th>
-            województwo
+            <div>  województwo </div>
             <!--@Html.DisplayNameFor(model => model.wojewodztwo) -->
 
         </th>
+        
         <th>
-            l.przypadków
+            <div> liczba przypadków </div>
             <!--@Html.DisplayNameFor(model => model.liczba_przypadkow)-->
         </th>
-       <!--
+        
         <th>
-            @Html.DisplayNameFor(model => model.liczba_na_10_tys_mieszkancow)
-        </th>
-           -->
-    <th>
-        zgony 
-        <!--@Html.DisplayNameFor(model => model.zgony)-->
-    </th>
-    <th>
-        zgony w wyniku covid
-        <!--@Html.DisplayNameFor(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)-->
-      
-    </th>
-        <th>
-        zgony w wyniku covid i innych chorób 
-        <!--@Html.DisplayNameFor(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)-->
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.liczba_zlecen_poz)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.liczba_ozdrowiencow)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.liczba_osob_objetych_kwarantanna)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.liczba_wykonanych_testow)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.liczba_testow_z_wynikiem_pozytywnym)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.liczba_testow_z_wynikiem_negatywnym)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.liczba_pozostalych_testow)
-        </th>
-        <!--
-        <th>
-            @Html.DisplayNameFor(model => model.teryt)
-        </th>
-            -->
+            <div> zgony </div>
+            <!--@Html.DisplayNameFor(model => model.zgony)-->
 
-        <th></th>
+        </th>
+        
+        <th>
+            <div> zgony w wyniku covid bez chorób współistniejących </div>
+            <!--@Html.DisplayNameFor(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)-->
+
+        </th>
+
+        <th>
+            <div> zgony w wyniku covid i chorób współistniejących </div>
+
+            <!--@Html.DisplayNameFor(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)-->
+
+
+        </th>
+
+        <th>
+            <div> liczba zlecen </div>
+
+            <!--   @Html.DisplayNameFor(model => model.liczba_zlecen_poz) -->
+        </th>
+
+        <th>
+            <div>liczba  ozdrowieńców </div>
+
+            <!--    @Html.DisplayNameFor(model => model.liczba_ozdrowiencow) -->
+
+        </th>
+        
+        <th>
+            <div> liczba osób objętych kwarantanną</div>
+
+            <!--  @Html.DisplayNameFor(model => model.liczba_osob_objetych_kwarantanna) -->
+        </th>
+        <th>
+            <div>liczba wykonanych testów</div>
+
+            <!--    @Html.DisplayNameFor(model => model.liczba_wykonanych_testow)  -->
+        </th>
+        <th>
+            <div>liczba wykonanych testów z wynikiem pozytywnym</div>
+
+            <!--  @Html.DisplayNameFor(model => model.liczba_testow_z_wynikiem_pozytywnym)  -->
+        </th>
+        <th>
+            <div>liczba testów z wynikiem negatywnym</div>
+            <!--   @Html.DisplayNameFor(model => model.liczba_testow_z_wynikiem_negatywnym) -->
+        </th>
+        <th>
+            <div>liczba pozostałych testów</div>
+
+            <!--   @Html.DisplayNameFor(model => model.liczba_pozostalych_testow)  -->
+        </th>
+
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
 <tr>
     <td>
         @Html.DisplayFor(modelItem => item.stan_rekordu_na)
+    </td>
+
+
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.id })
     </td>
 
     <td>
@@ -125,18 +291,8 @@
         @Html.DisplayFor(modelItem => item.liczba_pozostalych_testow)
     </td>
 
-    <!--
-    <td>
-        @Html.DisplayFor(modelItem => item.teryt)
-    </td>
-     -->
 
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.id })
-    </td>
 </tr>
-}
+    }
 
 </table>
