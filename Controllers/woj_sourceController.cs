@@ -13,9 +13,14 @@ namespace SARSCOV2.Controllers
     public class woj_sourceController : Controller
     {
         private DBEntities db = new DBEntities();
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         // GET: woj_source
         public ActionResult Index()
+        {
+            return View(db.woj_source.ToList());
+        }
+
+        public ActionResult Raport()
         {
             return View(db.woj_source.ToList());
         }

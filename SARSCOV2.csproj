@@ -317,6 +317,7 @@
     <Content Include="Views\woj_source\Details.cshtml" />
     <Content Include="Views\woj_source\Edit.cshtml" />
     <Content Include="Views\woj_source\Index.cshtml" />
+    <Content Include="Views\woj_source\Raport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
