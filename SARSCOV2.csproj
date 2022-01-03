@@ -172,6 +172,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PowController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\woj_sourceController.cs" />
     <Compile Include="Global.asax.cs">
@@ -318,6 +319,12 @@
     <Content Include="Views\woj_source\Edit.cshtml" />
     <Content Include="Views\woj_source\Index.cshtml" />
     <Content Include="Views\woj_source\Raport.cshtml" />
+    <Content Include="Views\Pow\Create.cshtml" />
+    <Content Include="Views\Pow\Delete.cshtml" />
+    <Content Include="Views\Pow\Details.cshtml" />
+    <Content Include="Views\Pow\Edit.cshtml" />
+    <Content Include="Views\Pow\Index.cshtml" />
+    <Content Include="Views\Pow\Raport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

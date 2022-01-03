@@ -35,9 +35,11 @@
 
 </head>
 <body onload="zegarek()">
-
+   
     <div class="navbar navbar-inverse navbar-fixed-top">
-
+        <!-- dodano zegar -->
+        <div id="zegar" style="text-align: center; font-weight:bold; color: red; font-family: Arial, sans-serif;
+         font-size: 16px;"></div>
         <div class="container">
 
             <div class="navbar-header">
@@ -54,10 +56,14 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Role", "Index", "Role")</li>
-                    <li>@Html.ActionLink("woj_source", "Index", "woj_source")</li>
-                    <li>@Html.ActionLink("Raport", "Raport", "woj_source")</li>
+
+                    <li>@Html.ActionLink("Miasta", "Index", "Pow")</li>
+                    <li>@Html.ActionLink("MiastaRaport", "Raport", "Pow")</li>
 
 
+
+                    <li>@Html.ActionLink("Województwa", "Index", "woj_source")</li>
+                    <li>@Html.ActionLink("RaportWoj", "Raport", "woj_source")</li>
 
 
 
@@ -69,9 +75,7 @@
 
     </div>
 
-    <!-- dodano zegar -->
-    <div id="zegar" style="text-align: center; font-weight:bold; color: red; font-family: Arial, sans-serif;
-         font-size: 16px;"></div>
+
 
 
     <div class="container body-content">
