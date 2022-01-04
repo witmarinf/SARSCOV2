@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="miasta">
           <Key>
             <PropertyRef Name="id" />
@@ -85,7 +85,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="wojewodztwo" Type="varchar" MaxLength="50" />
           <Property Name="liczba_przypadkow" Type="int" />
-          <Property Name="liczba_na_10_tys_mieszkancow" Type="float" />
+          <Property Name="liczba_na_10_tys_mieszkancow" Type="varchar" MaxLength="50" />
           <Property Name="zgony" Type="int" />
           <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="int" />
           <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="int" />
@@ -116,8 +116,7 @@
           <EntitySet Name="woj_target" EntityType="Self.woj_target" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wojewodztwa" EntityType="Self.wojewodztwa" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -201,7 +200,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="wojewodztwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="liczba_przypadkow" Type="Int32" />
-          <Property Name="liczba_na_10_tys_mieszkancow" Type="Double" />
+          <Property Name="liczba_na_10_tys_mieszkancow" Type="String" />
           <Property Name="zgony" Type="Int32" />
           <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="Int32" />
           <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="Int32" />

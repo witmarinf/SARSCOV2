@@ -17,7 +17,7 @@ namespace SARSCOV2.ModelsDB
         public int id { get; set; }
         public string wojewodztwo { get; set; }
         public Nullable<int> liczba_przypadkow { get; set; }
-        public Nullable<double> liczba_na_10_tys_mieszkancow { get; set; }
+        public string liczba_na_10_tys_mieszkancow { get; set; }
         public Nullable<int> zgony { get; set; }
         public Nullable<int> zgony_w_wyniku_covid_bez_chorob_wspolistniejacych { get; set; }
         public Nullable<int> zgony_w_wyniku_covid_i_chorob_wspolistniejacych { get; set; }
