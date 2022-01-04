@@ -4,18 +4,28 @@
     ViewBag.Title = "Raport";
 }
 
+<h2>Info</h2>
+<!--dane wazne-->
+<table class="table table-bordered table-hover width:30%;">
+    <tr>
+        <th>data pierwszej aktualizacji:</th>
+        <td>@Model.Min(model => model.stan_rekordu_na)</td>
+    </tr>
+    <tr>
+        <th>data ostatniej aktualizacji:</th>
+        <td>@Model.Max(model => model.stan_rekordu_na)</td>
+
+
+        @{int RowNo = 0;}
+        @foreach (var item in Model)
+        { RowNo++; }
+    <tr>
+        <th>liczba rekordów:</th>
+        <td>@RowNo </td>
+    </tr>
+</table>
+
 <h2>Raport dotyczący województw</h2>
-
-<p style="color: red;">
-    data pierwszej aktualizacji: @Model.Min(model => model.stan_rekordu_na)
-    <br />
-    data ostatniej aktualizacji: @Model.Max(model => model.stan_rekordu_na)
-    <br />
-
-    @{int RowNo = 0;}
-    @foreach (var item in Model)
-    { RowNo++; }
-    liczba rekordów: @RowNo
 
     <br />
     <table class="table table-hover table-bordered">

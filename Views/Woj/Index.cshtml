@@ -4,8 +4,6 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
 <head>
     <style>
         th div {
@@ -17,20 +15,29 @@
     </style>
 </head>
 
-<h2>Dane</h2>
 
-<p style="color: red;">
-    data pierwszej aktualizacji: @Model.Min(model => model.stan_rekordu_na)
-    <br />
-    data ostatniej aktualizacji: @Model.Max(model => model.stan_rekordu_na)
-    <br />
+<h2>Info</h2>
+<!--dane wazne-->
+<table class="table table-bordered table-hover width:30%;">
+    <tr>
+        <th>data pierwszej aktualizacji:</th>
+        <td>@Model.Min(model => model.stan_rekordu_na)</td>
+    </tr>
+    <tr>
 
-    @{int RowNo = 0;}
-    @foreach (var item in Model)
-    { RowNo++; }
-    liczba rekordów: @RowNo
+        <th>data ostatniej aktualizacji:</th>
+        <td>@Model.Max(model => model.stan_rekordu_na)</td>
 
-    <hr />
+
+        @{int RowNo = 0;}
+        @foreach (var item in Model)
+        { RowNo++; }
+    <tr>
+        <th>liczba rekordów:</th>
+        <td>@RowNo </td>
+    </tr>
+
+</table>
 
 <p><b>Dane dzienne z poszczególnych województw</b></p>
 
