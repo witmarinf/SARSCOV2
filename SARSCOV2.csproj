@@ -175,7 +175,6 @@
     <Compile Include="Controllers\PowController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\WojController.cs" />
-    <Compile Include="Controllers\woj_sourceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -314,12 +313,6 @@
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Details.cshtml" />
     <Content Include="Views\Role\Delete.cshtml" />
-    <Content Include="Views\woj_source\Create.cshtml" />
-    <Content Include="Views\woj_source\Delete.cshtml" />
-    <Content Include="Views\woj_source\Details.cshtml" />
-    <Content Include="Views\woj_source\Edit.cshtml" />
-    <Content Include="Views\woj_source\Index.cshtml" />
-    <Content Include="Views\woj_source\Raport.cshtml" />
     <Content Include="Views\Pow\Create.cshtml" />
     <Content Include="Views\Pow\Delete.cshtml" />
     <Content Include="Views\Pow\Details.cshtml" />
