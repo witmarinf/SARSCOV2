@@ -10,9 +10,8 @@
 namespace SARSCOV2.ModelsDB
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class pow_target
+    public partial class pow_filter_records_Result
     {
         public int id { get; set; }
         public string wojewodztwo { get; set; }

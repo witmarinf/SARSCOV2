@@ -10,13 +10,11 @@
 namespace SARSCOV2.ModelsDB
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class pow_target
+    public partial class woj_filter_records_Result
     {
         public int id { get; set; }
         public string wojewodztwo { get; set; }
-        public string powiat_miasto { get; set; }
         public Nullable<int> liczba_przypadkow { get; set; }
         public string liczba_na_10_tys_mieszkancow { get; set; }
         public Nullable<int> zgony { get; set; }
