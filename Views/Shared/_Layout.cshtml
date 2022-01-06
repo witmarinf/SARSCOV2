@@ -18,16 +18,12 @@
             var dzienN = data.getDay();
             var miesiac = data.getMonth();
             var rok = data.getFullYear();
-
             if (minuta < 10) minuta = "0" + minuta;
             if (sekunda < 10) sekunda = "0" + sekunda;
-
             var dni = new Array("niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota");
             var miesiace = new Array("stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca", "lipca", "sierpnia", "września", "października", "listopada", "grudnia");
-
             var pokazDate = '&nbsp;' + dni[dzienN] + ' | ' + dzien + ' ' + miesiace[miesiac] + ' ' + rok + " | " + godzina + ':' + minuta + ':' + sekunda;
             document.getElementById("zegar").innerHTML = pokazDate;
-
             setTimeout(zegarek, 1000);
         }
     </script>
@@ -38,8 +34,7 @@
    
     <div class="navbar navbar-inverse navbar-fixed-top">
         <!-- dodano zegar -->
-        <div id="zegar" style="text-align: center; font-weight:bold; color: red; font-family: Arial, sans-serif;
-         font-size: 16px;"></div>
+        
         <div class="container">
 
             <div class="navbar-header">
@@ -59,18 +54,7 @@
                         -->
                     <li>@Html.ActionLink("Role", "Index", "Role")</li>
                     
-                    <!--
-                    <li>@Html.ActionLink("Woj1", "Index", "Woj")</li>
-                    <li>@Html.ActionLink("RaportWoj", "Raport", "Woj")</li>
-                    
-                    <li>@Html.ActionLink("Miasta", "Index", "Pow")</li>
-                    <li>@Html.ActionLink("MiastaRaport", "Raport", "Pow")</li>
-                    -->
-
-                    
-                    <li>@Html.ActionLink("Województwa", "Index", "woj_source")</li>
-                    <li>@Html.ActionLink("RaportWoj", "Raport", "woj_source")</li>
-                    
+ 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         Województwa
@@ -78,7 +62,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>@Html.ActionLink("Województwa", "Index", "Woj")</li>
-                        <hr/>
+                        
                         <li>@Html.ActionLink("Raport", "Raport", "Woj")</li>
                     </ul>
                 </li>
@@ -90,7 +74,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>@Html.ActionLink("Miasta", "Index", "Pow")</li>
-                        <hr/>
+                       
                         <li>@Html.ActionLink("Raport", "Raport", "Pow")</li>
                     </ul>
                 </li>
@@ -105,9 +89,6 @@
 
     </div>
 
-
-
-
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -117,7 +98,7 @@
                     <td style="font-weight:bold;">&copy; @DateTime.Now.Year - My ASP.NET Application &nbsp; </td>
                     <td style="font-weight:bold;"> &nbsp;|&nbsp;Praca inżynierska PŁ WEEIA &nbsp; &nbsp;|&nbsp;</td>
                     <td style="font-weight:bold;"> &nbsp;&nbsp;Mariusz Witczak indeks: 218186 &nbsp;|&nbsp;</td>
-
+                    <td id="zegar" style=" font-weight:bold; color: green;"></td>
                 </tr>
             </table>
         </footer>
