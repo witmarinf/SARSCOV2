@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GetWojRecordsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PowController.cs" />
@@ -210,6 +211,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ModelsDB\merge_pow_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\merge_woj_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelsDB\miasta.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -220,6 +227,9 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ModelsDB\wojewodztwa.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\WojFilterAllByDate_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ModelsDB\woj_source.cs">
@@ -325,6 +335,7 @@
     <Content Include="Views\Woj\Edit.cshtml" />
     <Content Include="Views\Woj\Index.cshtml" />
     <Content Include="Views\Woj\Raport.cshtml" />
+    <Content Include="Views\GetWojRecords\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

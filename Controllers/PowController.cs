@@ -12,7 +12,7 @@ namespace SARSCOV2.Controllers
 {
     public class PowController : Controller
     {
-        private DBEntities db = new DBEntities();
+        readonly DBEntities db = new DBEntities();
 
         // GET: Pow
         public ActionResult Index()

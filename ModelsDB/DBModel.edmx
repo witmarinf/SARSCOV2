@@ -108,6 +108,18 @@
           <Property Name="populacja" Type="int" />
           <Property Name="code" Type="varchar" MaxLength="10" />
         </EntityType>
+        <Function Name="bulk_pow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FilePath" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="bulk_woj" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FilePath" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="merge_pow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="merge_woj" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="WojFilterAllByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="Todate" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="DBModelStoreContainer">
           <EntitySet Name="miasta" EntityType="Self.miasta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pow_source" EntityType="Self.pow_source" Schema="dbo" store:Type="Tables" />
@@ -200,7 +212,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="wojewodztwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="liczba_przypadkow" Type="Int32" />
-          <Property Name="liczba_na_10_tys_mieszkancow" Type="String" />
+          <Property Name="liczba_na_10_tys_mieszkancow" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="zgony" Type="Int32" />
           <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="Int32" />
           <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="Int32" />
@@ -230,7 +242,117 @@
           <EntitySet Name="woj_source" EntityType="Self.woj_source" />
           <EntitySet Name="woj_target" EntityType="Self.woj_target" />
           <EntitySet Name="wojewodztwa" EntityType="Self.wojewodztwa" />
+          <FunctionImport Name="bulk_pow">
+          <Parameter Name="FilePath" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="bulk_woj">
+          <Parameter Name="FilePath" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="merge_pow" ReturnType="Collection(DBModel.merge_pow_Result)" />
+          <FunctionImport Name="merge_woj" ReturnType="Collection(DBModel.merge_woj_Result)" />
+          <FunctionImport Name="WojFilterAllByDate" ReturnType="Collection(DBModel.WojFilterAllByDate_Result)">
+            <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="Todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Search" EntitySet="woj_target" ReturnType="Collection(DBModel.woj_target)">
+            <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="Todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetFunctionRecordsFromWoj_target" EntitySet="woj_target" ReturnType="Collection(DBModel.woj_target)">
+            <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="Todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="merge_pow_Result">
+          <Property Type="String" Name="action" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="powiat_miasto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="wojewodztwo_new" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="liczba_przypadkow_new" Nullable="true" />
+          <Property Type="String" Name="liczba_na_10_tys_mieszkancow_new" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="zgony_new" Nullable="true" />
+          <Property Type="Int32" Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_new" Nullable="true" />
+          <Property Type="Int32" Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_zlecen_poz_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_ozdrowiencow_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_osob_objetych_kwarantanna_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_wykonanych_testow_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_testow_z_wynikiem_pozytywnym_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_testow_z_wynikiem_negatywnym_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_pozostalych_testow_new" Nullable="true" />
+          <Property Type="String" Name="teryt_new" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="stan_rekordu_na_new" Nullable="true" />
+          <Property Type="Int32" Name="id1" Nullable="true" />
+          <Property Type="String" Name="wojewodztwo_old" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="powiat_miasto1" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="liczba_przypadkow_old" Nullable="true" />
+          <Property Type="String" Name="liczba_na_10_tys_mieszkancow_old" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="zgony_old" Nullable="true" />
+          <Property Type="Int32" Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_old" Nullable="true" />
+          <Property Type="Int32" Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_zlecen_poz_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_ozdrowiencow_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_osob_objetych_kwarantanna_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_wykonanych_testow_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_testow_z_wynikiem_pozytywnym_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_testow_z_wynikiem_negatywnym_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_pozostalych_testow_old" Nullable="true" />
+          <Property Type="String" Name="teryt_old" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="stan_rekordu_na_old" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="merge_woj_Result">
+          <Property Type="String" Name="action" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="wojewodztwo_new" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="liczba_przypadkow_new" Nullable="true" />
+          <Property Type="String" Name="liczba_na_10_tys_mieszkancow_new" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="zgony_new" Nullable="true" />
+          <Property Type="Int32" Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_new" Nullable="true" />
+          <Property Type="Int32" Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_zlecen_poz_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_ozdrowiencow_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_osob_objetych_kwarantanna_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_wykonanych_testow_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_testow_z_wynikiem_pozytywnym_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_testow_z_wynikiem_negatywnym_new" Nullable="true" />
+          <Property Type="Int32" Name="liczba_pozostalych_testow_new" Nullable="true" />
+          <Property Type="String" Name="teryt_new" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="stan_rekordu_na_new" Nullable="true" />
+          <Property Type="Int32" Name="id1" Nullable="true" />
+          <Property Type="String" Name="wojewodztwo_old" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="liczba_przypadkow_old" Nullable="true" />
+          <Property Type="String" Name="liczba_na_10_tys_mieszkancow_old" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="zgony_old" Nullable="true" />
+          <Property Type="Int32" Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_old" Nullable="true" />
+          <Property Type="Int32" Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_zlecen_poz_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_ozdrowiencow_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_osob_objetych_kwarantanna_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_wykonanych_testow_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_testow_z_wynikiem_pozytywnym_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_testow_z_wynikiem_negatywnym_old" Nullable="true" />
+          <Property Type="Int32" Name="liczba_pozostalych_testow_old" Nullable="true" />
+          <Property Type="String" Name="teryt_old" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="stan_rekordu_na_old" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="WojFilterAllByDate_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="wojewodztwo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="liczba_przypadkow" Nullable="true" />
+          <Property Type="String" Name="liczba_na_10_tys_mieszkancow" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="zgony" Nullable="true" />
+          <Property Type="Int32" Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Nullable="true" />
+          <Property Type="Int32" Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Nullable="true" />
+          <Property Type="Int32" Name="liczba_zlecen_poz" Nullable="true" />
+          <Property Type="Int32" Name="liczba_ozdrowiencow" Nullable="true" />
+          <Property Type="Int32" Name="liczba_osob_objetych_kwarantanna" Nullable="true" />
+          <Property Type="Int32" Name="liczba_wykonanych_testow" Nullable="true" />
+          <Property Type="Int32" Name="liczba_testow_z_wynikiem_pozytywnym" Nullable="true" />
+          <Property Type="Int32" Name="liczba_testow_z_wynikiem_negatywnym" Nullable="true" />
+          <Property Type="Int32" Name="liczba_pozostalych_testow" Nullable="true" />
+          <Property Type="String" Name="teryt" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="stan_rekordu_na" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -346,6 +468,112 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="bulk_pow" FunctionName="DBModel.Store.bulk_pow" />
+          <FunctionImportMapping FunctionImportName="bulk_woj" FunctionName="DBModel.Store.bulk_woj" />
+          <FunctionImportMapping FunctionImportName="merge_pow" FunctionName="DBModel.Store.merge_pow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBModel.merge_pow_Result">
+                <ScalarProperty Name="action" ColumnName="action" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="powiat_miasto" ColumnName="powiat_miasto" />
+                <ScalarProperty Name="wojewodztwo_new" ColumnName="wojewodztwo_new" />
+                <ScalarProperty Name="liczba_przypadkow_new" ColumnName="liczba_przypadkow_new" />
+                <ScalarProperty Name="liczba_na_10_tys_mieszkancow_new" ColumnName="liczba_na_10_tys_mieszkancow_new" />
+                <ScalarProperty Name="zgony_new" ColumnName="zgony_new" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_new" ColumnName="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_new" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_new" ColumnName="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_new" />
+                <ScalarProperty Name="liczba_zlecen_poz_new" ColumnName="liczba_zlecen_poz_new" />
+                <ScalarProperty Name="liczba_ozdrowiencow_new" ColumnName="liczba_ozdrowiencow_new" />
+                <ScalarProperty Name="liczba_osob_objetych_kwarantanna_new" ColumnName="liczba_osob_objetych_kwarantanna_new" />
+                <ScalarProperty Name="liczba_wykonanych_testow_new" ColumnName="liczba_wykonanych_testow_new" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_pozytywnym_new" ColumnName="liczba_testow_z_wynikiem_pozytywnym_new" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_negatywnym_new" ColumnName="liczba_testow_z_wynikiem_negatywnym_new" />
+                <ScalarProperty Name="liczba_pozostalych_testow_new" ColumnName="liczba_pozostalych_testow_new" />
+                <ScalarProperty Name="teryt_new" ColumnName="teryt_new" />
+                <ScalarProperty Name="stan_rekordu_na_new" ColumnName="stan_rekordu_na_new" />
+                <ScalarProperty Name="id1" ColumnName="id1" />
+                <ScalarProperty Name="wojewodztwo_old" ColumnName="wojewodztwo_old" />
+                <ScalarProperty Name="powiat_miasto1" ColumnName="powiat_miasto1" />
+                <ScalarProperty Name="liczba_przypadkow_old" ColumnName="liczba_przypadkow_old" />
+                <ScalarProperty Name="liczba_na_10_tys_mieszkancow_old" ColumnName="liczba_na_10_tys_mieszkancow_old" />
+                <ScalarProperty Name="zgony_old" ColumnName="zgony_old" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_old" ColumnName="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_old" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_old" ColumnName="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_old" />
+                <ScalarProperty Name="liczba_zlecen_poz_old" ColumnName="liczba_zlecen_poz_old" />
+                <ScalarProperty Name="liczba_ozdrowiencow_old" ColumnName="liczba_ozdrowiencow_old" />
+                <ScalarProperty Name="liczba_osob_objetych_kwarantanna_old" ColumnName="liczba_osob_objetych_kwarantanna_old" />
+                <ScalarProperty Name="liczba_wykonanych_testow_old" ColumnName="liczba_wykonanych_testow_old" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_pozytywnym_old" ColumnName="liczba_testow_z_wynikiem_pozytywnym_old" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_negatywnym_old" ColumnName="liczba_testow_z_wynikiem_negatywnym_old" />
+                <ScalarProperty Name="liczba_pozostalych_testow_old" ColumnName="liczba_pozostalych_testow_old" />
+                <ScalarProperty Name="teryt_old" ColumnName="teryt_old" />
+                <ScalarProperty Name="stan_rekordu_na_old" ColumnName="stan_rekordu_na_old" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="merge_woj" FunctionName="DBModel.Store.merge_woj">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBModel.merge_woj_Result">
+                <ScalarProperty Name="action" ColumnName="action" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="wojewodztwo_new" ColumnName="wojewodztwo_new" />
+                <ScalarProperty Name="liczba_przypadkow_new" ColumnName="liczba_przypadkow_new" />
+                <ScalarProperty Name="liczba_na_10_tys_mieszkancow_new" ColumnName="liczba_na_10_tys_mieszkancow_new" />
+                <ScalarProperty Name="zgony_new" ColumnName="zgony_new" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_new" ColumnName="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_new" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_new" ColumnName="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_new" />
+                <ScalarProperty Name="liczba_zlecen_poz_new" ColumnName="liczba_zlecen_poz_new" />
+                <ScalarProperty Name="liczba_ozdrowiencow_new" ColumnName="liczba_ozdrowiencow_new" />
+                <ScalarProperty Name="liczba_osob_objetych_kwarantanna_new" ColumnName="liczba_osob_objetych_kwarantanna_new" />
+                <ScalarProperty Name="liczba_wykonanych_testow_new" ColumnName="liczba_wykonanych_testow_new" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_pozytywnym_new" ColumnName="liczba_testow_z_wynikiem_pozytywnym_new" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_negatywnym_new" ColumnName="liczba_testow_z_wynikiem_negatywnym_new" />
+                <ScalarProperty Name="liczba_pozostalych_testow_new" ColumnName="liczba_pozostalych_testow_new" />
+                <ScalarProperty Name="teryt_new" ColumnName="teryt_new" />
+                <ScalarProperty Name="stan_rekordu_na_new" ColumnName="stan_rekordu_na_new" />
+                <ScalarProperty Name="id1" ColumnName="id1" />
+                <ScalarProperty Name="wojewodztwo_old" ColumnName="wojewodztwo_old" />
+                <ScalarProperty Name="liczba_przypadkow_old" ColumnName="liczba_przypadkow_old" />
+                <ScalarProperty Name="liczba_na_10_tys_mieszkancow_old" ColumnName="liczba_na_10_tys_mieszkancow_old" />
+                <ScalarProperty Name="zgony_old" ColumnName="zgony_old" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_old" ColumnName="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych_old" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_old" ColumnName="zgony_w_wyniku_covid_i_chorob_wspolistniejacych_old" />
+                <ScalarProperty Name="liczba_zlecen_poz_old" ColumnName="liczba_zlecen_poz_old" />
+                <ScalarProperty Name="liczba_ozdrowiencow_old" ColumnName="liczba_ozdrowiencow_old" />
+                <ScalarProperty Name="liczba_osob_objetych_kwarantanna_old" ColumnName="liczba_osob_objetych_kwarantanna_old" />
+                <ScalarProperty Name="liczba_wykonanych_testow_old" ColumnName="liczba_wykonanych_testow_old" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_pozytywnym_old" ColumnName="liczba_testow_z_wynikiem_pozytywnym_old" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_negatywnym_old" ColumnName="liczba_testow_z_wynikiem_negatywnym_old" />
+                <ScalarProperty Name="liczba_pozostalych_testow_old" ColumnName="liczba_pozostalych_testow_old" />
+                <ScalarProperty Name="teryt_old" ColumnName="teryt_old" />
+                <ScalarProperty Name="stan_rekordu_na_old" ColumnName="stan_rekordu_na_old" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="WojFilterAllByDate" FunctionName="DBModel.Store.WojFilterAllByDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBModel.WojFilterAllByDate_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="wojewodztwo" ColumnName="wojewodztwo" />
+                <ScalarProperty Name="liczba_przypadkow" ColumnName="liczba_przypadkow" />
+                <ScalarProperty Name="liczba_na_10_tys_mieszkancow" ColumnName="liczba_na_10_tys_mieszkancow" />
+                <ScalarProperty Name="zgony" ColumnName="zgony" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" />
+                <ScalarProperty Name="liczba_zlecen_poz" ColumnName="liczba_zlecen_poz" />
+                <ScalarProperty Name="liczba_ozdrowiencow" ColumnName="liczba_ozdrowiencow" />
+                <ScalarProperty Name="liczba_osob_objetych_kwarantanna" ColumnName="liczba_osob_objetych_kwarantanna" />
+                <ScalarProperty Name="liczba_wykonanych_testow" ColumnName="liczba_wykonanych_testow" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_pozytywnym" ColumnName="liczba_testow_z_wynikiem_pozytywnym" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_negatywnym" ColumnName="liczba_testow_z_wynikiem_negatywnym" />
+                <ScalarProperty Name="liczba_pozostalych_testow" ColumnName="liczba_pozostalych_testow" />
+                <ScalarProperty Name="teryt" ColumnName="teryt" />
+                <ScalarProperty Name="stan_rekordu_na" ColumnName="stan_rekordu_na" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Search" FunctionName="DBModel.Store.WojFilterAllByDate" />
+          <FunctionImportMapping FunctionImportName="GetFunctionRecordsFromWoj_target" FunctionName="DBModel.Store.WojFilterAllByDate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

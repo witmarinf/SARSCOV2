@@ -12,6 +12,8 @@ namespace SARSCOV2.ModelsDB
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DBEntities : DbContext
     {
@@ -31,5 +33,98 @@ namespace SARSCOV2.ModelsDB
         public virtual DbSet<woj_source> woj_source { get; set; }
         public virtual DbSet<woj_target> woj_target { get; set; }
         public virtual DbSet<wojewodztwa> wojewodztwa { get; set; }
+    
+        public virtual int bulk_pow(string filePath)
+        {
+            var filePathParameter = filePath != null ?
+                new ObjectParameter("FilePath", filePath) :
+                new ObjectParameter("FilePath", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("bulk_pow", filePathParameter);
+        }
+    
+        public virtual int bulk_woj(string filePath)
+        {
+            var filePathParameter = filePath != null ?
+                new ObjectParameter("FilePath", filePath) :
+                new ObjectParameter("FilePath", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("bulk_woj", filePathParameter);
+        }
+    
+        public virtual ObjectResult<merge_pow_Result> merge_pow()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<merge_pow_Result>("merge_pow");
+        }
+    
+        public virtual ObjectResult<merge_woj_Result> merge_woj()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<merge_woj_Result>("merge_woj");
+        }
+    
+        public virtual ObjectResult<WojFilterAllByDate_Result> WojFilterAllByDate(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("Fromdate", fromdate) :
+                new ObjectParameter("Fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WojFilterAllByDate_Result>("WojFilterAllByDate", fromdateParameter, todateParameter);
+        }
+    
+        public virtual ObjectResult<woj_target> Search(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("Fromdate", fromdate) :
+                new ObjectParameter("Fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_target>("Search", fromdateParameter, todateParameter);
+        }
+    
+        public virtual ObjectResult<woj_target> Search(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, MergeOption mergeOption)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("Fromdate", fromdate) :
+                new ObjectParameter("Fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_target>("Search", mergeOption, fromdateParameter, todateParameter);
+        }
+    
+        public virtual ObjectResult<woj_target> GetFunctionRecordsFromWoj_target(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("Fromdate", fromdate) :
+                new ObjectParameter("Fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_target>("GetFunctionRecordsFromWoj_target", fromdateParameter, todateParameter);
+        }
+    
+        public virtual ObjectResult<woj_target> GetFunctionRecordsFromWoj_target(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, MergeOption mergeOption)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("Fromdate", fromdate) :
+                new ObjectParameter("Fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_target>("GetFunctionRecordsFromWoj_target", mergeOption, fromdateParameter, todateParameter);
+        }
     }
 }

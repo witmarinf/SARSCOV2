@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
     <script>
-        function zegarek()
-        {
+        function zegarek() {
             var data = new Date();
             var godzina = data.getHours();
             var minuta = data.getMinutes();
@@ -37,9 +37,6 @@
 <body onload="zegarek()">
    
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <!-- dodano zegar -->
-        <div id="zegar" style="text-align: center; font-weight:bold; color: red; font-family: Arial, sans-serif;
-         font-size: 16px;"></div>
         <div class="container">
 
             <div class="navbar-header">
@@ -72,7 +69,6 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Województwa", "Index", "Woj")</li>
-                            <hr />
                             <li>@Html.ActionLink("Raport", "Raport", "Woj")</li>
                         </ul>
                     </li>
@@ -84,7 +80,6 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Miasta", "Index", "Pow")</li>
-                            <hr />
                             <li>@Html.ActionLink("Raport", "Raport", "Pow")</li>
 
 
@@ -113,7 +108,7 @@
                     <td style="font-weight:bold;">&copy; @DateTime.Now.Year - My ASP.NET Application &nbsp; </td>
                     <td style="font-weight:bold;"> &nbsp;|&nbsp;Praca inżynierska PŁ WEEIA &nbsp; &nbsp;|&nbsp;</td>
                     <td style="font-weight:bold;"> &nbsp;&nbsp;Mariusz Witczak indeks: 218186 &nbsp;|&nbsp;</td>
-
+                    <td id="zegar" style="text-align: center; font-weight:bold; color: red;"></td>
                 </tr>
             </table>
         </footer>
