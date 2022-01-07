@@ -18,7 +18,7 @@ namespace SARSCOV2.Controllers
         [HttpPost]
         public ActionResult Index(DateTime From, DateTime To)
         {
-            return View(db.function_woj_filter_records(From, To));
+            return View(db.function_pow_filter_records(From, To));
         }
     }
 }

@@ -4,9 +4,8 @@
     ViewBag.Title = "Raport";
 }
 
-<h2>Info</h2>
 <!--dane wazne-->
-<table class="table table-bordered table-hover width:30%;">
+<table class="table table-bordered table-hover">
     <tr>
         <th>data pierwszej aktualizacji:</th>
         <td>@Model.Min(model => model.stan_rekordu_na)</td>
@@ -14,7 +13,7 @@
     <tr>
         <th>data ostatniej aktualizacji:</th>
         <td>@Model.Max(model => model.stan_rekordu_na)</td>
-
+    </tr>
 
         @{int RowNo = 0;}
         @foreach (var item in Model)

@@ -172,6 +172,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\Pie1Controller.cs" />
     <Compile Include="Controllers\PowController.cs" />
     <Compile Include="Controllers\PowFilterController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -334,10 +335,11 @@
     <Content Include="Views\Woj\Index.cshtml" />
     <Content Include="Views\Woj\Raport.cshtml" />
     <Content Include="Views\WojFilter\Index.cshtml" />
+    <Content Include="Views\PowFilter\Index.cshtml" />
+    <Content Include="Views\Pie1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\PowFilter\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
