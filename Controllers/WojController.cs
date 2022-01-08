@@ -20,9 +20,16 @@ namespace SARSCOV2.Controllers
             return View(db.woj_target.ToList());
         }
 
-        public ActionResult Raport()
+        public ActionResult Raport(string wojewodztwo)
         {
-            return View(db.woj_target.ToList());
+
+            ViewBag.wojewodztwo = (from r in db.woj_target select r.wojewodztwo).Distinct();
+            var model = from r in db.woj_target
+                        orderby r.wojewodztwo
+                        where r.wojewodztwo == wojewodztwo || wojewodztwo == "" || wojewodztwo == null
+  
+                        select r;
+            return View(model);
         }
 
         public ActionResult RaportWoj(string wojewodztwo, string rok, string miesiac)

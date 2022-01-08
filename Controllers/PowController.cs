@@ -20,9 +20,15 @@ namespace SARSCOV2.Controllers
             return View(db.pow_target.ToList());
         }
 
-        public ActionResult Raport()
+        public ActionResult Raport(string miasto)
         {
-            return View(db.pow_target.ToList());
+            ViewBag.miasto = (from r in db.pow_target select r.powiat_miasto).Distinct();
+
+            var model = from r in db.pow_target
+                        orderby r.powiat_miasto
+                        where r.powiat_miasto == miasto || miasto == "" || miasto == null
+                        select r;
+            return View(model);
         }
 
 
