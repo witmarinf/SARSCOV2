@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PowController.cs" />
     <Compile Include="Controllers\PowFilterController.cs" />
+    <Compile Include="Controllers\PowFilterDropDawnController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\WojController.cs" />
     <Compile Include="Controllers\WojFilterController.cs" />
@@ -342,6 +343,13 @@
     <Content Include="Views\WojFilterDropdawn\Details.cshtml" />
     <Content Include="Views\WojFilterDropdawn\Edit.cshtml" />
     <Content Include="Views\WojFilterDropdawn\Index.cshtml" />
+    <Content Include="Views\PowFilterDropDawn\Create.cshtml" />
+    <Content Include="Views\PowFilterDropDawn\Delete.cshtml" />
+    <Content Include="Views\PowFilterDropDawn\Details.cshtml" />
+    <Content Include="Views\PowFilterDropDawn\Edit.cshtml" />
+    <Content Include="Views\PowFilterDropDawn\Index.cshtml" />
+    <Content Include="Views\Woj\RaportWoj.cshtml" />
+    <Content Include="Views\Pow\RaportPow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

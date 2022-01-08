@@ -18,9 +18,9 @@ namespace SARSCOV2.Controllers
         public ActionResult Index(string wojewodztwo, string rok, string miesiac)
             {
             
-            ViewBag.wojewodztwo = (from r in db.pow_target select r.wojewodztwo).Distinct();
-            ViewBag.rok = (from r in db.pow_target select r.stan_rekordu_na.Value.Year.ToString()).Distinct();
-            ViewBag.miesiac = (from r in db.pow_target select r.stan_rekordu_na.Value.Month.ToString()).Distinct();
+            ViewBag.wojewodztwo = (from r in db.woj_target select r.wojewodztwo).Distinct();
+            ViewBag.rok = (from r in db.woj_target select r.stan_rekordu_na.Value.Year.ToString()).Distinct();
+            ViewBag.miesiac = (from r in db.woj_target select r.stan_rekordu_na.Value.Month.ToString()).Distinct();
 
             var model = from r in db.woj_target
                         orderby r.wojewodztwo

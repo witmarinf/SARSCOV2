@@ -56,11 +56,13 @@
                             Województwa
                             <span class="caret"></span>
                         </a>
+                        <!--Wojewodztwa-->>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Województwa", "Index", "Woj")</li>
-                            <li> @Html.ActionLink("Filtrowanie wg. daty", "Index", "WojFilter")</li>
-                            <li> @Html.ActionLink("Filtrowanie wg. województw i miesiąca", "Index", "WojFilterDropdawn")</li>
-                            <li>@Html.ActionLink("Raport", "Raport", "Woj")</li>
+                            <li>@Html.ActionLink("Dane:Województwa", "Index", "Woj")</li>
+                            <li>@Html.ActionLink("Filtrowanie wg. daty", "Index", "WojFilter")</li>
+                            <li>@Html.ActionLink("Filtrowanie wg. województw i miesiąca", "Index", "WojFilterDropdawn")</li>
+                            <li>@Html.ActionLink("Raport dot. województw wg. miesięcy", "RaportWoj", "Woj")</li>
+                            <li>@Html.ActionLink("Raport Całkowity", "Raport", "Woj")</li>
                         </ul>
                     </li>
 
@@ -69,11 +71,13 @@
                             Miasta
                             <span class="caret"></span>
                         </a>
+                        <!--Miasta-->
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Miasta", "Index", "Pow")</li>
+                            <li>@Html.ActionLink("Dane:Miasta", "Index", "Pow")</li>
                             <li>@Html.ActionLink("Filtrowanie wg. daty", "Index", "PowFilter")</li>
-                            <li> @Html.ActionLink("Filtrowanie wg. miast i miesiąca", "Index", "PowFilterDropdawn")</li>
-                            <li>@Html.ActionLink("Raport", "Raport", "Pow")</li>
+                            <li>@Html.ActionLink("Filtrowanie wg. miast i miesiąca", "Index", "PowFilterDropdawn")</li>
+                            <li>@Html.ActionLink("Raport dot. miast wg. miesięcy", "RaportPow", "Pow")</li>
+                            <li>@Html.ActionLink("Raport Całkowity", "Raport", "Pow")</li>
 
                         </ul>
                     </li>

@@ -1,42 +1,51 @@
 ﻿@model IEnumerable<SARSCOV2.ModelsDB.pow_target>
 
 @{
-    ViewBag.Title = "Raport";
+    ViewBag.Title = "RaportWoj";
 }
 
+<h2>Raport wg. 10-ciu największych miast w Polsce z uwzględnieniem miesięcy</h2>
 
-<h2>Całkowity raport dotyczący 10-ciu największych miast w Polsce</h2>
-<!--dane wazne-->
-<table class="table table-bordered table-hover width:30%;">
-    <tr>
-        <th>data pierwszej aktualizacji:</th>
-        <td>@Model.Min(model => model.stan_rekordu_na)</td>
-    </tr>
-    <tr>
-        <th>data ostatniej aktualizacji:</th>
-        <td>@Model.Max(model => model.stan_rekordu_na)</td>
-    </tr>
+@using (Html.BeginForm("RaportWoj", "Woj", FormMethod.Get))
+{
+    <span>wojewodztwo</span>@Html.DropDownList("wojewodztwo", new MultiSelectList(ViewBag.miasto))
+    <span>rok</span>@Html.DropDownList("rok", new SelectList(ViewBag.rok))
+    <span>miesiac</span>@Html.DropDownList("miesiac", new SelectList(ViewBag.miesiac))
+
+    <input type="submit" value="wyszukaj" />
+
+    <!--dane wazne-->
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>dane od dnia:</th>
+            <td>@Model.Min(model => model.stan_rekordu_na)</td>
+        </tr>
+        <tr>
+            <th>dane do dnia:</th>
+            <td>@Model.Max(model => model.stan_rekordu_na)</td>
+        </tr>
 
         @{int RowNo = 0;}
         @foreach (var item in Model)
         { RowNo++; }
-    <tr>
-        <th>liczba rekordów:</th>
-        <td>@RowNo </td>
-    </tr>
-</table>
+        <tr>
+            <th>liczba rekordów w danym okresie:</th>
+            <td>@RowNo </td>
+        </tr>
+    </table>
 
-<h2>Raport dotyczący 10-ciu największych miast</h2>
 
+
+    <br />
     <table class="table table-hover table-bordered">
         <thead>
         <tbody>
             <tr>
                 <th></th>
-                <th>Sum</th>
-                <th>Min</th>
-                <th>Avg</th>
-                <th>Max</th>
+                <th>Suma</th>
+                <th>Minimum</th>
+                <th>Średnia</th>
+                <th>Maksimum</th>
             </tr>
 
             <tr>
@@ -131,3 +140,4 @@
 
     </table>
 
+}
