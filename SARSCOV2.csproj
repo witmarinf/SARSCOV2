@@ -18,7 +18,8 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44319</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -172,12 +173,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\Pie1Controller.cs" />
     <Compile Include="Controllers\PowController.cs" />
     <Compile Include="Controllers\PowFilterController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\WojController.cs" />
     <Compile Include="Controllers\WojFilterController.cs" />
+    <Compile Include="Controllers\WojFilterDropdawnController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -336,7 +337,11 @@
     <Content Include="Views\Woj\Raport.cshtml" />
     <Content Include="Views\WojFilter\Index.cshtml" />
     <Content Include="Views\PowFilter\Index.cshtml" />
-    <Content Include="Views\Pie1\Index.cshtml" />
+    <Content Include="Views\WojFilterDropdawn\Create.cshtml" />
+    <Content Include="Views\WojFilterDropdawn\Delete.cshtml" />
+    <Content Include="Views\WojFilterDropdawn\Details.cshtml" />
+    <Content Include="Views\WojFilterDropdawn\Edit.cshtml" />
+    <Content Include="Views\WojFilterDropdawn\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -389,7 +394,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51201</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44319/</IISUrl>
+          <IISUrl>http://localhost:44319/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:44319/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

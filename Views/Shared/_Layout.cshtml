@@ -49,6 +49,7 @@
                 <ul class="nav navbar-nav">
 
                     <li>@Html.ActionLink("Role", "Index", "Role")</li>
+                    <li>@Html.ActionLink("Pie1", "Index", "Pie1")</li>
 
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -58,6 +59,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Województwa", "Index", "Woj")</li>
                             <li> @Html.ActionLink("Filtrowanie wg. daty", "Index", "WojFilter")</li>
+                            <li> @Html.ActionLink("Filtrowanie wg. województw i miesiąca", "Index", "WojFilterDropdawn")</li>
                             <li>@Html.ActionLink("Raport", "Raport", "Woj")</li>
                         </ul>
                     </li>
@@ -70,6 +72,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Miasta", "Index", "Pow")</li>
                             <li>@Html.ActionLink("Filtrowanie wg. daty", "Index", "PowFilter")</li>
+                            <li> @Html.ActionLink("Filtrowanie wg. miast i miesiąca", "Index", "PowFilterDropdawn")</li>
                             <li>@Html.ActionLink("Raport", "Raport", "Pow")</li>
 
                         </ul>

@@ -12,6 +12,7 @@ namespace SARSCOV2.ModelsDB
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
 
     public partial class woj_target
     {
@@ -33,5 +34,7 @@ namespace SARSCOV2.ModelsDB
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> stan_rekordu_na { get; set; }
+        //add
+        public SelectList ListWoj { get; internal set; }
     }
 }
