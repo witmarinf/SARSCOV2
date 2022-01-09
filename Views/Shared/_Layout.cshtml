@@ -37,26 +37,29 @@
         
         <div class="container">
 
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("SARS-Cov2", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("SARS-Cov2", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
                     <li>@Html.ActionLink("Role", "Index", "Role")</li>
                     <li>@Html.ActionLink("Pie", "Index", "Pie")</li>
+                    <li>@Html.ActionLink("PowPie", "Index", "PowPie")</li>
 
+
+                    <!--Wojewodztwa-->>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Województwa
                             <span class="caret"></span>
                         </a>
-                        <!--Wojewodztwa-->>
+
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Dane:Województwa", "Index", "Woj")</li>
                             <li>@Html.ActionLink("Filtrowanie wg. daty", "Index", "WojFilter")</li>
@@ -66,22 +69,45 @@
                         </ul>
                     </li>
 
+
+                    <!--Wojewodztwa Wykresy-->>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Województwa Wykresy
+                            <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Dane:Województwa", "Index", "Woj")</li>
+                        </ul>
+                    </li>
+
+
+                    <!--Miasta-->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Miasta
                             <span class="caret"></span>
                         </a>
-                        <!--Miasta-->
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Dane:Miasta", "Index", "Pow")</li>
                             <li>@Html.ActionLink("Filtrowanie wg. daty", "Index", "PowFilter")</li>
                             <li>@Html.ActionLink("Filtrowanie wg. miast i miesiąca", "Index", "PowFilterDropdawn")</li>
                             <li>@Html.ActionLink("Raport dot. miast wg. miesięcy", "RaportPow", "Pow")</li>
                             <li>@Html.ActionLink("Raport Całkowity wg. miast", "Raport", "Pow")</li>
-
                         </ul>
                     </li>
 
+                    <!--Miasta Wykresy-->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Miasta Wykresy
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Dane:Miasta", "Index", "PowPie")</li>
+                        </ul>
+                    </li>
 
 
                 </ul>

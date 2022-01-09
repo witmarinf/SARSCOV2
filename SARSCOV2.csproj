@@ -176,6 +176,7 @@
     <Compile Include="Controllers\PowController.cs" />
     <Compile Include="Controllers\PowFilterController.cs" />
     <Compile Include="Controllers\PowFilterDropDawnController.cs" />
+    <Compile Include="Controllers\PowPieController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\WojController.cs" />
     <Compile Include="Controllers\WojFilterController.cs" />
@@ -354,6 +355,7 @@
     <Content Include="Views\PowFilterDropDawn\Index.cshtml" />
     <Content Include="Views\Woj\RaportWoj.cshtml" />
     <Content Include="Views\Pow\RaportPow.cshtml" />
+    <Content Include="Views\PowPie\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
