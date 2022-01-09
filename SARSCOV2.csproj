@@ -181,6 +181,7 @@
     <Compile Include="Controllers\WojController.cs" />
     <Compile Include="Controllers\WojFilterController.cs" />
     <Compile Include="Controllers\WojFilterDropdawnController.cs" />
+    <Compile Include="Controllers\WojPieController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -355,7 +356,8 @@
     <Content Include="Views\PowFilterDropDawn\Index.cshtml" />
     <Content Include="Views\Woj\RaportWoj.cshtml" />
     <Content Include="Views\Pow\RaportPow.cshtml" />
-    <Content Include="Views\PowPie\Index.cshtml" />
+    <Content Include="Views\PowPie\PowZgony.cshtml" />
+    <Content Include="Views\WojPie\WojZgony.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

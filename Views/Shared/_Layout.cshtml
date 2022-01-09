@@ -27,16 +27,10 @@
             setTimeout(zegarek, 1000);
         }
     </script>
-
-
 </head>
 <body onload="zegarek()">
-   
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <!-- dodano zegar -->
-        
         <div class="container">
-
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
@@ -78,7 +72,7 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Dane:Województwa", "Index", "Woj")</li>
+                            <li>@Html.ActionLink("Zgony", "WojZgony", "WojPie")</li>
                         </ul>
                     </li>
 
@@ -105,7 +99,7 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Dane:Miasta", "Index", "PowPie")</li>
+                            <li>@Html.ActionLink("Zgony", "PowZgony", "PowPie")</li>
                         </ul>
                     </li>
 

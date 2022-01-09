@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
-using System.Web.Mvc;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Web.Mvc;
 
 namespace SARSCOV2.Controllers
 {
-    public class PowPieController : Controller
+    public class WojPieController : Controller
     {
-        // GET: PowPie
-        public ActionResult PowZgony()
+        // GET: WojPie
+        public ActionResult WojZgony()
         {
             return View();
         }
@@ -18,7 +17,8 @@ namespace SARSCOV2.Controllers
         [HttpPost]
         public JsonResult AjaxMethod()
         {
-            string query = "SELECT powiat_miasto, Sum(zgony) zgony from pow_target group by powiat_miasto order by sum(zgony) DESC";
+            string query = "SELECT wojewodztwo, SUM(zgony) zgony from";
+            query += " woj_source group by wojewodztwo order by sum(zgony) DESC";
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]
@@ -38,10 +38,11 @@ namespace SARSCOV2.Controllers
                         {
                             chart_data.Add(new object[]
                         {
-                            sql_data_reader["powiat_miasto"].ToString(), sql_data_reader["zgony"]
+                            sql_data_reader["wojewodztwo"].ToString(), sql_data_reader["zgony"]
                         });
                         }
                     }
+
                     connection.Close();
                 }
             }
