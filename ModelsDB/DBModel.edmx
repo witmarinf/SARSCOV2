@@ -108,6 +108,12 @@
           <Property Name="populacja" Type="int" />
           <Property Name="code" Type="varchar" MaxLength="10" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'DB.dbo.woj_target_view' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="woj_target_view">
+          <Property Name="wojewodztwo" Type="varchar" MaxLength="50" />
+          <Property Name="zgony" Type="int" />
+        </EntityType>-->
         <Function Name="pow_filter_records" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Fromdate" Type="datetime" Mode="In" />
           <Parameter Name="Todate" Type="datetime" Mode="In" />

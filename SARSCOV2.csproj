@@ -199,6 +199,10 @@
     <Compile Include="Migrations\202112302218134_role.Designer.cs">
       <DependentUpon>202112302218134_role.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201091814312_formatdate.cs" />
+    <Compile Include="Migrations\202201091814312_formatdate.Designer.cs">
+      <DependentUpon>202201091814312_formatdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelsDB\DBModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -379,6 +383,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112302218134_role.resx">
       <DependentUpon>202112302218134_role.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201091814312_formatdate.resx">
+      <DependentUpon>202201091814312_formatdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

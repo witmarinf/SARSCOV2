@@ -31,7 +31,6 @@ namespace SARSCOV2.ModelsDB
         public Nullable<int> liczba_testow_z_wynikiem_negatywnym { get; set; }
         public Nullable<int> liczba_pozostalych_testow { get; set; }
         public string teryt { get; set; }
-
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> stan_rekordu_na { get; set; }

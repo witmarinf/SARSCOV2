@@ -9,8 +9,8 @@
         <EntityTypeShape EntityType="DBModel.pow_source" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.pow_target" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.woj_source" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.woj_target" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.wojewodztwa" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.woj_target" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.wojewodztwa" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
