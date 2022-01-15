@@ -37,15 +37,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    @Html.ActionLink("SARS-Cov2", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("SARS-Cov2", "Index", "Stat", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
                     <li>@Html.ActionLink("Role", "Index", "Role")</li>
-                    <li>@Html.ActionLink("Pie", "Index", "Pie")</li>
-                    <li>@Html.ActionLink("PowPie", "Index", "PowPie")</li>
-
 
                     <!--Wojewodztwa-->>
                     <li class="dropdown">
@@ -100,6 +97,8 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Zgony", "PowZgony", "PowPie")</li>
+                            <li>@Html.ActionLink("ZgonyPorównanie", "PowZgonyPorownanie", "PowPie")</li>
+
                         </ul>
                     </li>
 

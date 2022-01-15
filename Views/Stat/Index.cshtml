@@ -1,0 +1,376 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <style>
+        .resp {
+            width: auto;
+            height: 500px;
+            padding: 5px;
+            border: 1px solid;
+        }
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+
+   <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    -->
+       <!--Wykresy-->
+
+    <script type="text/javascript">
+        google.charts.load("visualization", "1", { packages: ["corechart"] });
+
+        google.charts.setOnLoadCallback(drawChart1);
+        google.charts.setOnLoadCallback(drawChart1a);
+        google.charts.setOnLoadCallback(drawChart1b);
+        google.charts.setOnLoadCallback(drawChart1c);
+        google.charts.setOnLoadCallback(drawChart2);
+        google.charts.setOnLoadCallback(drawChart2a);
+        google.charts.setOnLoadCallback(drawChart2b);
+        google.charts.setOnLoadCallback(drawChart2c);
+
+        function drawChart1() {
+            $.ajax({
+                type: "POST",
+                url: "/Stat/AjaxMethod1",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    var options = {
+                        title: 'Porównanie wyników dla województw',
+                        vAxis: { title: 'liczba przypadków' },
+                        hAxis: { title: 'miasta' },
+                        seriesType: 'bars',
+                        series: { 5: { type: 'line' } },
+                        legend: { position: 'top', alignment: 'start' },
+                    };
+
+                    var chart = new google.visualization.ComboChart(document.getElementById('div1'));
+                    chart.draw(data, options);
+
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+
+
+
+        function drawChart1a() {
+            $.ajax({
+                type: "POST",
+                url: "/Stat/AjaxMethod1a",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    var options = {
+                        title: 'Liczba testów z wynikiem pozytywnym w województwach',
+                        legend: { position: 'right', alignment: 'start' },
+
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('div1a'));
+                    chart.draw(data, options);
+
+                },
+
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+
+        function drawChart1b() {
+            $.ajax({
+                type: "POST",
+                url: "/Stat/AjaxMethod1b",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    var options = {
+                        title: 'Liczba ozdrowieńców w województwach',
+                        legend: { position: 'right', alignment: 'start' },
+
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('div1b'));
+                    chart.draw(data, options);
+
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+
+
+        function drawChart1c() {
+            $.ajax({
+                type: "POST",
+                url: "/Stat/AjaxMethod1c",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    var options = {
+                        title: 'Liczba zgonów w województwach',
+                        legend: { position: 'none' },
+                        legend: { position: 'right', alignment: 'start' },
+
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('div1c'));
+                    chart.draw(data, options);
+
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+
+        function drawChart2() {
+            $.ajax({
+                type: "POST",
+                url: "/Stat/AjaxMethod2",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    var options = {
+                        title: 'Porównanie 10-ciu największych miast w Polsce',
+                        legend: { position: 'top', alignment: 'start' },
+                        vAxis: { title: 'liczba przypadków' },
+                        hAxis: { title: 'miasta' },
+                        seriesType: 'bars',
+                        //isStacked: true,
+                        series: { 5: { type: 'line' } }
+                    };
+                    var chart = new google.visualization.ComboChart(document.getElementById('div2'));
+                    chart.draw(data, options);
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+
+        function drawChart2a() {
+            $.ajax({
+                type: "POST",
+                url: "/Stat/AjaxMethod2a",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    var options = {
+                        title: 'Liczba testów z wynikiem pozytywnym w 10-ciu największych miastach w Polsce',
+                        legend: { position: 'right', alignment: 'start' },
+
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('div2a'));
+                    chart.draw(data, options);
+
+                },
+
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+
+        function drawChart2b() {
+            $.ajax({
+                type: "POST",
+                url: "/Stat/AjaxMethod2b",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    var options = {
+                        title: 'Liczba ozdrowieńców w 10-ciu największych miastach w Polsce',
+                        legend: { position: 'right', alignment: 'start' },
+
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('div2b'));
+                    chart.draw(data, options);
+
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+
+
+        function drawChart2c() {
+            $.ajax({
+                type: "POST",
+                url: "/Stat/AjaxMethod2c",
+                data: '{}',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    var options = {
+                        title: 'Liczba zgonów dla 10-ciu największych miast w Polsce',
+                        legend: { position: 'none' },
+                        legend: { position: 'right', alignment: 'start' },
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('div2c'));
+                    chart.draw(data, options);
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+
+    </script>
+
+    <!--Wykresy-->
+
+</head>
+
+<body>
+    <div>Dane z ostatniego dnia:</div>
+    <div>
+        <select id="mySelect" onchange="mySelectfunction()">
+            <option value="00">wybierz</option>
+            <option value="12">porównanie dla województw i miast w Polsce </option>
+            <option value="1a2a">liczba przypadków pozytywnych</option>
+            <option value="1b2b">liczba ozdrowieńców</option>
+            <option value="1c2c">liczba zgonów</option>
+        </select>
+        <script>
+            function mySelectfunction() {
+                getValue = document.getElementById("mySelect").value;
+
+                if (getValue == "00") {
+                    document.getElementById("div0").style.display = "block";
+                    document.getElementById("div1").style.display = "none";
+                    document.getElementById("div1a").style.display = "none";
+                    document.getElementById("div1b").style.display = "none";
+                    document.getElementById("div1c").style.display = "none";
+                    document.getElementById("div2").style.display = "none";
+                    document.getElementById("div2a").style.display = "none";
+                    document.getElementById("div2b").style.display = "none";
+                    document.getElementById("div2c").style.display = "none";
+                }
+
+                if (getValue == "12") {
+                    document.getElementById("div0").style.display = "none";
+                    document.getElementById("div1").style.display = "block";
+                    document.getElementById("div1a").style.display = "none";
+                    document.getElementById("div1b").style.display = "none";
+                    document.getElementById("div1c").style.display = "none";
+                    document.getElementById("div2").style.display = "block";
+                    document.getElementById("div2a").style.display = "none";
+                    document.getElementById("div2b").style.display = "none";
+                    document.getElementById("div2c").style.display = "none";
+                }
+
+                if (getValue == "1a2a") {
+                    document.getElementById("div0").style.display = "none";
+                    document.getElementById("div1").style.display = "none";
+                    document.getElementById("div1a").style.display = "block";
+                    document.getElementById("div1b").style.display = "none";
+                    document.getElementById("div1c").style.display = "none";
+                    document.getElementById("div2").style.display = "none";
+                    document.getElementById("div2a").style.display = "block";
+                    document.getElementById("div2b").style.display = "none";
+                    document.getElementById("div2c").style.display = "none";
+                }
+
+                if (getValue == "1b2b") {
+                    document.getElementById("div0").style.display = "none";
+                    document.getElementById("div1").style.display = "none";
+                    document.getElementById("div1a").style.display = "none";
+                    document.getElementById("div1b").style.display = "block";
+                    document.getElementById("div1c").style.display = "none";
+                    document.getElementById("div2").style.display = "none";
+                    document.getElementById("div2a").style.display = "none";
+                    document.getElementById("div2b").style.display = "block";
+                    document.getElementById("div2c").style.display = "none";
+                }
+
+                if (getValue == "1c2c") {
+                    document.getElementById("div0").style.display = "none";
+                    document.getElementById("div1").style.display = "none";
+                    document.getElementById("div1a").style.display = "none";
+                    document.getElementById("div1b").style.display = "none";
+                    document.getElementById("div1c").style.display = "block";
+                    document.getElementById("div2").style.display = "none";
+                    document.getElementById("div2a").style.display = "none";
+                    document.getElementById("div2b").style.display = "none";
+                    document.getElementById("div2c").style.display = "block";
+                }
+            }
+        </script>
+        <br />
+        <div>
+            <div class="resp" id="div0">Opis strony</div><br />
+            <div class="resp" id="div1"></div><br />
+            <div class="resp" id="div1a"></div><br />
+            <div class="resp" id="div1b"></div><br />
+            <div class="resp" id="div1c"></div><br />
+            <div class="resp" id="div2"></div><br />
+            <div class="resp" id="div2a"></div><br />
+            <div class="resp" id="div2b"></div><br />
+            <div class="resp" id="div2c"></div>
+        </div>
+    </div>
+</body>
+</html>
