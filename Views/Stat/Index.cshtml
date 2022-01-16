@@ -1,4 +1,5 @@
-﻿
+﻿@using System.Data
+@model DataSet
 @{
     ViewBag.Title = "Index";
 }
@@ -18,9 +19,9 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 
-   <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    -->
-       <!--Wykresy-->
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+     -->
+    <!--Wykresy-->
 
     <script type="text/javascript">
         google.charts.load("visualization", "1", { packages: ["corechart"] });
@@ -50,7 +51,8 @@
                         vAxis: { title: 'liczba przypadków' },
                         hAxis: { title: 'miasta' },
                         seriesType: 'bars',
-                        series: { 5: { type: 'line' } },
+                        isStacked: true,
+                        series: { 3: { type: 'line' } },
                         legend: { position: 'top', alignment: 'start' },
                     };
 
@@ -175,8 +177,9 @@
                         vAxis: { title: 'liczba przypadków' },
                         hAxis: { title: 'miasta' },
                         seriesType: 'bars',
-                        //isStacked: true,
-                        series: { 5: { type: 'line' } }
+                        barSliceText: 'value-and-percentage',
+                        isStacked: true,
+                        series: { 3: { type: 'line' } }
                     };
                     var chart = new google.visualization.ComboChart(document.getElementById('div2'));
                     chart.draw(data, options);
@@ -203,6 +206,7 @@
                     var options = {
                         title: 'Liczba testów z wynikiem pozytywnym w 10-ciu największych miastach w Polsce',
                         legend: { position: 'right', alignment: 'start' },
+
 
                     };
 
@@ -285,7 +289,15 @@
 </head>
 
 <body>
-    <div>Dane z ostatniego dnia:</div>
+    <br />
+    @foreach (DataRow row in Model.Tables[0].Rows)
+    {
+     <table style="font-weight: bold;"> 
+     <tr><td>Data pierwszej aktualizacji: </td><td> &nbsp; @row["min"] </td></tr>
+     <tr><td>Data ostatniej aktualizacji: </td><td> &nbsp; @row["maks"] </td></tr>
+     </table>
+    }
+    <br/>
     <div>
         <select id="mySelect" onchange="mySelectfunction()">
             <option value="00">wybierz</option>

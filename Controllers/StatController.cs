@@ -13,20 +13,54 @@ namespace SARSCOV2.Controllers
     public class StatController : Controller
     {
         // GET: Stat
+        /*
+         public ActionResult Index()
+          {
+              return View();
+          }
+        */
+
         public ActionResult Index()
         {
-            return View();
+            DataSet ds = new DataSet();
+            string constr = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "SELECT Format(max(stan_rekordu_na),'dd/MM/yyyy') maks," +
+                    "Format(min(stan_rekordu_na),'dd/MM/yyyy') min FROM woj_target";
+
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    cmd.Connection = con;
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    {
+                        sda.Fill(ds);
+                    }
+                }
+            }
+            return View(ds);
         }
+
+
+
+
 
         [HttpPost]
         public JsonResult AjaxMethod1()
-        {
-            string query = "SELECT wojewodztwo, Sum(liczba_testow_z_wynikiem_pozytywnym) poz, " +
-                "Sum(liczba_ozdrowiencow) ozd " +
-                ",Sum(zgony) zgony from woj_target" +
-                " where stan_rekordu_na = " +
-                "(select  max(stan_rekordu_na) from woj_target) group by " +
-                "wojewodztwo order by Sum(liczba_testow_z_wynikiem_pozytywnym) DESC";
+        {    //stan_rekordu_na = (select  max(stan_rekordu_na) from woj_target)
+             //stan_rekordu_na>=(select DATEADD(day,-7, max(stan_rekordu_na)) from woj_source)
+            /* string query = "SELECT wojewodztwo, Sum(liczba_testow_z_wynikiem_pozytywnym) poz," +
+                 "Sum(liczba_ozdrowiencow) ozd, Sum(zgony) zgony from woj_target where" +
+                 "stan_rekordu_na = (select  max(stan_rekordu_na) from woj_target)" +
+                 "group by wojewodztwo order by Sum(liczba_testow_z_wynikiem_pozytywnym) DESC";
+            */
+
+            string query = "SELECT wojewodztwo, Sum(liczba_testow_z_wynikiem_pozytywnym) poz, Sum(liczba_ozdrowiencow) ozd " +
+                ",Sum(zgony) zgony from woj_target where " +
+                "stan_rekordu_na = (select  max(stan_rekordu_na) from woj_target)" +
+                "group by wojewodztwo order by Sum(liczba_testow_z_wynikiem_pozytywnym) DESC";
+
+
 
             string constr = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chartData = new List<object>();
@@ -65,7 +99,8 @@ namespace SARSCOV2.Controllers
 
         public JsonResult AjaxMethod1a()
         {
-            string query = "SELECT wojewodztwo, Sum(liczba_testow_z_wynikiem_pozytywnym) poz from woj_target where stan_rekordu_na = " +
+            string query = "SELECT wojewodztwo, Sum(liczba_testow_z_wynikiem_pozytywnym) poz " +
+                "from woj_target where stan_rekordu_na = " +
                 "(select  max(stan_rekordu_na) from woj_target) group by " +
                 "wojewodztwo order by Sum(liczba_testow_z_wynikiem_pozytywnym) DESC";
 
