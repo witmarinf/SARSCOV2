@@ -26,8 +26,10 @@ namespace SARSCOV2.Controllers
             string constr = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "SELECT Format(max(stan_rekordu_na),'dd/MM/yyyy') maks," +
-                    "Format(min(stan_rekordu_na),'dd/MM/yyyy') min FROM woj_target";
+                string query = "Select Format(min(w.stan_rekordu_na),'dd/MM/yyyy') minw,"
+                             + "Format(max(w.stan_rekordu_na),'dd/MM/yyyy') maxw," 
+                             + "Format(min(p.stan_rekordu_na),'dd/MM/yyyy') minp,"
+                             + "Format(max(p.stan_rekordu_na),'dd/MM/yyyy') maxp from woj_target w, pow_target p";
 
                 using (SqlCommand cmd = new SqlCommand(query))
                 {

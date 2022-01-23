@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Indexk";
+}
+
+<html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['geochart'],
+            // Note: you will need to get a mapsApiKey for your project.
+            // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+        });
+        google.charts.setOnLoadCallback(drawRegionsMap);
+
+        function drawRegionsMap() {
+            $.ajax({
+                type: "POST",
+                url: "/Poland/AjaxMethodk",
+                data: '{}',
+                isStacked: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+                    var options = {
+                        region: "PL",
+                        resolution: "provinces",
+                        datalessRegionColor: 'transparent',
+                        displayMode: 'regions',
+
+                        colorAxis: {
+                            minValue: 0,
+                            maxValue: 1000
+                        }
+                    }
+                    var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+                    chart.draw(data, options);
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+    <h2>Zgony w wyniku covid bez chorób współistniejących</h2>
+    <div id="regions_div" style="width: 900px; height: 500px;"></div>
+</body>
+</html>

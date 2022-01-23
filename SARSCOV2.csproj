@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PolandController.cs" />
     <Compile Include="Controllers\PowController.cs" />
     <Compile Include="Controllers\PowFilterController.cs" />
     <Compile Include="Controllers\PowFilterDropDawnController.cs" />
@@ -358,6 +359,16 @@
     <Content Include="Views\PowPie\PowZgony.cshtml" />
     <Content Include="Views\WojPie\WojZgony.cshtml" />
     <Content Include="Views\Stat\Index.cshtml" />
+    <Content Include="Views\Poland\Indexc.cshtml" />
+    <Content Include="Views\Poland\Indexd.cshtml" />
+    <Content Include="Views\Poland\Indexe.cshtml" />
+    <Content Include="Views\Poland\Indexf.cshtml" />
+    <Content Include="Views\Poland\Indexg.cshtml" />
+    <Content Include="Views\Poland\Indexi.cshtml" />
+    <Content Include="Views\Poland\Indexh.cshtml" />
+    <Content Include="Views\Poland\Indexl.cshtml" />
+    <Content Include="Views\Poland\Indexk.cshtml" />
+    <Content Include="Views\Poland\Indexj.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
