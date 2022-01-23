@@ -302,7 +302,6 @@
     <br/>
     <div>
         <select id="mySelect" onchange="mySelectfunction()">
-            <option value="00">wybierz</option>
             <option value="12">porównanie dla województw i miast w Polsce </option>
             <option value="1a2a">liczba przypadków pozytywnych</option>
             <option value="1b2b">liczba ozdrowieńców</option>
@@ -312,20 +311,7 @@
             function mySelectfunction() {
                 getValue = document.getElementById("mySelect").value;
 
-                if (getValue == "00") {
-                    document.getElementById("div0").style.display = "block";
-                    document.getElementById("div1").style.display = "none";
-                    document.getElementById("div1a").style.display = "none";
-                    document.getElementById("div1b").style.display = "none";
-                    document.getElementById("div1c").style.display = "none";
-                    document.getElementById("div2").style.display = "none";
-                    document.getElementById("div2a").style.display = "none";
-                    document.getElementById("div2b").style.display = "none";
-                    document.getElementById("div2c").style.display = "none";
-                }
-
                 if (getValue == "12") {
-                    document.getElementById("div0").style.display = "none";
                     document.getElementById("div1").style.display = "block";
                     document.getElementById("div1a").style.display = "none";
                     document.getElementById("div1b").style.display = "none";
@@ -337,7 +323,6 @@
                 }
 
                 if (getValue == "1a2a") {
-                    document.getElementById("div0").style.display = "none";
                     document.getElementById("div1").style.display = "none";
                     document.getElementById("div1a").style.display = "block";
                     document.getElementById("div1b").style.display = "none";
@@ -349,7 +334,6 @@
                 }
 
                 if (getValue == "1b2b") {
-                    document.getElementById("div0").style.display = "none";
                     document.getElementById("div1").style.display = "none";
                     document.getElementById("div1a").style.display = "none";
                     document.getElementById("div1b").style.display = "block";
@@ -361,7 +345,6 @@
                 }
 
                 if (getValue == "1c2c") {
-                    document.getElementById("div0").style.display = "none";
                     document.getElementById("div1").style.display = "none";
                     document.getElementById("div1a").style.display = "none";
                     document.getElementById("div1b").style.display = "none";
@@ -375,7 +358,6 @@
         </script>
         <br />
         <div>
-            <div class="resp" id="div0">Opis strony</div><br />
             <div class="resp" id="div1"></div><br />
             <div class="resp" id="div1a"></div><br />
             <div class="resp" id="div1b"></div><br />
