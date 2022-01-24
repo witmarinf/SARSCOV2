@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+
+
+
+    google.charts.load("visualization", "1", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        $.ajax({
+            type: "POST",
+            url: "/WojTrendMonth/AjaxMethod",
+            data: '{}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                var data = google.visualization.arrayToDataTable(r);
+
+
+                options = {
+                    title: 'Trend miesieczny zgonów dla województw w Polsce',
+
+                    vAxis: { title: 'ilość' },
+                    hAxis: { title: 'miesiąc' },
+                    seriesType: 'bars',
+                    series: { 5: { type: 'line' } }
+                };
+                chart = new google.visualization.ColumnChart($("#chart1")[0]);
+                chart.draw(data, options);
+            },
+            failure: function (r) {
+                alert(r.d);
+            },
+            error: function (r) {
+                alert(r.d);
+            }
+        });
+    }
+</script>
+<div id="chart1" style="width: auto; height: 600px;">
+</div>

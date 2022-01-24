@@ -91,6 +91,10 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Zgony", "WojZgony", "WojPie")</li>
+                            <li>@Html.ActionLink("Trend miesięczny zgonów", "Index", "WojTrendMonth")</li>
+                            <li>@Html.ActionLink("Trend zgonów z ostatnich 14 dni", "Index", "WojTrendDay14")</li>
+                            <li>@Html.ActionLink("Regresja liniowa i wykładnicza", "Index", "WojRegressionDay14")</li>
+
                         </ul>
                     </li>
 
@@ -118,8 +122,9 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>@Html.ActionLink("Zgony", "PowZgony", "PowPie")</li>
-                            <li>@Html.ActionLink("ZgonyPorównanie", "PowZgonyPorownanie", "PowPie")</li>
-
+                            <li>@Html.ActionLink("Trend miesięczny zgonów", "Index", "PowTrendMonth")</li>
+                            <li>@Html.ActionLink("Trend zgonów z ostatnich 14 dni", "Index", "PowTrendDay14")</li>
+                            <li>@Html.ActionLink("Regresja liniowa i wykładnicza", "Index", "PowRegressionDay14")</li>
                         </ul>
                     </li>
 
