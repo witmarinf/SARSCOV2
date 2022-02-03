@@ -288,10 +288,8 @@
     @foreach (DataRow row in Model.Tables[0].Rows)
     {
 <table style="font-weight: bold;">
-    <tr><td>Data pierwszej aktualizacji dla województw: </td><td> &nbsp; @row["minw"] </td></tr>
-    <tr><td>Data ostatniej aktualizacji dla województw: </td><td> &nbsp; @row["maxw"] </td></tr>
-    <tr><td>Data pierwszej aktualizacji dla 10-ciu największych miast w Polsce: </td><td> &nbsp; @row["minp"] </td></tr>
-    <tr><td>Data ostatniej aktualizacji dla 10-ciu największych miast w Polsce: </td><td> &nbsp; @row["maxp"] </td></tr>
+    <tr><td>Dane dla województw: </td><td> &nbsp; @row["minw"] - @row["maxw"] </td></tr>
+    <tr><td>Dane dla miast: </td><td> &nbsp;  @row["minp"] - @row["maxp"] </td></tr>
 </table>
     }
     <br/>

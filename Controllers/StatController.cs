@@ -12,17 +12,11 @@ namespace SARSCOV2.Controllers
 {
     public class StatController : Controller
     {
-        // GET: Stat
-        /*
-         public ActionResult Index()
-          {
-              return View();
-          }
-        */
 
         public ActionResult Index()
         {
             DataSet ds = new DataSet();
+
             string constr = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             using (SqlConnection con = new SqlConnection(constr))
             {
