@@ -177,15 +177,18 @@
     <Compile Include="Controllers\PowController.cs" />
     <Compile Include="Controllers\PowFilterController.cs" />
     <Compile Include="Controllers\PowFilterDropDawnController.cs" />
+    <Compile Include="Controllers\PowLastDayAvgController.cs" />
     <Compile Include="Controllers\PowPieController.cs" />
     <Compile Include="Controllers\PowRegressionDay14Controller.cs" />
     <Compile Include="Controllers\PowTrendDay14Controller.cs" />
     <Compile Include="Controllers\PowTrendMonthController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\StatController.cs" />
+    <Compile Include="Controllers\TableWojLastDayController.cs" />
     <Compile Include="Controllers\WojController.cs" />
     <Compile Include="Controllers\WojFilterController.cs" />
     <Compile Include="Controllers\WojFilterDropdawnController.cs" />
+    <Compile Include="Controllers\WojLastDayAvgController.cs" />
     <Compile Include="Controllers\WojPieController.cs" />
     <Compile Include="Controllers\WojRegressionDay14Controller.cs" />
     <Compile Include="Controllers\WojTrendDay14Controller.cs" />
@@ -382,6 +385,9 @@
     <Content Include="Views\PowTrendDay14\Index.cshtml" />
     <Content Include="Views\WojRegressionDay14\Index.cshtml" />
     <Content Include="Views\PowRegressionDay14\Index.cshtml" />
+    <Content Include="Views\TableWojLastDay\Index.cshtml" />
+    <Content Include="Views\WojLastDayAvg\Index.cshtml" />
+    <Content Include="Views\PowLastDayAvg\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

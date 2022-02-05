@@ -45,11 +45,14 @@
                     <!--Mapa-->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Dane z ostatniego dnia
+                            Dane z ostatniego dnia aktualizacji
                             <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("T | Dane zbiorcze wg. województw", "Index", "TableWojLastDay")</li>
+                            <li>@Html.ActionLink("W | Zgony wg. województw", "Index", "WojLastDayAvg")</li>
+                            <li>@Html.ActionLink("W | Zgony wg. miast", "Index", "PowLastDayAvg")</li>
                             <li>@Html.ActionLink("M | Osoby objęte kwarantanną wg. województw", "Indexc", "Poland")</li>
                             <li>@Html.ActionLink("M | Ozdrowieńcy wg. województw", "Indexd", "Poland")</li>
                             <li>@Html.ActionLink("M | Osoby z poprzedniej doby z wynikiem pozytywnym", "Indexe", "Poland")</li>
