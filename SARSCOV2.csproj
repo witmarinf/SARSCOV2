@@ -184,6 +184,7 @@
     <Compile Include="Controllers\PowTrendMonthController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\StatController.cs" />
+    <Compile Include="Controllers\TablePowLastDayController.cs" />
     <Compile Include="Controllers\TableWojLastDayController.cs" />
     <Compile Include="Controllers\WojController.cs" />
     <Compile Include="Controllers\WojFilterController.cs" />
@@ -388,6 +389,7 @@
     <Content Include="Views\TableWojLastDay\Index.cshtml" />
     <Content Include="Views\WojLastDayAvg\Index.cshtml" />
     <Content Include="Views\PowLastDayAvg\Index.cshtml" />
+    <Content Include="Views\TablePowLastDay\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
