@@ -48,5 +48,40 @@ namespace SARSCOV2.Controllers
             }
             return Json(chart_data);
         }
+
+        [HttpPost]
+        public JsonResult AjaxMethod1()
+        {
+            string query = "select g, h from PowTrendDay14WithoutWeekendsView";
+            string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
+            List<object> chart_data = new List<object>();
+            chart_data.Add(new object[]
+                        {
+                            "zgony w wyniku covid bez chorób współistniejących",
+                            "zgony w wyniku covid i chorób współistniejących"
+                        });
+            using (SqlConnection connection = new SqlConnection(constructor))
+            {
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = connection;
+                    connection.Open();
+                    using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
+                    {
+                        while (sql_data_reader.Read())
+                        {
+                            chart_data.Add(new object[]
+                        {
+                            sql_data_reader["g"],
+                            sql_data_reader["h"],
+                        });
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            return Json(chart_data);
+        }
     }
 }

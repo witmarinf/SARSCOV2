@@ -49,5 +49,7 @@ namespace SARSCOV2.Controllers
             }
             return Json(chart_data);
         }
+
+        
     }
 }

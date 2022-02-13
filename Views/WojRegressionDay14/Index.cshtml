@@ -9,6 +9,7 @@
 
         google.charts.load("visualization", "1", { packages: ["corechart"] });
         google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawChart1);
         function drawChart() {
             $.ajax({
                 type: "POST",
@@ -51,6 +52,49 @@
                 }
             });
         }
+
+        function drawChart1() {
+            $.ajax({
+                type: "POST",
+                url: "/WojRegressionDay14/AjaxMethod1",
+                data: '{}',
+                isStacked: true,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (r) {
+                    var data = google.visualization.arrayToDataTable(r);
+
+                    var options = {
+                        hAxis: { minValue: 0, maxValue: 400 },
+                        vAxis: { minValue: 0, maxValue: 1000 },
+                        chartArea: { width: '50%' },
+                        trendlines: {
+                            0: {
+                                type: 'linear',
+                                showR2: true,
+                                visibleInLegend: true
+                            }
+                        }
+                    };
+
+                    var chartLinear = new google.visualization.ScatterChart(document.getElementById('chartLinear1'));
+                    chartLinear.draw(data, options);
+
+                    options.trendlines[0].type = 'exponential';
+                    options.colors = ['#6F9732'];
+
+                    var chartExponential = new google.visualization.ScatterChart(document.getElementById('chartExponential1'));
+                    chartExponential.draw(data, options);
+
+                },
+                failure: function (r) {
+                    alert(r.d);
+                },
+                error: function (r) {
+                    alert(r.d);
+                }
+            });
+        }
     </script>
 </head>
 
@@ -58,5 +102,8 @@
     <h3> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni </h3>
     <div id="chartLinear" style="height: 500px; width: auto"></div>
     <div id="chartExponential" style="height: 500px; width: auto"></div>
+    <h3> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni <br/> bez danych z sobót i niedziel  </h3>
+    <div id="chartLinear1" style="height: 500px; width: auto"></div>
+    <div id="chartExponential1" style="height: 500px; width: auto"></div>
 </body>
 </html>

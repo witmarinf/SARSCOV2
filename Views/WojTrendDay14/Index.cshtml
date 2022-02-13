@@ -1,14 +1,8 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
 <script type="text/javascript">
-
-
-
     google.charts.load("visualization", "1", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
@@ -20,9 +14,10 @@
             dataType: "json",
             success: function (r) {
                 var data = google.visualization.arrayToDataTable(r);
-
-
-                options = {
+               /* var options = {
+                    is3D: true,}
+                    */
+                var options = {
                     title: 'Trend dzienny dla województw - ostatnie 14 dni',
 
                     vAxis: { title: 'ilość przypadków' },
@@ -30,7 +25,8 @@
                     seriesType: 'bars',
                     series: { 5: { type: 'line' } }
                 };
-                chart = new google.visualization.ColumnChart($("#chart1")[0]);
+                chart = new google.visualization.ComboChart($("#chart1")[0]);
+               /* chart = new google.visualization.LineChart($("#chart1")[0]); */
                 chart.draw(data, options);
             },
             failure: function (r) {
