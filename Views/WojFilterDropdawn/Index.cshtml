@@ -17,11 +17,14 @@
 
 <h2>Filtrowanie danych wg. województw oraz daty</h2>
 
-@using (Html.BeginForm("Index", "WojFilterDropdawn", FormMethod.Get))
-{
-    <span>wojewodztwo</span>@Html.DropDownList("wojewodztwo", new MultiSelectList(ViewBag.wojewodztwo))
-    <span>rok</span>@Html.DropDownList("rok", new SelectList(ViewBag.rok))
-    <span>miesiac</span>@Html.DropDownList("miesiac", new SelectList(ViewBag.miesiac))
+@using (Html.BeginForm("Index", "WojFilterDropdawn", FormMethod.Post))
+{   
+    @Html.Label("wojewodztwo: ")
+    @Html.DropDownList("wojewodztwo", new SelectList(ViewBag.wojewodztwo))
+    @Html.Label("rok: ") 
+    @Html.DropDownList("rok", new SelectList(ViewBag.rok))
+    @Html.Label("miesiac: ")
+    @Html.DropDownList("miesiac", new SelectList(ViewBag.miesiac))
 
     <input type="submit" value="wyszukaj" />
 

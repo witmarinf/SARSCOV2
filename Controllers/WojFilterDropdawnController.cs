@@ -12,7 +12,14 @@ namespace SARSCOV2.Controllers
         readonly DBEntities db = new DBEntities();       
         public ActionResult Index(string wojewodztwo, string rok, string miesiac)
             {
-            ViewBag.wojewodztwo = (from r in db.woj_target select r.wojewodztwo).Distinct();
+
+
+
+            //ViewBag.wojewodztwo = new SelectList(db.wojewodztwa, "wojewodztwo", "wojewodztwo");
+            //ViewBag.wojewodztwo = new SelectList(woj.Items).OrderBy(x => x.Text);
+            ViewBag.wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo);
+            //ViewBag.wojewodztwo = new SelectList(from r in db.wojewodztwa select r.wojewodztwo);
+            
             ViewBag.rok = (from r in db.woj_target select r.stan_rekordu_na.Value.Year.ToString()).Distinct();
             ViewBag.miesiac = (from r in db.woj_target select r.stan_rekordu_na.Value.Month.ToString()).Distinct();
 

@@ -17,9 +17,9 @@
 
 <h2>Filtrowanie wg. 10-ciu największych miast w Polsce oraz daty</h2>
 
-@using (Html.BeginForm("Index", "WojFilterDropdawn", FormMethod.Get))
+@using (Html.BeginForm("Index", "PowFilterDropdawn", FormMethod.Get))
 {
-    <span>miasto</span>@Html.DropDownList("miasto", new MultiSelectList(ViewBag.miasto))
+    <span>miasto</span>@Html.DropDownList("miasto", new SelectList(ViewBag.miasto))
     <span>rok</span>@Html.DropDownList("rok", new SelectList(ViewBag.rok))
     <span>miesiac</span>@Html.DropDownList("miesiac", new SelectList(ViewBag.miesiac))
 
@@ -30,7 +30,7 @@
 
             <th>
                 <div>
-                    @Html.DisplayNameFor(model => model.wojewodztwo)
+                    @Html.DisplayNameFor(model => model.powiat_miasto)
                 </div>
             </th>
 
@@ -135,7 +135,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.wojewodztwo)
+                    @Html.DisplayFor(modelItem => item.powiat_miasto)
                 </td>
 
                 <td>

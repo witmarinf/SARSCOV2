@@ -18,7 +18,7 @@ namespace SARSCOV2.Controllers
         public ActionResult Index(string miasto, string rok, string miesiac)
         {
 
-            ViewBag.miasto = (from r in db.pow_target select r.powiat_miasto).Distinct();
+            ViewBag.miasto = (from r in db.miasta select r.miasto);
             ViewBag.rok = (from r in db.pow_target select r.stan_rekordu_na.Value.Year.ToString()).Distinct();
             ViewBag.miesiac = (from r in db.pow_target select r.stan_rekordu_na.Value.Month.ToString()).Distinct();
 
