@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using SARSCOV2.ModelsDB;
 
@@ -34,9 +31,9 @@ namespace SARSCOV2.Controllers
 
         public ActionResult RaportPow(string miasto, string rok, string miesiac)
         {
-            ViewBag.miasto = (from r in db.miasta select r.miasto);
-            ViewBag.rok = (from r in db.pow_target select r.stan_rekordu_na.Value.Year.ToString()).Distinct();
-            ViewBag.miesiac = (from r in db.pow_target select r.stan_rekordu_na.Value.Month.ToString()).Distinct();
+            ViewBag.miasto = (from r in db.miasta select r.miasto).OrderBy(r=>r);
+            ViewBag.rok = (from r in db.pow_target select r.stan_rekordu_na.Value.Year).Distinct().OrderBy(r=>r);
+            ViewBag.miesiac = (from r in db.pow_target select r.stan_rekordu_na.Value.Month).Distinct().OrderBy(r=>r);
 
 
             var model = from r in db.pow_target

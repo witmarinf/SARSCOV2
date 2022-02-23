@@ -13,15 +13,10 @@ namespace SARSCOV2.Controllers
         public ActionResult Index(string wojewodztwo, string rok, string miesiac)
             {
 
-
-
-            //ViewBag.wojewodztwo = new SelectList(db.wojewodztwa, "wojewodztwo", "wojewodztwo");
-            //ViewBag.wojewodztwo = new SelectList(woj.Items).OrderBy(x => x.Text);
-            ViewBag.wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo);
-            //ViewBag.wojewodztwo = new SelectList(from r in db.wojewodztwa select r.wojewodztwo);
+            ViewBag.wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r);
             
-            ViewBag.rok = (from r in db.woj_target select r.stan_rekordu_na.Value.Year.ToString()).Distinct();
-            ViewBag.miesiac = (from r in db.woj_target select r.stan_rekordu_na.Value.Month.ToString()).Distinct();
+            ViewBag.rok = (from r in db.woj_target select r.stan_rekordu_na.Value.Year).Distinct().OrderBy(r => r);
+            ViewBag.miesiac = (from r in db.woj_target select r.stan_rekordu_na.Value.Month).Distinct().OrderBy(r => r);
 
             var model = from r in db.woj_target
                         orderby r.wojewodztwo

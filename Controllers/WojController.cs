@@ -34,9 +34,9 @@ namespace SARSCOV2.Controllers
 
         public ActionResult RaportWoj(string wojewodztwo, string rok, string miesiac)
         {
-            ViewBag.wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo);
-            ViewBag.rok = (from r in db.woj_target select r.stan_rekordu_na.Value.Year.ToString()).Distinct();
-            ViewBag.miesiac = (from r in db.woj_target select r.stan_rekordu_na.Value.Month.ToString()).Distinct();
+            ViewBag.wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r);
+            ViewBag.rok = (from r in db.woj_target select r.stan_rekordu_na.Value.Year).Distinct().OrderBy(r => r);
+            ViewBag.miesiac = (from r in db.woj_target select r.stan_rekordu_na.Value.Month).Distinct().OrderBy(r => r);
 
 
             var model = from r in db.woj_target
@@ -47,9 +47,6 @@ namespace SARSCOV2.Controllers
                         select r;
             return View(model);
         }
-
-
-
 
 
         // GET: Woj/Details/5
@@ -73,9 +70,7 @@ namespace SARSCOV2.Controllers
             return View();
         }
 
-        // POST: Woj/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,wojewodztwo,liczba_przypadkow,liczba_na_10_tys_mieszkancow,zgony,zgony_w_wyniku_covid_bez_chorob_wspolistniejacych,zgony_w_wyniku_covid_i_chorob_wspolistniejacych,liczba_zlecen_poz,liczba_ozdrowiencow,liczba_osob_objetych_kwarantanna,liczba_wykonanych_testow,liczba_testow_z_wynikiem_pozytywnym,liczba_testow_z_wynikiem_negatywnym,liczba_pozostalych_testow,teryt,stan_rekordu_na")] woj_target woj_target)
@@ -105,9 +100,7 @@ namespace SARSCOV2.Controllers
             return View(woj_target);
         }
 
-        // POST: Woj/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,wojewodztwo,liczba_przypadkow,liczba_na_10_tys_mieszkancow,zgony,zgony_w_wyniku_covid_bez_chorob_wspolistniejacych,zgony_w_wyniku_covid_i_chorob_wspolistniejacych,liczba_zlecen_poz,liczba_ozdrowiencow,liczba_osob_objetych_kwarantanna,liczba_wykonanych_testow,liczba_testow_z_wynikiem_pozytywnym,liczba_testow_z_wynikiem_negatywnym,liczba_pozostalych_testow,teryt,stan_rekordu_na")] woj_target woj_target)

@@ -17,7 +17,8 @@
 <h2>Całkowity raport dotyczący 10-ciu największych miast w Polsce</h2>
 @using (Html.BeginForm("Raport", "Pow", FormMethod.Get))
 {
-    <span>miasto</span>@Html.DropDownList("miasto", new MultiSelectList(ViewBag.miasto))
+    @Html.Label("miasto: ")
+    @Html.DropDownList("miasto", new MultiSelectList(ViewBag.miasto))
     <input type="submit" value="Wynik">
 
 

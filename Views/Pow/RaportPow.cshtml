@@ -8,9 +8,14 @@
 
 @using (Html.BeginForm("RaportWoj", "Woj", FormMethod.Get))
 {
-    <span>wojewodztwo</span>@Html.DropDownList("wojewodztwo", new MultiSelectList(ViewBag.miasto))
-    <span>rok</span>@Html.DropDownList("rok", new SelectList(ViewBag.rok))
-    <span>miesiac</span>@Html.DropDownList("miesiac", new SelectList(ViewBag.miesiac))
+    @Html.Label("wojewodztwo: ")
+    @Html.DropDownList("wojewodztwo", new MultiSelectList(ViewBag.miasto))
+
+    @Html.Label("rok: ")
+    @Html.DropDownList("rok", new SelectList(ViewBag.rok))
+
+    @Html.Label("miesiąc: ")
+    @Html.DropDownList("miesiac", new SelectList(ViewBag.miesiac))
 
     <input type="submit" value="wyszukaj" />
 
