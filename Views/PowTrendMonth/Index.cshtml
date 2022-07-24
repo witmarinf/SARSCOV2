@@ -3,20 +3,31 @@
     ViewBag.Title = "Index";
 }
 
+<!--PowTrendMonth-->
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script type="text/javascript">
 
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.setOnLoadCallback(function () {
+        drawChart();
+        $("#powiat_miasto").on("change", function () {
+            drawChart();
+        });
+    });
 
 
-    google.charts.load("visualization", "1", { packages: ["corechart"] });
-    google.charts.setOnLoadCallback(drawChart);
+    //google.charts.load("visualization", "1", { packages: ["corechart"] });
+    //google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
+
+        var powiat_miasto = $("#powiat_miasto option:selected").val();
+
         $.ajax({
             type: "POST",
-            url: "/WojTrendMonth/AjaxMethod",
-            data: '{}',
+            url: "/PowTrendMonth/AjaxMethod",
+            data: "{powiat_miasto: '" + powiat_miasto + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (r) {
@@ -24,14 +35,16 @@
 
 
                 options = {
-                    title: 'Trend miesieczny zgonów dla  10-ciu największych miast w Polsce',
-
-                    vAxis: { title: 'ilość' },
-                    hAxis: { title: 'miesiąc' },
-                    seriesType: 'bars',
-                    series: { 5: { type: 'line' } }
+                    title: 'Trend miesieczny zgonów dla 10-ciu największych miast w Polsce',
+                    is3D: true,
+                    legend: {
+                        position: 'bottom',
+                        alignment: 'center',
+                        orientation: 'vertical',
+                    }
                 };
-                chart = new google.visualization.ColumnChart($("#chart1")[0]);
+
+                chart = new google.visualization.ColumnChart($("#chart")[0]);
                 chart.draw(data, options);
             },
             failure: function (r) {
@@ -43,5 +56,12 @@
         });
     }
 </script>
-<div id="chart1" style="width: auto; height: 600px;">
-</div>
+
+@using (Html.BeginForm("AjaxMethod", "PowTrendMonth", FormMethod.Post))
+{
+    @Html.Label("miasto: ")
+    @Html.DropDownList("powiat_miasto", (SelectList)ViewBag.powiat_miasto, new { @class = "form-control", style = "width:300px; height:35px;" })
+
+    <div id="chart" style="width: 1200px; height: 600px;">
+    </div>
+}
