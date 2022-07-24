@@ -9,7 +9,7 @@ namespace SARSCOV2.Controllers
 {
     public class WojTrendMonthController : Controller
     {
-        //GET: Pie 
+
         public ActionResult Index()
         {
             return View();
