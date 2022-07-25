@@ -3,21 +3,28 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Mvc;
+using System.Linq;
+using SARSCOV2.ModelsDB;
 
 namespace SARSCOV2.Controllers
 {
     public class PowTrendDay14Controller : Controller
     {
+
+        DBEntities db = new DBEntities();
         // GET: PowTrendDay14
         public ActionResult Index()
         {
+            var powiat_miasto = (from r in db.miasta select r.miasto).OrderBy(r => r).ToList();
+            ViewBag.powiat_miasto = new SelectList(powiat_miasto, "powiat_miasto");
+            
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethod()
+        public JsonResult AjaxMethod(string powiat_miasto)
         {
-            string query = "select dmy, g, h from PowTrendDay14View";
+            string query = "SELECT dmy, g, h FROM PowTrendDay14View WHERE powiat_miasto=@powiat_miasto";
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]
@@ -31,6 +38,7 @@ namespace SARSCOV2.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@powiat_miasto", powiat_miasto);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
