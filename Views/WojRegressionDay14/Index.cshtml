@@ -1,109 +1,133 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
 
-        google.charts.load("visualization", "1", { packages: ["corechart"] });
-        google.charts.setOnLoadCallback(drawChart);
-        google.charts.setOnLoadCallback(drawChart1);
-        function drawChart() {
-            $.ajax({
-                type: "POST",
-                url: "/WojRegressionDay14/AjaxMethod",
-                data: '{}',
-                isStacked: true,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (r) {
-                    var data = google.visualization.arrayToDataTable(r);
+<!--WojRegressionDay14-->
 
-                    var options = {
-                        hAxis: { minValue: 0, maxValue: 400 },
-                        vAxis: { minValue: 0, maxValue: 1000 },
-                        chartArea: { width: '50%' },
-                        trendlines: {
-                            0: {
-                                type: 'linear',
-                                showR2: true,
-                                visibleInLegend: true
-                            }
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.setOnLoadCallback(function () {
+        drawChart();
+        $("#wojewodztwo").on("change", function () {
+            drawChart();
+        });
+    });
+
+    google.setOnLoadCallback(function () {
+        drawChart1();
+        $("#wojewodztwo").on("change", function () {
+            drawChart1();
+        });
+    });
+
+    function drawChart() {
+
+        var wojewodztwo = $("#wojewodztwo option:selected").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/WojRegressionDay14/AjaxMethod",
+            data: "{wojewodztwo: '" + wojewodztwo + "'}",
+            isStacked: true,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                var data = google.visualization.arrayToDataTable(r);
+
+                var options = {
+                    hAxis: { minValue: 0, maxValue: 100 },
+                    vAxis: { minValue: 0, maxValue: 100 },
+                    chartArea: { width: '50%' },
+                    trendlines: {
+                        0: {
+                            type: 'linear',
+                            showR2: true,
+                            visibleInLegend: true
                         }
-                    };
+                    }
+                };
 
-                    var chartLinear = new google.visualization.ScatterChart(document.getElementById('chartLinear'));
-                    chartLinear.draw(data, options);
+                var chartLinear = new google.visualization.ScatterChart(document.getElementById('chartLinear'));
+                chartLinear.draw(data, options);
 
-                    options.trendlines[0].type = 'exponential';
-                    options.colors = ['#6F9654'];
+                options.trendlines[0].type = 'exponential';
+                options.colors = ['#6F9654'];
 
-                    var chartExponential = new google.visualization.ScatterChart(document.getElementById('chartExponential'));
-                    chartExponential.draw(data, options);
+                var chartExponential = new google.visualization.ScatterChart(document.getElementById('chartExponential'));
+                chartExponential.draw(data, options);
 
-                },
-                failure: function (r) {
-                    alert(r.d);
-                },
-                error: function (r) {
-                    alert(r.d);
-                }
-            });
-        }
+            },
+            failure: function (r) {
+                alert(r.d);
+            },
+            error: function (r) {
+                alert(r.d);
+            }
+        });
+    }
 
-        function drawChart1() {
-            $.ajax({
-                type: "POST",
-                url: "/WojRegressionDay14/AjaxMethod1",
-                data: '{}',
-                isStacked: true,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (r) {
-                    var data = google.visualization.arrayToDataTable(r);
+    function drawChart1() {
 
-                    var options = {
-                        hAxis: { minValue: 0, maxValue: 400 },
-                        vAxis: { minValue: 0, maxValue: 1000 },
-                        chartArea: { width: '50%' },
-                        trendlines: {
-                            0: {
-                                type: 'linear',
-                                showR2: true,
-                                visibleInLegend: true
-                            }
+        var wojewodztwo = $("#wojewodztwo option:selected").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/WojRegressionDay14/AjaxMethod1",
+            data: "{wojewodztwo: '" + wojewodztwo + "'}",
+            isStacked: true,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+
+                var data = google.visualization.arrayToDataTable(r);
+
+                var options = {
+                    hAxis: { minValue: 0, maxValue: 100 },
+                    vAxis: { minValue: 0, maxValue: 100 },
+                    chartArea: { width: '50%' },
+                    trendlines: {
+                        0: {
+                            type: 'linear',
+                            showR2: true,
+                            visibleInLegend: true
                         }
-                    };
+                    }
+                };
 
-                    var chartLinear = new google.visualization.ScatterChart(document.getElementById('chartLinear1'));
-                    chartLinear.draw(data, options);
+                var chartLinear = new google.visualization.ScatterChart(document.getElementById('chartLinear1'));
+                chartLinear.draw(data, options);
 
-                    options.trendlines[0].type = 'exponential';
-                    options.colors = ['#6F9732'];
+                options.trendlines[0].type = 'exponential';
+                options.colors = ['#6F9732'];
 
-                    var chartExponential = new google.visualization.ScatterChart(document.getElementById('chartExponential1'));
-                    chartExponential.draw(data, options);
+                var chartExponential = new google.visualization.ScatterChart(document.getElementById('chartExponential1'));
+                chartExponential.draw(data, options);
 
-                },
-                failure: function (r) {
-                    alert(r.d);
-                },
-                error: function (r) {
-                    alert(r.d);
-                }
-            });
-        }
-    </script>
-</head>
+            },
+            failure: function (r) {
+                alert(r.d);
+            },
+            error: function (r) {
+                alert(r.d);
+            }
+        });
+    }
+</script>
 
-<body>
+@using (Html.BeginForm("AjaxMethod", "WojRegressionDay14", FormMethod.Post))
+{
+    @Html.Label("województwo: ")
+    @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control", style = "width:300px; height:35px;" })
+
+
     <h3> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni </h3>
     <div id="chartLinear" style="height: 500px; width: auto"></div>
     <div id="chartExponential" style="height: 500px; width: auto"></div>
-    <h3> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni <br/> bez danych z sobót i niedziel  </h3>
+    <h3> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni <br /> bez danych z sobót i niedziel  </h3>
     <div id="chartLinear1" style="height: 500px; width: auto"></div>
     <div id="chartExponential1" style="height: 500px; width: auto"></div>
-</body>
-</html>
+}
+
+

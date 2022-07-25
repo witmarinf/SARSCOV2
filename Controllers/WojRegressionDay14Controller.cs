@@ -3,23 +3,33 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Mvc;
+using System.Linq;
+using SARSCOV2.ModelsDB;
+
 
 namespace SARSCOV2.Controllers
 {
     public class WojRegressionDay14Controller : Controller
     {
+        DBEntities db = new DBEntities();
+
         // GET: WojRegressionDay14
+
         public ActionResult Index()
         {
+
+            var wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
+            ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
+
             return View();
         }
 
-      
+   
 
         [HttpPost]
-        public JsonResult AjaxMethod()
+        public JsonResult AjaxMethod(string wojewodztwo)
         {
-            string query = "select g, h from WojTrendDay14View";
+            string query = "SELECT g, h FROM WojTrendDay14View WHERE wojewodztwo=@wojewodztwo";
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]
@@ -33,6 +43,7 @@ namespace SARSCOV2.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@wojewodztwo", wojewodztwo);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -52,9 +63,9 @@ namespace SARSCOV2.Controllers
         }
 
         [HttpPost]
-        public JsonResult AjaxMethod1()
+        public JsonResult AjaxMethod1(string wojewodztwo)
         {
-            string query = "select g, h from WojTrendDay14WithoutWeekendsView";
+            string query = "SELECT g, h FROM WojTrendDay14WithoutWeekendsView WHERE wojewodztwo=@wojewodztwo";
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]
@@ -68,6 +79,7 @@ namespace SARSCOV2.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@wojewodztwo", wojewodztwo);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {

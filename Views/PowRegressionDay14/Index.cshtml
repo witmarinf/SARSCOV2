@@ -123,7 +123,7 @@
     }
 </script>
 
-@using (Html.BeginForm("AjaxMethod", "PowTrendDay14", FormMethod.Post))
+@using (Html.BeginForm("AjaxMethod", "PowRegressionDay14", FormMethod.Post))
 {
     @Html.Label("miasto: ")
     @Html.DropDownList("powiat_miasto", (SelectList)ViewBag.powiat_miasto, new { @class = "form-control", style = "width:300px; height:35px;" })
