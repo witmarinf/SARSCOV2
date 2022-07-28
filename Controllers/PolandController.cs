@@ -3,22 +3,39 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Mvc;
+using System.Linq;
+using System;
+using SARSCOV2.ModelsDB;
+
 
 namespace GooglePie.Controllers
 {
     public class PolandController : Controller
     {
-        // GET: MapaPolski
+        DBEntities db = new DBEntities();
+
+        //Osoby objęte kwarantanną
         public ActionResult Indexc()
         {
-            //ViewBag.gender = gender;
+
+            var termin = (from r in db.woj_target
+                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            List<string> stan_rekordu_na = new List<string>();
+
+            foreach (var da in termin)
+            {
+                stan_rekordu_na.Add(da.Value.ToString("d"));
+            }
+
+            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
+
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethodc()
+        public JsonResult AjaxMethodc(string stan_rekordu_na)
         {
-            string query = "select a, b, c from PolandMapView";
+            string query = "SELECT a, b, c FROM PolandMapView WHERE stan_rekordu_na=@stan_rekordu_na";
 
 
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
@@ -35,6 +52,7 @@ namespace GooglePie.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -57,17 +75,33 @@ namespace GooglePie.Controllers
             return Json(chart_data);
         }
 
+        
+         
+        
+
+        //liczba ozdrowieńców
 
         public ActionResult Indexd()
         {
-           
+
+            var termin = (from r in db.woj_target
+                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            List<string> stan_rekordu_na = new List<string>();
+
+            foreach (var da in termin)
+            {
+                stan_rekordu_na.Add(da.Value.ToString("d"));
+            }
+
+            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
+
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethodd()
+        public JsonResult AjaxMethodd(string stan_rekordu_na)
         {
-            string query = "select a, b, d from PolandMapView";
+            string query = "SELECT a, b, d FROM PolandMapView  WHERE stan_rekordu_na=@stan_rekordu_na";
 
 
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
@@ -84,6 +118,7 @@ namespace GooglePie.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -94,7 +129,6 @@ namespace GooglePie.Controllers
                             sql_data_reader["a"].ToString(),
                             sql_data_reader["b"].ToString(),
                             sql_data_reader["d"]
-
 
                         });
                         }
@@ -112,16 +146,30 @@ namespace GooglePie.Controllers
 
 
 
+
+        //liczba osób, których poprzedniej doby wynik był pozytwny
+
         public ActionResult Indexe()
         {
+
+            var termin = (from r in db.woj_target
+                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            List<string> stan_rekordu_na = new List<string>();
+
+            foreach (var da in termin)
+            {
+                stan_rekordu_na.Add(da.Value.ToString("d"));
+            }
+
+            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
 
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethode()
+        public JsonResult AjaxMethode(string stan_rekordu_na)
         {
-            string query = "select a, b, e from PolandMapView";
+            string query = "SELECT a, b, e FROM PolandMapView  WHERE stan_rekordu_na=@stan_rekordu_na";
 
 
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
@@ -138,6 +186,7 @@ namespace GooglePie.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -148,8 +197,6 @@ namespace GooglePie.Controllers
                             sql_data_reader["a"].ToString(),
                             sql_data_reader["b"].ToString(),
                             sql_data_reader["e"]
-
-
                         });
                         }
                     }
@@ -160,18 +207,36 @@ namespace GooglePie.Controllers
             return Json(chart_data);
         }
 
+
+
+
+
+
+
+
  
         //liczba osób z wynikiem negatywnym 
         public ActionResult Indexf()
         {
 
+            var termin = (from r in db.woj_target
+                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            List<string> stan_rekordu_na = new List<string>();
+
+            foreach (var da in termin)
+            {
+                stan_rekordu_na.Add(da.Value.ToString("d"));
+            }
+
+            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
+
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethodf()
+        public JsonResult AjaxMethodf(string stan_rekordu_na)
         {
-            string query = "select a, b, f from PolandMapView";
+            string query = "SELECT a, b, f FROM PolandMapView WHERE stan_rekordu_na=@stan_rekordu_na";
 
 
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
@@ -188,6 +253,7 @@ namespace GooglePie.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -198,7 +264,6 @@ namespace GooglePie.Controllers
                             sql_data_reader["a"].ToString(),
                             sql_data_reader["b"].ToString(),
                             sql_data_reader["f"]
-
 
                         });
                         }
@@ -213,17 +278,32 @@ namespace GooglePie.Controllers
 
 
 
-        //liczba osób z wynikiem pozytywnym 
+
+
+
+
+        //liczba osób, których wynik w ciągu ostatniej doby był pozytwny 
         public ActionResult Indexg()
         {
+
+            var termin = (from r in db.woj_target
+                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            List<string> stan_rekordu_na = new List<string>();
+
+            foreach (var da in termin)
+            {
+                stan_rekordu_na.Add(da.Value.ToString("d"));
+            }
+
+            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
 
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethodg()
+        public JsonResult AjaxMethodg(string stan_rekordu_na)
         {
-            string query = "select a, b, g from PolandMapView";
+            string query = "SELECT a, b, g FROM PolandMapView  WHERE stan_rekordu_na=@stan_rekordu_na";
 
 
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
@@ -239,6 +319,7 @@ namespace GooglePie.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -249,8 +330,6 @@ namespace GooglePie.Controllers
                             sql_data_reader["a"].ToString(),
                             sql_data_reader["b"].ToString(),
                             sql_data_reader["g"]
-
-
                         });
                         }
                     }
@@ -263,17 +342,29 @@ namespace GooglePie.Controllers
 
 
 
-        //liczba wykonanych testów
+
+        //liczba wykonanych testów w ciągu ostatniej doby
         public ActionResult Indexh()
         {
+
+            var termin = (from r in db.woj_target
+                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            List<string> stan_rekordu_na = new List<string>();
+
+            foreach (var da in termin)
+            {
+                stan_rekordu_na.Add(da.Value.ToString("d"));
+            }
+
+            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
 
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethodh()
+        public JsonResult AjaxMethodh(string stan_rekordu_na)
         {
-            string query = "select a, b, h from PolandMapView";
+            string query = "SELECT a, b, h FROM PolandMapView  WHERE stan_rekordu_na=@stan_rekordu_na";
 
 
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
@@ -289,6 +380,7 @@ namespace GooglePie.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -312,18 +404,35 @@ namespace GooglePie.Controllers
         }
 
 
+
+
+
+
+
+
         //liczba testów zleconych przez podstawową opiekę zdrowotną
 
         public ActionResult Indexi()
         {
 
+            var termin = (from r in db.woj_target
+                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            List<string> stan_rekordu_na = new List<string>();
+
+            foreach (var da in termin)
+            {
+                stan_rekordu_na.Add(da.Value.ToString("d"));
+            }
+
+            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
+
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethodi()
+        public JsonResult AjaxMethodi(string stan_rekordu_na)
         {
-            string query = "select a, b, i from PolandMapView";
+            string query = "SELECT a, b, i FROM PolandMapView  WHERE stan_rekordu_na=@stan_rekordu_na";
 
 
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
@@ -339,6 +448,7 @@ namespace GooglePie.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -363,17 +473,34 @@ namespace GooglePie.Controllers
 
 
 
+
+
+
+
+
+
+        //liczba zgonów
+
         public ActionResult Indexj()
         {
+            var termin = (from r in db.woj_target
+                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            List<string> stan_rekordu_na = new List<string>();
+
+            foreach (var da in termin)
+            {
+                stan_rekordu_na.Add(da.Value.ToString("d"));
+            }
+
+            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
 
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethodj()
+        public JsonResult AjaxMethodj(string stan_rekordu_na)
         {
-            string query = "select a, b, j from PolandMapView";
-
+            string query = "SELECT a, b, j FROM PolandMapView  WHERE stan_rekordu_na=@stan_rekordu_na";
 
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
@@ -388,6 +515,7 @@ namespace GooglePie.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -398,8 +526,6 @@ namespace GooglePie.Controllers
                             sql_data_reader["a"].ToString(),
                             sql_data_reader["b"].ToString(),
                             sql_data_reader["j"]
-
-
                         });
                         }
                     }
@@ -409,6 +535,8 @@ namespace GooglePie.Controllers
             }
             return Json(chart_data);
         }
+         
+
 
 
 
@@ -416,13 +544,25 @@ namespace GooglePie.Controllers
         public ActionResult Indexk()
         {
 
+            var termin = (from r in db.woj_target
+                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            List<string> stan_rekordu_na = new List<string>();
+
+            foreach (var da in termin)
+            {
+                stan_rekordu_na.Add(da.Value.ToString("d"));
+            }
+
+            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
+
+
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethodk()
+        public JsonResult AjaxMethodk(string stan_rekordu_na)
         {
-            string query = "select a, b, k from PolandMapView";
+            string query = "SELECT a, b, k FROM PolandMapView WHERE stan_rekordu_na=@stan_rekordu_na";
 
 
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
@@ -438,6 +578,7 @@ namespace GooglePie.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -448,8 +589,6 @@ namespace GooglePie.Controllers
                             sql_data_reader["a"].ToString(),
                             sql_data_reader["b"].ToString(),
                             sql_data_reader["k"]
-
-
                         });
                         }
                     }
@@ -461,17 +600,28 @@ namespace GooglePie.Controllers
         }
 
 
+
         //zgony_w_wyniku_covid_bez_chorob_wspolistniejacych
         public ActionResult Indexl()
         {
+            var termin = (from r in db.woj_target
+                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            List<string> stan_rekordu_na = new List<string>();
+
+            foreach (var da in termin)
+            {
+                stan_rekordu_na.Add(da.Value.ToString("d"));
+            }
+
+            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
 
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethodl()
+        public JsonResult AjaxMethodl(string stan_rekordu_na)
         {
-            string query = "select a, b, l from PolandMapView";
+            string query = "SELECT a, b, l FROM PolandMapView WHERE stan_rekordu_na=@stan_rekordu_na";
 
 
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
@@ -487,6 +637,7 @@ namespace GooglePie.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -497,18 +648,13 @@ namespace GooglePie.Controllers
                             sql_data_reader["a"].ToString(),
                             sql_data_reader["b"].ToString(),
                             sql_data_reader["l"]
-
-
                         });
                         }
                     }
-
                     connection.Close();
                 }
             }
             return Json(chart_data);
         }
-
-
     }
 }

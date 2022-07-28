@@ -19,7 +19,7 @@ namespace SARSCOV2.Controllers
 
             using (SqlConnection conn = new SqlConnection(constr))
             {
-                string query = "SELECT x,b,c,d,e,f,g,h,i,j,k,l FROM PolandMapView";
+                string query = "SELECT x,b,c,d,e,f,g,h,i,j,k,l FROM PolandMapLastDayView";
                 using (SqlCommand cmd = new SqlCommand(query))
                 {
                     cmd.Connection = conn;

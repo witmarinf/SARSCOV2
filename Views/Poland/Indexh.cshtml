@@ -2,6 +2,8 @@
     ViewBag.Title = "Indexh";
 }
 
+<!--liczba wykonanych testów w ciągu ostatniej doby-->
+
 <html>
 <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -10,13 +12,23 @@
             'packages': ['geochart'],
             'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
         });
-        google.charts.setOnLoadCallback(drawRegionsMap);
+
+        google.charts.setOnLoadCallback(
+            function () {
+                drawRegionsMap();
+                $("#stan_rekordu_na").on("change", function () {
+                    drawRegionsMap();
+                });
+            });
 
         function drawRegionsMap() {
+
+            var stan_rekordu_na = $("#stan_rekordu_na option:selected").val();
+
             $.ajax({
                 type: "POST",
                 url: "/Poland/AjaxMethodf",
-                data: '{}',
+                data: "{stan_rekordu_na: '" + stan_rekordu_na + "'}",
                 isStacked: true,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -46,9 +58,9 @@
         }
     </script>
 
-</head>
-<body>
-    <h2>Liczba testów pozytywnych, które spłynęły w ciągu ostatniej doby - dane z ostatniego dnia</h2>
-    <div id="regions_div" style="width: 900px; height: 500px;"></div>
-</body>
-</html>
+    @using (Html.BeginForm("AjaxMethodh","Poland", FormMethod.Post))
+    {
+        <h3>Testy pozytywne z ostatniej doby według raportów dziennych</h3>
+        @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:150px; height:35px;" })
+        <div id="regions_div" style="width: 800px; height: auto;"></div>
+    }

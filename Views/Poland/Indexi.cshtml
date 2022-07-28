@@ -1,62 +1,68 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "Indexi";
 }
 
-<html>
-<head>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            'packages': ['geochart'],
-            'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
-        });
-        google.charts.setOnLoadCallback(drawRegionsMap);
+<!--liczba testów zleconych przez podstawową opiekę zdrowotną-->
 
-        function drawRegionsMap() {
-            $.ajax({
-                type: "POST",
-                url: "/Poland/AjaxMethodg",
-                data: '{}',
-                isStacked: true,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (r) {
-                    var data = google.visualization.arrayToDataTable(r);
-                    var options = {
-                        region: "PL",
-                        resolution: "provinces",
-                        datalessRegionColor: 'transparent',
-                        displayMode: 'regions',
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {
+        'packages': ['geochart'],
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+    });
 
-                        colorAxis: {
-                            minValue: 0,
-                            maxValue: 10000
-                        }
-                    }
-                    var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-                    chart.draw(data, options);
-                },
-                failure: function (r) {
-                    alert(r.d);
-                },
-                error: function (r) {
-                    alert(r.d);
-                }
+    google.charts.setOnLoadCallback(
+        function () {
+            drawRegionsMap();
+            $("#stan_rekordu_na").on("change", function () {
+                drawRegionsMap();
             });
-        }
-    </script>
+        });
 
-</head>
-<body>
-    <h2>Liczba testów zleconych przez podstawową opiekę zdrowotną - dane z ostatneigo dnia</h2>
-    <div id="regions_div" style="width: 900px; height: 500px;"></div>
-</body>
-</html>
-@{
-    ViewBag.Title = "Indexi";
+
+    function drawRegionsMap() {
+
+        var stan_rekordu_na = $("#stan_rekordu_na option:selected").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/Poland/AjaxMethodg",
+            data: "{stan_rekordu_na: '" + stan_rekordu_na + "'}",
+            //data: '{}',
+            isStacked: true,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                var data = google.visualization.arrayToDataTable(r);
+                var options = {
+                    region: "PL",
+                    resolution: "provinces",
+                    datalessRegionColor: 'transparent',
+                    displayMode: 'regions',
+
+                    colorAxis: {
+                        minValue: 0,
+                        maxValue: 10000
+                    }
+                }
+                var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+                chart.draw(data, options);
+            },
+            failure: function (r) {
+                alert(r.d);
+            },
+            error: function (r) {
+                alert(r.d);
+            }
+        });
+    }
+</script>
+
+@using(Html.BeginForm("AjaxMethodi","Poland", FormMethod.Post))
+{
+    <h3>Testy zlecone przez podstawową opiekę zdrowotną</h3>
+    @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:150px; height:35px;" })
+
+    <div id="regions_div" style="width: 800px; height: auto;"></div>
 }
-
-<h2>Indexi</h2>
 
