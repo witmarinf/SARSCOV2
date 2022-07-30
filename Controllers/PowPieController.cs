@@ -1,71 +1,45 @@
 ﻿using System.Collections.Generic;
-using System.Web.Mvc;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.Mvc;
+using SARSCOV2.ModelsDB;
+using System.Linq;
 
 
 namespace SARSCOV2.Controllers
 {
     public class PowPieController : Controller
     {
-        // GET: PowPie
+        DBEntities db = new DBEntities();
+
+        // GET: WojPie
         public ActionResult Index()
         {
-            return View();
-        }
+            var termin = (from r in db.pow_target
+                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            List<string> stan_rekordu_na = new List<string>();
 
-        [HttpPost]
-        public JsonResult AjaxMethod()
-        {
-            string query = "SELECT powiat_miasto, Sum(zgony) zgony from pow_target group by powiat_miasto order by sum(zgony) DESC";
-            string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
-            List<object> chart_data = new List<object>();
-            chart_data.Add(new object[]
-                        {
-                            "wojewodztwo", "zgony"
-                        });
-            using (SqlConnection connection = new SqlConnection(constructor))
+            foreach (var da in termin)
             {
-                using (SqlCommand cmd = new SqlCommand(query))
-                {
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Connection = connection;
-                    connection.Open();
-                    using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
-                    {
-                        while (sql_data_reader.Read())
-                        {
-                            chart_data.Add(new object[]
-                        {
-                            sql_data_reader["powiat_miasto"].ToString(), 
-                            sql_data_reader["zgony"]
-                        });
-                        }
-                    }
-                    connection.Close();
-                }
+                stan_rekordu_na.Add(da.Value.ToString("d"));
             }
-            return Json(chart_data);
-        }
 
-        //PowPie/PowZgonyPorownanie
-        /*
-        public ActionResult PowZgonyPorownanie()
-        {
+            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
+
             return View();
         }
-        
+
         [HttpPost]
-        public JsonResult AjaxMethodPor()
+        public JsonResult AjaxMethod(string stan_rekordu_na)
         {
-            string query = "SELECT wojewodztwo,Sum(zgony) zgony, Sum(zgony_w_wyniku_covid_bez_chorob_wspolistniejacych) bez,";
-            query += "Sum(zgony_w_wyniku_covid_i_chorob_wspolistniejacych) z from woj_target group by wojewodztwo order by sum(zgony) ASC";
+            string query = "SELECT b, j FROM PowByDayView WHERE stan_rekordu_na=@stan_rekordu_na";
+
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]
                         {
-                            "wojewodztwo","zgony", "[bez 12]","z"
+                            "miasto", "zgony"
                         });
             using (SqlConnection connection = new SqlConnection(constructor))
             {
@@ -73,6 +47,7 @@ namespace SARSCOV2.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
+                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -80,7 +55,8 @@ namespace SARSCOV2.Controllers
                         {
                             chart_data.Add(new object[]
                         {
-                            sql_data_reader["wojewodztwo"].ToString(),sql_data_reader["zgony"] ,sql_data_reader["bez"],sql_data_reader["z"]
+                            sql_data_reader["b"], //miasto
+                            sql_data_reader["j"]  //zgony
                         });
                         }
                     }
@@ -89,6 +65,6 @@ namespace SARSCOV2.Controllers
                 }
             }
             return Json(chart_data);
-        }*/
+        }
     }
 }
