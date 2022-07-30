@@ -1,20 +1,29 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
-<!--WOJEWODZTWA-->
-<h2>Statystyki zgonów za okres całkowity</h2>
+
+<!--WojPie-->
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-    google.load("visualization", "1", { packages: ["corechart"] });
-    google.setOnLoadCallback(drawChart);
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.setOnLoadCallback(function () {
+        drawChart();
+        $("#stan_rekordu_na").on("change", function () {
+            drawChart();
+        });
+    });
+
     function drawChart() {
+
+        var stan_rekordu_na = $("#stan_rekordu_na option:selected").val();
+
         $.ajax({
             type: "POST",
             url: "/WojPie/AjaxMethod",
-            data: '{}',
+            data: "{stan_rekordu_na: '" + stan_rekordu_na + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (r) {
@@ -34,8 +43,6 @@
                 };
                 chart = new google.visualization.ColumnChart($("#chart2")[0]);
                 chart.draw(data, options);
-
-
 
                 options = {
                     title: 'Table',
@@ -58,7 +65,29 @@
     }
 </script>
 
-<div id="chart2" style="width: 1000px; height: 500px; border: 1px solid;"></div>
-<br />
-<div id="chart1" style="width: 1000px; height: 650px; border: 1px solid;"></div>
+@using (Html.BeginForm("AjaxMethod", "WojPie", FormMethod.Post))
+{
+    <h3>Zgony ze względu na województwo według daty</h3>
+    @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:300px; height:35px;" })
+
+    <div id="chart2" style="width: 1000px; height: 500px; border: 1px solid;"></div>
+    <br />
+    <div id="chart1" style="width: 1000px; height: 650px; border: 1px solid;"></div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
