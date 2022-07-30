@@ -366,7 +366,7 @@
     <Content Include="Views\PowFilterDropDawn\Index.cshtml" />
     <Content Include="Views\Woj\RaportWoj.cshtml" />
     <Content Include="Views\Pow\RaportPow.cshtml" />
-    <Content Include="Views\PowPie\PowZgony.cshtml" />
+    <Content Include="Views\PowPie\Index.cshtml" />
     <Content Include="Views\WojPie\Index.cshtml" />
     <Content Include="Views\Stat\Index.cshtml" />
     <Content Include="Views\Poland\Indexc.cshtml" />

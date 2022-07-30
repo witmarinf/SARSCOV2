@@ -58,9 +58,10 @@
         }
     </script>
 
-    @using (Html.BeginForm("AjaxMethodh","Poland", FormMethod.Post))
+    @using (Html.BeginForm("AjaxMethodh", "Poland", FormMethod.Post))
     {
         <h3>Testy pozytywne z ostatniej doby według raportów dziennych</h3>
+        @Html.Label("Wybierz datę dnia: ")
         @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:150px; height:35px;" })
         <div id="regions_div" style="width: 800px; height: auto;"></div>
     }

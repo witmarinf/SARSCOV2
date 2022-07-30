@@ -24,7 +24,7 @@ namespace SARSCOV2.Controllers
         [HttpPost]
         public JsonResult AjaxMethod(string powiat_miasto)
         {
-            string query = "SELECT dmy, g, h FROM PowTrendDay14View WHERE powiat_miasto=@powiat_miasto";
+            string query = "SELECT dmy, g, h, g,h  FROM PowTrendDay14View WHERE powiat_miasto=@powiat_miasto";
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]

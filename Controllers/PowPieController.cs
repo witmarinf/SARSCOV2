@@ -10,7 +10,7 @@ namespace SARSCOV2.Controllers
     public class PowPieController : Controller
     {
         // GET: PowPie
-        public ActionResult PowZgony()
+        public ActionResult Index()
         {
             return View();
         }
@@ -38,7 +38,8 @@ namespace SARSCOV2.Controllers
                         {
                             chart_data.Add(new object[]
                         {
-                            sql_data_reader["powiat_miasto"].ToString(), sql_data_reader["zgony"]
+                            sql_data_reader["powiat_miasto"].ToString(), 
+                            sql_data_reader["zgony"]
                         });
                         }
                     }

@@ -65,6 +65,7 @@
 {
     <h3>Ozdrowieńcy według raportów dziennych</h3>
 
+    @Html.Label("Wybierz datę dnia: ")
     @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:150px; height:35px;" })
 
     <div id="regions_div" style="width: 800px; height: auto;"></div>

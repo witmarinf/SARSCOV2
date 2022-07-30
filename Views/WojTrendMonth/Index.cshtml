@@ -29,9 +29,8 @@
             success: function (r) {
                 var data = google.visualization.arrayToDataTable(r);
 
-
                 options = {
-                    title: 'Trend miesieczny zgonów dla województw w Polsce',
+                    title: 'Trend miesieczny zgonów według województw w Polsce',
                     is3D: true,
                     legend: {
                         position: 'bottom',
@@ -55,9 +54,8 @@
 
 @using (Html.BeginForm("AjaxMethod", "WojTrendMonth", FormMethod.Post))
 {
-    @Html.Label("województwo: ")
     @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control", style = "width:300px; height:35px;" })
 
-    <div id="chart" style="width: 1200px; height: 600px;">
+    <div id="chart" style="width: 1200px; height: 600px; border: 1px solid;">
     </div>
 }
