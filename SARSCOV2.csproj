@@ -182,6 +182,7 @@
     <Compile Include="Controllers\PowRegressionDay14Controller.cs" />
     <Compile Include="Controllers\PowTrendDay14Controller.cs" />
     <Compile Include="Controllers\PowTrendMonthController.cs" />
+    <Compile Include="Controllers\PowZgonyAllController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\StatController.cs" />
     <Compile Include="Controllers\TablePowLastDayController.cs" />
@@ -392,6 +393,7 @@
     <Content Include="Views\PowLastDayAvg\Index.cshtml" />
     <Content Include="Views\TablePowLastDay\Index.cshtml" />
     <Content Include="Views\WojZgonyAll\Index.cshtml" />
+    <Content Include="Views\PowZgonyAll\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
