@@ -1,4 +1,5 @@
-﻿using System;
+﻿//using SARSCOV2.ModelsDB;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace SARSCOV2.Controllers
 {
     public class TableWojLastDayController : Controller
@@ -14,6 +16,8 @@ namespace SARSCOV2.Controllers
         // GET: TableWojLastDay
         public ActionResult Index()
         {
+           //DBEntities ds = new DBEntities();
+
             DataSet ds = new DataSet();
             string constr = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
 

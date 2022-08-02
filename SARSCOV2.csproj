@@ -194,6 +194,7 @@
     <Compile Include="Controllers\WojRegressionDay14Controller.cs" />
     <Compile Include="Controllers\WojTrendDay14Controller.cs" />
     <Compile Include="Controllers\WojTrendMonthController.cs" />
+    <Compile Include="Controllers\WojZgonyAllController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -390,6 +391,7 @@
     <Content Include="Views\WojLastDayAvg\Index.cshtml" />
     <Content Include="Views\PowLastDayAvg\Index.cshtml" />
     <Content Include="Views\TablePowLastDay\Index.cshtml" />
+    <Content Include="Views\WojZgonyAll\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
