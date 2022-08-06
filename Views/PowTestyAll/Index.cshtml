@@ -33,7 +33,8 @@
             var data = google.visualization.arrayToDataTable(dt);
 
             var options = {
-                displayAnnotations: false
+                displayAnnotations: false,
+                height: 400
             };
 
             var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
@@ -51,11 +52,11 @@
 
 @using (Html.BeginForm("AjaxMethod", "PowZgonyAll", FormMethod.Post))
 {
-    <h3>Testy według 10-ciu największych miast w Polsce</h3>
+    <h4>Testy według 10-ciu największych miast w Polsce</h4>
 
     @Html.DropDownList("powiat_miasto", (SelectList)ViewBag.powiat_miasto, new { @class = "form-control", style = "width:300px; height:35px;" })
 
-    <div id="chart_div" style="width: auto; height:700px;">
+    <div id="chart_div">
     </div>
 }
 

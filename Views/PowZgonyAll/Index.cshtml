@@ -34,7 +34,8 @@
             var data = google.visualization.arrayToDataTable(dt);
 
             var options = {
-                displayAnnotations: false
+                displayAnnotations: false,
+                height: 400
             };
 
             var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
@@ -56,7 +57,7 @@
 
     @Html.DropDownList("powiat_miasto", (SelectList)ViewBag.powiat_miasto, new { @class = "form-control", style = "width:300px; height:35px;" })
 
-    <div id="chart_div" style="width: auto; height:700px;">
+    <div id="chart_div">
     </div>
 }
 

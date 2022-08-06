@@ -32,7 +32,8 @@
                 var data = google.visualization.arrayToDataTable(dt);
 
                 var options = {
-                    displayAnnotations: false
+                    displayAnnotations: false,
+                    height: 400
                 };
 
                 var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
@@ -50,10 +51,10 @@
 
 @using (Html.BeginForm("AjaxMethod", "WojZgonyAll", FormMethod.Post))
 {
-    <h3>Zgony według województw</h3>
+    <h4>Zgony według województw</h4>
 
     @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control", style = "width:300px; height:35px;" })
 
-    <div id="chart_div" style="width: auto; height:700px;">
+    <div id="chart_div">
     </div>
 }
