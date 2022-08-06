@@ -4,7 +4,6 @@
 
 <!--PowRegressionDay14-->
 
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
@@ -24,9 +23,6 @@
         });
     });
 
-    //google.charts.load("visualization", "1", { packages: ["corechart"] });
-    //google.charts.setOnLoadCallback(drawChart);
-    //google.charts.setOnLoadCallback(drawChart1);
 
     function drawChart() {
         var powiat_miasto = $("#powiat_miasto option:selected").val();
@@ -38,12 +34,12 @@
             isStacked: true,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (r) {
-                var data = google.visualization.arrayToDataTable(r);
-
+            success: function (dt) {
+                var maksimum = Math.max(dt);
+                var data = google.visualization.arrayToDataTable(dt);
                 var options = {
-                    hAxis: { minValue: 0, maxValue: 50 },
-                    vAxis: { minValue: 0, maxValue: 50 },
+                    hAxis: { minValue: 0, maxValue: maksimum },
+                    vAxis: { minValue: 0, maxValue: maksimum },
                     chartArea: { width: '50%' },
                     trendlines: {
                         0: {
@@ -64,11 +60,11 @@
                 chartExponential.draw(data, options);
 
             },
-            failure: function (r) {
-                alert(r.d);
+            failure: function (dt) {
+                alert(dt.d);
             },
-            error: function (r) {
-                alert(r.d);
+            error: function (dt) {
+                alert(dt.d);
             }
         });
     }
@@ -81,18 +77,17 @@
 
         $.ajax({
             type: "POST",
-            url: "/PowRegressionDay14/AjaxMethod1",
+            url: "/PowRegressionDay14/AjaxMethod",
             data: "{powiat_miasto: '" + powiat_miasto + "'}",
-            //data: '{}',
             isStacked: true,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (r) {
-                var data = google.visualization.arrayToDataTable(r);
-
+            success: function (dt) {
+                var maksimum = Math.max(dt);
+                var data = google.visualization.arrayToDataTable(dt);
                 var options = {
-                    hAxis: { minValue: 0, maxValue: 50},
-                    vAxis: { minValue: 0, maxValue: 50 },
+                    hAxis: { minValue: 0, maxValue: maksimum },
+                    vAxis: { minValue: 0, maxValue: maksimum },
                     chartArea: { width: '50%' },
                     trendlines: {
                         0: {
@@ -113,11 +108,11 @@
                 chartExponential.draw(data, options);
 
             },
-            failure: function (r) {
-                alert(r.d);
+            failure: function (dt) {
+                alert(dt.d);
             },
-            error: function (r) {
-                alert(r.d);
+            error: function (dt) {
+                alert(dt.d);
             }
         });
     }
@@ -127,12 +122,11 @@
 {
     @Html.Label("miasto: ")
     @Html.DropDownList("powiat_miasto", (SelectList)ViewBag.powiat_miasto, new { @class = "form-control", style = "width:300px; height:35px;" })
-  
     
-    <h3> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni </h3>
+    <h4> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni </h4>
     <div id="chartLinear" style="height: 500px; width: auto"></div>
     <div id="chartExponential" style="height: 500px; width: auto"></div>
-    <h3> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni <br /> oprócz danych z sobót i niedziel </h3>
+    <h4> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni <br /> oprócz danych z sobót i niedziel </h4>
     <div id="chartLinear1" style="height: 500px; width: auto"></div>
     <div id="chartExponential1" style="height: 500px; width: auto"></div>
 }

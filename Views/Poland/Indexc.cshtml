@@ -30,9 +30,13 @@
             isStacked: true,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (r) {
-                var data = google.visualization.arrayToDataTable(r);
+            success: function (dt) {
+
+                var maksimum = Math.max(dt);
+
+                var data = google.visualization.arrayToDataTable(dt);
                 var options = {
+                    height: 400,
                     region: "PL",
                     resolution: "provinces",
                     datalessRegionColor: 'transparent',
@@ -40,17 +44,17 @@
 
                     colorAxis: {
                         minValue: 0,
-                        maxValue: 200000
+                        maxValue: maksimum
                     }
                 }
                 var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
                 chart.draw(data, options);
             },
-            failure: function (r) {
-                alert(r.d);
+            failure: function (dt) {
+                alert(dt.d);
             },
-            error: function (r) {
-                alert(r.d);
+            error: function (dt) {
+                alert(dt.d);
             }
         });
     }
@@ -59,10 +63,10 @@
 
 @using (Html.BeginForm("AjaxMethodc", "Poland", FormMethod.Post))
 {
-    <h2>Osoby objęte kwarantanną</h2>
+    <h4>Osoby objęte kwarantanną według raportów dziennych</h4>
 
     @Html.Label("Wybierz datę dnia: ")
     @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:150px; height:35px;" })
 
-    <div id="regions_div" style="width: 800px; height: auto;"></div>
+    <div id="regions_div"></div>
 }

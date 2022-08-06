@@ -19,40 +19,38 @@
             });
         });
 
-
     function drawRegionsMap() {
-
         var stan_rekordu_na = $("#stan_rekordu_na option:selected").val();
 
         $.ajax({
             type: "POST",
             url: "/Poland/AjaxMethodg",
             data: "{stan_rekordu_na: '" + stan_rekordu_na + "'}",
-            //data: '{}',
             isStacked: true,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (r) {
-                var data = google.visualization.arrayToDataTable(r);
+            success: function (dt) {
+                var maksimum = Math.max(dt);
+                var data = google.visualization.arrayToDataTable(dt);
                 var options = {
                     region: "PL",
+                    height: 400 ,
                     resolution: "provinces",
                     datalessRegionColor: 'transparent',
                     displayMode: 'regions',
-
                     colorAxis: {
                         minValue: 0,
-                        maxValue: 10000
+                        maxValue: maksimum
                     }
                 }
                 var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
                 chart.draw(data, options);
             },
-            failure: function (r) {
-                alert(r.d);
+            failure: function (dt) {
+                alert(dt.d);
             },
-            error: function (r) {
-                alert(r.d);
+            error: function (dt) {
+                alert(dt.d);
             }
         });
     }
@@ -60,10 +58,9 @@
 
 @using (Html.BeginForm("AjaxMethodi", "Poland", FormMethod.Post))
 {
-    <h3>Testy zlecone przez podstawową opiekę zdrowotną</h3>
+    <h4>Testy zlecone przez podstawową opiekę zdrowotną</h4>
     @Html.Label("Wybierz datę dnia: ")
     @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:150px; height:35px;" })
-
-    <div id="regions_div" style="width: 800px; height: auto;"></div>
+    <div id="regions_div"></div>
 }
 

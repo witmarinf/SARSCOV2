@@ -23,9 +23,7 @@
     });
 
     function drawChart() {
-
         var wojewodztwo = $("#wojewodztwo option:selected").val();
-
         $.ajax({
             type: "POST",
             url: "/WojRegressionDay14/AjaxMethod",
@@ -33,12 +31,12 @@
             isStacked: true,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (r) {
-                var data = google.visualization.arrayToDataTable(r);
-
+            success: function (dt) {
+                var maksimum = Math.max(dt);
+                var data = google.visualization.arrayToDataTable(dt);
                 var options = {
-                    hAxis: { minValue: 0, maxValue: 100 },
-                    vAxis: { minValue: 0, maxValue: 100 },
+                    hAxis: { minValue: 0, maxValue: maksimum },
+                    vAxis: { minValue: 0, maxValue: maksimum },
                     chartArea: { width: '50%' },
                     trendlines: {
                         0: {
@@ -57,21 +55,18 @@
 
                 var chartExponential = new google.visualization.ScatterChart(document.getElementById('chartExponential'));
                 chartExponential.draw(data, options);
-
             },
-            failure: function (r) {
-                alert(r.d);
+            failure: function (dt) {
+                alert(dt.d);
             },
-            error: function (r) {
-                alert(r.d);
+            error: function (dt) {
+                alert(dt.d);
             }
         });
     }
 
     function drawChart1() {
-
         var wojewodztwo = $("#wojewodztwo option:selected").val();
-
         $.ajax({
             type: "POST",
             url: "/WojRegressionDay14/AjaxMethod1",
@@ -79,13 +74,13 @@
             isStacked: true,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (r) {
-
-                var data = google.visualization.arrayToDataTable(r);
+            success: function (dt) {
+                var maksimum = Math.max(dt);
+                var data = google.visualization.arrayToDataTable(dt);
 
                 var options = {
-                    hAxis: { minValue: 0, maxValue: 100 },
-                    vAxis: { minValue: 0, maxValue: 100 },
+                    hAxis: { minValue: 0, maxValue: maksimum },
+                    vAxis: { minValue: 0, maxValue: maksimum },
                     chartArea: { width: '50%' },
                     trendlines: {
                         0: {
@@ -106,11 +101,11 @@
                 chartExponential.draw(data, options);
 
             },
-            failure: function (r) {
-                alert(r.d);
+            failure: function (dt) {
+                alert(dt.d);
             },
-            error: function (r) {
-                alert(r.d);
+            error: function (dt) {
+                alert(dt.d);
             }
         });
     }
@@ -120,12 +115,10 @@
 {
     @Html.Label("województwo: ")
     @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control", style = "width:300px; height:35px;" })
-
-
-    <h3> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni </h3>
+    <h4> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni </h4>
     <div id="chartLinear" style="height: 500px; width: auto"></div>
     <div id="chartExponential" style="height: 500px; width: auto"></div>
-    <h3> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni <br /> bez danych z sobót i niedziel  </h3>
+    <h4> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni <br /> bez danych z sobót i niedziel  </h4>
     <div id="chartLinear1" style="height: 500px; width: auto"></div>
     <div id="chartExponential1" style="height: 500px; width: auto"></div>
 }

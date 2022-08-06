@@ -26,12 +26,12 @@
         data: "{powiat_miasto: '" + powiat_miasto + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (r) {
+        success: function (dt) {
 
-            for (var i = 0; i < r.length; i++)
-                r[i][0] = new Date(r[i][0]);
+            for (var i = 0; i < dt.length; i++)
+                dt[i][0] = new Date(dt[i][0]);
 
-            var data = google.visualization.arrayToDataTable(r);
+            var data = google.visualization.arrayToDataTable(dt);
 
             var options = {
                 displayAnnotations: false
@@ -40,11 +40,11 @@
             var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         },
-        failure: function (r) {
-            alert(r.d);
+        failure: function (dt) {
+            alert(dt.d);
         },
-        error: function (r) {
-            alert(r.d);
+        error: function (dt) {
+            alert(dt.d);
         }
     });
     }
