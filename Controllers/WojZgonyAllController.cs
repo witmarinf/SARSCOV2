@@ -16,18 +16,30 @@ namespace SARSCOV2.Controllers
 
         public ActionResult Index()
         {
-            var wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
+            List<string> wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
+            wojewodztwo.Insert(0, "POLSKA");
             ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
+
             return View();
         }
 
         [HttpPost]
         public JsonResult AjaxMethod(string wojewodztwo)
         {
-            string query = "SELECT stan_rekordu_na, zgony_w_wyniku_covid_bez_chorob_wspolistniejacych,"
-                + " zgony_w_wyniku_covid_i_chorob_wspolistniejacych FROM WojZgonyAllView "
-                + " WHERE wojewodztwo=@wojewodztwo ";
+            string query;
 
+            if (string.Equals(wojewodztwo ,"POLSKA")) {
+                query = "SELECT stan_rekordu_na, SUM(zgony_w_wyniku_covid_bez_chorob_wspolistniejacych) "
+                    + " AS zgony_w_wyniku_covid_bez_chorob_wspolistniejacych"
+                    + " , SUM(zgony_w_wyniku_covid_i_chorob_wspolistniejacych) "
+                    + " AS zgony_w_wyniku_covid_i_chorob_wspolistniejacych "
+                    + " FROM WojZgonyAllView group by stan_rekordu_na";
+            }
+            else {
+                query = "SELECT stan_rekordu_na, zgony_w_wyniku_covid_bez_chorob_wspolistniejacych,"
+                    + " zgony_w_wyniku_covid_i_chorob_wspolistniejacych FROM WojZgonyAllView "
+                    + " WHERE wojewodztwo=@wojewodztwo ";
+            }
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]
