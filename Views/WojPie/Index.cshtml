@@ -30,7 +30,9 @@
                 var data = google.visualization.arrayToDataTable(r);
                 //Pie
                 var options = {
-                    title: 'Wykres kołowy zgonów wg. województw'
+                    height: 400 ,
+                    title: 'Wykres kołowy zgonów wg. województw',
+                    is3D: true
                 };
                 var chart = new google.visualization.PieChart($("#chart1")[0]);
                 chart.draw(data, options);
@@ -38,6 +40,7 @@
 
                 //.ColumnChart
                 options = {
+                    height: 400 ,
                     title: 'Wykres kolumnowy zgonów wg. województw',
                     is3D: true
                 };
@@ -70,9 +73,9 @@
     <h3>Zgony ze względu na województwo według daty</h3>
     @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:300px; height:35px;" })
 
-    <div id="chart2" style="width: 1000px; height: 500px; border: 1px solid;"></div>
-    <br />
-    <div id="chart1" style="width: 1000px; height: 650px; border: 1px solid;"></div>
+    <div id="chart2" style="border: 1px solid;"></div>
+    <br/>
+    <div id="chart1" style="border: 1px solid;"></div>
 }
 
 

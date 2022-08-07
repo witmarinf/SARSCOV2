@@ -17,19 +17,27 @@ namespace SARSCOV2.Controllers
 
         public ActionResult Index()
         {
-
-            var wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
+            List<string> wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
+            wojewodztwo.Insert(0, "POLSKA");
             ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
 
             return View();
         }
 
-   
-
         [HttpPost]
         public JsonResult AjaxMethod(string wojewodztwo)
         {
-            string query = "SELECT g, h FROM WojTrendDay14View WHERE wojewodztwo=@wojewodztwo";
+            string query;
+
+            if (string.Equals(wojewodztwo, "POLSKA"))
+            {
+                query = "SELECT sum(g) AS g, sum(h) AS h FROM WojTrendDay14View group by dmy";
+            }
+            else
+            {
+                query = "SELECT g, h FROM WojTrendDay14View WHERE wojewodztwo=@wojewodztwo";
+            }
+
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]
@@ -65,7 +73,15 @@ namespace SARSCOV2.Controllers
         [HttpPost]
         public JsonResult AjaxMethod1(string wojewodztwo)
         {
-            string query = "SELECT g, h FROM WojTrendDay14WithoutWeekendsView WHERE wojewodztwo=@wojewodztwo";
+            string query;
+            if (string.Equals(wojewodztwo, "POLSKA"))
+            {
+                query = "SELECT SUM(g) AS g, SUM(h) AS h FROM WojTrendDay14WithoutWeekendsView group by dmy";
+            }
+            else { 
+            query = "SELECT g, h FROM WojTrendDay14WithoutWeekendsView WHERE wojewodztwo=@wojewodztwo";
+            }
+            
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]

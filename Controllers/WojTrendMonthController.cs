@@ -14,16 +14,28 @@ namespace SARSCOV2.Controllers
 
             public ActionResult Index()
             {
-                var wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
+                List<string> wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
+
+                wojewodztwo.Insert(0,"POLSKA");
+                wojewodztwo.Insert(1, "AVG");
+            
                 ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
                 return View();
             }
 
-            [HttpPost]
-            public JsonResult AjaxMethod(string wojewodztwo)
-            {
-                string query = "SELECT c,f,g FROM WojTrendMonthView WHERE wojewodztwo=@wojewodztwo";
-
+        [HttpPost]
+        public JsonResult AjaxMethod(string wojewodztwo)
+        {
+            string query;
+            if (string.Equals(wojewodztwo, "POLSKA")) {
+              query = "SELECT c, SUM(f) AS f, SUM(g) AS g FROM WojTrendMonthView GROUP BY c";
+            }
+            else if(string.Equals(wojewodztwo, "AVG")){ 
+              query = "SELECT c, AVG(f) AS f, AVG(g) AS g FROM WojTrendMonthView GROUP BY c";
+            }
+            else {
+              query = "SELECT c,f,g FROM WojTrendMonthView WHERE wojewodztwo=@wojewodztwo";
+            }
                 string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
                 List<object> chart_data = new List<object>();
                 chart_data.Add(new object[]
