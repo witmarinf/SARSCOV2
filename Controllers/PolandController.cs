@@ -35,8 +35,6 @@ namespace GooglePie.Controllers
         public JsonResult AjaxMethodc(string stan_rekordu_na)
         {
             string query = "SELECT a, b, c FROM PolandMapView WHERE stan_rekordu_na=@stan_rekordu_na";
-
-
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]
