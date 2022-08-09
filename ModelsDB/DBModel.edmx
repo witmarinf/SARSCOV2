@@ -108,6 +108,27 @@
           <Property Name="populacja" Type="int" />
           <Property Name="code" Type="varchar" MaxLength="10" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB.dbo.woj_targetView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="woj_targetView">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="wojewodztwo" Type="varchar" MaxLength="50" />
+          <Property Name="liczba_przypadkow" Type="int" />
+          <Property Name="zgony" Type="int" />
+          <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="int" />
+          <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="int" />
+          <Property Name="liczba_zlecen_poz" Type="int" />
+          <Property Name="liczba_ozdrowiencow" Type="int" />
+          <Property Name="liczba_osob_objetych_kwarantanna" Type="int" />
+          <Property Name="liczba_wykonanych_testow" Type="int" />
+          <Property Name="liczba_testow_z_wynikiem_pozytywnym" Type="int" />
+          <Property Name="liczba_testow_z_wynikiem_negatywnym" Type="int" />
+          <Property Name="liczba_pozostalych_testow" Type="int" />
+          <Property Name="stan_rekordu_na" Type="datetime" />
+        </EntityType>
         <Function Name="pow_filter_records" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Fromdate" Type="datetime" Mode="In" />
           <Parameter Name="Todate" Type="datetime" Mode="In" />
@@ -123,6 +144,24 @@
           <EntitySet Name="woj_source" EntityType="Self.woj_source" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="woj_target" EntityType="Self.woj_target" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wojewodztwa" EntityType="Self.wojewodztwa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="woj_targetView" EntityType="Self.woj_targetView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [woj_targetView].[id] AS [id], 
+    [woj_targetView].[wojewodztwo] AS [wojewodztwo], 
+    [woj_targetView].[liczba_przypadkow] AS [liczba_przypadkow], 
+    [woj_targetView].[zgony] AS [zgony], 
+    [woj_targetView].[zgony_w_wyniku_covid_bez_chorob_wspolistniejacych] AS [zgony_w_wyniku_covid_bez_chorob_wspolistniejacych], 
+    [woj_targetView].[zgony_w_wyniku_covid_i_chorob_wspolistniejacych] AS [zgony_w_wyniku_covid_i_chorob_wspolistniejacych], 
+    [woj_targetView].[liczba_zlecen_poz] AS [liczba_zlecen_poz], 
+    [woj_targetView].[liczba_ozdrowiencow] AS [liczba_ozdrowiencow], 
+    [woj_targetView].[liczba_osob_objetych_kwarantanna] AS [liczba_osob_objetych_kwarantanna], 
+    [woj_targetView].[liczba_wykonanych_testow] AS [liczba_wykonanych_testow], 
+    [woj_targetView].[liczba_testow_z_wynikiem_pozytywnym] AS [liczba_testow_z_wynikiem_pozytywnym], 
+    [woj_targetView].[liczba_testow_z_wynikiem_negatywnym] AS [liczba_testow_z_wynikiem_negatywnym], 
+    [woj_targetView].[liczba_pozostalych_testow] AS [liczba_pozostalych_testow], 
+    [woj_targetView].[stan_rekordu_na] AS [stan_rekordu_na]
+    FROM [dbo].[woj_targetView] AS [woj_targetView]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -254,6 +293,7 @@
             <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
             <Parameter Name="Todate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="woj_targetView" EntityType="DBModel.woj_targetView" />
         </EntityContainer>
         <ComplexType Name="woj_filter_records_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -292,6 +332,25 @@
           <Property Type="String" Name="teryt" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="stan_rekordu_na" Nullable="true" />
         </ComplexType>
+        <EntityType Name="woj_targetView">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wojewodztwo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="liczba_przypadkow" Type="Int32" />
+          <Property Name="zgony" Type="Int32" />
+          <Property Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" Type="Int32" />
+          <Property Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" Type="Int32" />
+          <Property Name="liczba_zlecen_poz" Type="Int32" />
+          <Property Name="liczba_ozdrowiencow" Type="Int32" />
+          <Property Name="liczba_osob_objetych_kwarantanna" Type="Int32" />
+          <Property Name="liczba_wykonanych_testow" Type="Int32" />
+          <Property Name="liczba_testow_z_wynikiem_pozytywnym" Type="Int32" />
+          <Property Name="liczba_testow_z_wynikiem_negatywnym" Type="Int32" />
+          <Property Name="liczba_pozostalych_testow" Type="Int32" />
+          <Property Name="stan_rekordu_na" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -454,6 +513,26 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="function_pow_filter_records" FunctionName="DBModel.Store.pow_filter_records" />
+          <EntitySetMapping Name="woj_targetView">
+            <EntityTypeMapping TypeName="DBModel.woj_targetView">
+              <MappingFragment StoreEntitySet="woj_targetView">
+                <ScalarProperty Name="stan_rekordu_na" ColumnName="stan_rekordu_na" />
+                <ScalarProperty Name="liczba_pozostalych_testow" ColumnName="liczba_pozostalych_testow" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_negatywnym" ColumnName="liczba_testow_z_wynikiem_negatywnym" />
+                <ScalarProperty Name="liczba_testow_z_wynikiem_pozytywnym" ColumnName="liczba_testow_z_wynikiem_pozytywnym" />
+                <ScalarProperty Name="liczba_wykonanych_testow" ColumnName="liczba_wykonanych_testow" />
+                <ScalarProperty Name="liczba_osob_objetych_kwarantanna" ColumnName="liczba_osob_objetych_kwarantanna" />
+                <ScalarProperty Name="liczba_ozdrowiencow" ColumnName="liczba_ozdrowiencow" />
+                <ScalarProperty Name="liczba_zlecen_poz" ColumnName="liczba_zlecen_poz" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_i_chorob_wspolistniejacych" />
+                <ScalarProperty Name="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" ColumnName="zgony_w_wyniku_covid_bez_chorob_wspolistniejacych" />
+                <ScalarProperty Name="zgony" ColumnName="zgony" />
+                <ScalarProperty Name="liczba_przypadkow" ColumnName="liczba_przypadkow" />
+                <ScalarProperty Name="wojewodztwo" ColumnName="wojewodztwo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

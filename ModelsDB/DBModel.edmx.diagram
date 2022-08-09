@@ -11,6 +11,7 @@
         <EntityTypeShape EntityType="DBModel.woj_source" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.woj_target" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.wojewodztwa" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.woj_targetView" Width="1.5" PointX="0.75" PointY="5.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

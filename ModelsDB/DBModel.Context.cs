@@ -33,6 +33,7 @@ namespace SARSCOV2.ModelsDB
         public virtual DbSet<woj_source> woj_source { get; set; }
         public virtual DbSet<woj_target> woj_target { get; set; }
         public virtual DbSet<wojewodztwa> wojewodztwa { get; set; }
+        public virtual DbSet<woj_targetView> woj_targetView { get; set; }
     
         public virtual ObjectResult<woj_filter_records_Result> woj_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
         {

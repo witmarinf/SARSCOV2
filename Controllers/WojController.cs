@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using SARSCOV2.ModelsDB;
 
@@ -20,21 +18,25 @@ namespace SARSCOV2.Controllers
             return View(db.woj_target.ToList());
         }
 
-        public ActionResult Raport(string wojewodztwo)
+        
+        public ActionResult Raport(string wojewodztwo)//, DateTime start, DateTime stop)
         {
+            ViewBag.wojewodztwo = new List<string>(from r in db.woj_target select r.wojewodztwo).Distinct().OrderBy(r=>r);
+            //ViewBag.start = (from r in db.woj_targetView select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
+            //ViewBag.stop = (from r in db.woj_targetView select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
 
-            ViewBag.wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo);
             var model = from r in db.woj_target
                         orderby r.wojewodztwo
                         where r.wojewodztwo == wojewodztwo || wojewodztwo == "" || wojewodztwo == null
-  
                         select r;
+
             return View(model);
         }
 
         public ActionResult RaportWoj(string wojewodztwo, string rok, string miesiac)
         {
-            ViewBag.wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r);
+            ViewBag.wojewodztwo = new List<string>(from r in db.woj_target select r.wojewodztwo).Distinct().OrderBy(r => r);
+            //ViewBag.wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r);
             ViewBag.rok = (from r in db.woj_target select r.stan_rekordu_na.Value.Year).Distinct().OrderBy(r => r);
             ViewBag.miesiac = (from r in db.woj_target select r.stan_rekordu_na.Value.Month).Distinct().OrderBy(r => r);
 
