@@ -112,5 +112,39 @@ namespace SARSCOV2.ModelsDB
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pow_target>("function_pow_filter_records", mergeOption, fromdateParameter, todateParameter);
         }
+    
+        public virtual ObjectResult<woj_filter_raport_Result> woj_filter_raport(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, string wojewodztwo)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("Fromdate", fromdate) :
+                new ObjectParameter("Fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(System.DateTime));
+    
+            var wojewodztwoParameter = wojewodztwo != null ?
+                new ObjectParameter("wojewodztwo", wojewodztwo) :
+                new ObjectParameter("wojewodztwo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_filter_raport_Result>("woj_filter_raport", fromdateParameter, todateParameter, wojewodztwoParameter);
+        }
+    
+        public virtual ObjectResult<woj_filter_raport1_Result> woj_filter_raport1(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, string wojewodztwo)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("Fromdate", fromdate) :
+                new ObjectParameter("Fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(System.DateTime));
+    
+            var wojewodztwoParameter = wojewodztwo != null ?
+                new ObjectParameter("wojewodztwo", wojewodztwo) :
+                new ObjectParameter("wojewodztwo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_filter_raport1_Result>("woj_filter_raport1", fromdateParameter, todateParameter, wojewodztwoParameter);
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<SARSCOV2.ModelsDB.woj_target>
-
-<!--Raport całkowity według województw  bez zakresu czasu-->
+<!--model SARSCOV2.ModelsDB.woj_target-->
+<!--Raport całkowity według województwu-->
 
 @{
     ViewBag.Title = "Raport";
@@ -24,7 +24,7 @@
 {
     <span>wojewodztwo</span>@Html.DropDownList("wojewodztwo", new SelectList(ViewBag.wojewodztwo))
 
-   <input type="submit" value="wyszukaj" />
+    <input type="submit" value="wyszukaj" />
 
     <!--dane wazne-->
     <table class="table table-bordered table-hover">

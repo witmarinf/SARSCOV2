@@ -252,6 +252,12 @@
     <Compile Include="ModelsDB\wojewodztwa.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelsDB\woj_filter_raport1_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\woj_filter_raport_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelsDB\woj_filter_records_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -404,6 +410,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\WojReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
