@@ -11,7 +11,7 @@ namespace SARSCOV2.Controllers
 {
     public class WojRegressionDay14Controller : Controller
     {
-        DBEntities db = new DBEntities();
+        readonly DBEntities db = new DBEntities();
 
         // GET: WojRegressionDay14
 

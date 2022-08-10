@@ -12,7 +12,7 @@ namespace SARSCOV2.Controllers
 {
     public class WojZgonyAllController : Controller
     {
-        DBEntities db = new DBEntities();
+        readonly DBEntities db = new DBEntities();
 
         public ActionResult Index()
         {

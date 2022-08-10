@@ -11,7 +11,7 @@ namespace Filter.Controllers
 {
     public class WojPieController : Controller
     {
-        DBEntities db = new DBEntities();
+        readonly DBEntities db = new DBEntities();
 
         // GET: WojPie
         public ActionResult Index()

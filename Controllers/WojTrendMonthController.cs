@@ -10,9 +10,9 @@ namespace SARSCOV2.Controllers
     {
         public class WojTrendMonthController : Controller
         {
-            DBEntities db = new DBEntities();
+        readonly DBEntities db = new DBEntities();
 
-            public ActionResult Index()
+        public ActionResult Index()
             {
                 List<string> wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
 

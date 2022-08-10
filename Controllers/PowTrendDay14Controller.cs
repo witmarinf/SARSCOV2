@@ -11,7 +11,8 @@ namespace SARSCOV2.Controllers
     public class PowTrendDay14Controller : Controller
     {
 
-        DBEntities db = new DBEntities();
+        readonly DBEntities db = new DBEntities();
+
         // GET: PowTrendDay14
         public ActionResult Index()
         {

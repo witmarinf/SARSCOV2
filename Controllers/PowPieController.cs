@@ -11,7 +11,7 @@ namespace SARSCOV2.Controllers
 {
     public class PowPieController : Controller
     {
-        DBEntities db = new DBEntities();
+        readonly DBEntities db = new DBEntities();
 
         // GET: WojPie
         public ActionResult Index()

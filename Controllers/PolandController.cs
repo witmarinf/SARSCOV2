@@ -11,7 +11,7 @@ namespace GooglePie.Controllers
 {
     public class PolandController : Controller
     {
-        DBEntities db = new DBEntities();
+        readonly DBEntities db = new DBEntities();
 
         //Osoby objęte kwarantanną
         public ActionResult Indexc()

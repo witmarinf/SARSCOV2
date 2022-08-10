@@ -10,7 +10,7 @@ namespace SARSCOV2.Controllers
 {
     public class WojController : Controller
     {
-        private DBEntities db = new DBEntities();
+        readonly DBEntities db = new DBEntities();
 
         // GET: Woj
         public ActionResult Index()

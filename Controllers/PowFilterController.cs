@@ -9,7 +9,7 @@ namespace SARSCOV2.Controllers
 {
     public class PowFilterController : Controller
     {
-        private DBEntities db = new DBEntities();
+        readonly DBEntities db = new DBEntities();
         // GET: PowFilter
         public ActionResult Index()
         {
