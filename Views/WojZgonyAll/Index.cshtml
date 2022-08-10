@@ -17,7 +17,7 @@
 
     function drawChart() {
 
-       var wojewodztwo = $("#wojewodztwo option:selected").val();
+        var wojewodztwo = $("#wojewodztwo option:selected").val();
         $.ajax({
             type: "POST",
             url: "/WojZgonyAll/AjaxMethod",
@@ -36,7 +36,7 @@
                     height: 400
                 };
 
-                var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
                 chart.draw(data, options);
             },
             failure: function (dt) {
@@ -51,10 +51,10 @@
 
 @using (Html.BeginForm("AjaxMethod", "WojZgonyAll", FormMethod.Post))
 {
-    <h4>Zgony według województw</h4>
+    <h3>Zgony według 10-ciu największych miast w Polsce</h3>
 
     @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control", style = "width:300px; height:35px;" })
 
-    <div id="chart_div">
+    <div id="chart_div" style="width:auto; height:600px;">
     </div>
 }

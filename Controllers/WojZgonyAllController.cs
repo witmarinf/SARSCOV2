@@ -5,8 +5,6 @@ using System.Data.SqlClient;
 using System.Web.Mvc;
 using System.Linq;
 using SARSCOV2.ModelsDB;
-using System;
-
 
 namespace SARSCOV2.Controllers
 {
@@ -19,7 +17,6 @@ namespace SARSCOV2.Controllers
             List<string> wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
             wojewodztwo.Insert(0, "POLSKA");
             ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
-
             return View();
         }
 
@@ -72,5 +69,6 @@ namespace SARSCOV2.Controllers
             }
             return Json(chart_data);
         }
+
     }
 }
