@@ -16,7 +16,9 @@ namespace SARSCOV2.Controllers
         // GET: WojTrendDay14
         public ActionResult Index()
         {
-            var wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
+            List<string> wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).
+                OrderBy(r => r).ToList();
+            wojewodztwo.Insert(0, "POLSKA");
             ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
             return View();
         }
@@ -24,7 +26,12 @@ namespace SARSCOV2.Controllers
         [HttpPost]
         public JsonResult AjaxMethod(string wojewodztwo)
         {
-            string query = "SELECT dmy, g, h FROM WojTrendDay14View WHERE wojewodztwo=@wojewodztwo";
+            string query;
+            if (string.Equals(wojewodztwo, "POLSKA")) {
+                query = "SELECT dmy, SUM(g) g, SUM(h) h FROM WojTrendDay14View group by dmy";
+            }
+            else
+            query = "SELECT dmy, g, h FROM WojTrendDay14View WHERE wojewodztwo=@wojewodztwo";
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]
