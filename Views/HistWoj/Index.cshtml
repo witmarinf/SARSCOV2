@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!--WojZgonyHistogram-->
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type='text/javascript'>
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+
+    google.charts.setOnLoadCallback(function () {
+        drawChart();
+        $("#wojewodztwo").on("change", function () {
+            drawChart();
+        });
+    });
+
+    function drawChart() {
+
+    var wojewodztwo = $("#wojewodztwo option:selected").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/HistWoj/AjaxMethod",
+        data: "{wojewodztwo: '" + wojewodztwo + "'}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (r) {
+
+            data = google.visualization.arrayToDataTable(r);
+
+            var options = {
+                displayAnnotations: true,
+                vAxis: { title: 'ilość przypadków' },
+                hAxis: { title: 'ilość zgonów' },
+                le
+            };
+
+            var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        },
+        failure: function (r) {
+            alert(r.d);
+        },
+        error: function (r) {
+            alert(r.d);
+        }
+    });
+    }
+</script>
+
+@using (Html.BeginForm("AjaxMethod", "WojZgonyHistogram", FormMethod.Post))
+{
+    <h3>Histogram zgonów spowodowanych wirusem Sars-Cov-2 w Polsce wg. województw</h3>
+    @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control", style = "width:300px; height:35px;" })
+    <div id="chart_div" style="width: auto; height:600px; border: 1px solid;">
+    </div>
+}
+
+
+
+
+
+
+
+
+

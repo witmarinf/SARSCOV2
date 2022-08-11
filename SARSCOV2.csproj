@@ -198,6 +198,7 @@
     <Compile Include="Controllers\WojTrendDay14Controller.cs" />
     <Compile Include="Controllers\WojTrendMonthController.cs" />
     <Compile Include="Controllers\WojZgonyAllController.cs" />
+    <Compile Include="Controllers\WojZgonyHistogramController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -394,7 +395,6 @@
     <Content Include="Views\Poland\Indexj.cshtml" />
     <Content Include="Views\WojTrendMonth\Index.cshtml" />
     <Content Include="Views\PowTrendMonth\Index.cshtml" />
-    <Content Include="Views\WojdTrendDay14\Index.cshtml" />
     <Content Include="Views\WojTrendDay14\Index.cshtml" />
     <Content Include="Views\PowTrendDay14\Index.cshtml" />
     <Content Include="Views\WojRegressionDay14\Index.cshtml" />
@@ -407,10 +407,11 @@
     <Content Include="Views\PowZgonyAll\Index.cshtml" />
     <Content Include="Views\WojTestyAll\Index.cshtml" />
     <Content Include="Views\PowTestyAll\Index.cshtml" />
+    <Content Include="Views\HistWoj\Index.cshtml" />
+    <Content Include="Views\WojZgonyHistogram\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\WojReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
