@@ -132,6 +132,7 @@ warning 6002: The table/view 'DB.dbo.woj_targetView' does not have a primary key
         <Function Name="pow_filter_records" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Fromdate" Type="datetime" Mode="In" />
           <Parameter Name="Todate" Type="datetime" Mode="In" />
+          <Parameter Name="powiat_miasto" Type="varchar" Mode="In" />
         </Function>
         <Function Name="woj_filter_raport1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Fromdate" Type="datetime" Mode="In" />
@@ -296,10 +297,12 @@ warning 6002: The table/view 'DB.dbo.woj_targetView' does not have a primary key
           <FunctionImport Name="pow_filter_records" ReturnType="Collection(DBModel.pow_filter_records_Result)">
             <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
             <Parameter Name="Todate" Mode="In" Type="DateTime" />
+            <Parameter Name="powiat_miasto" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="function_pow_filter_records" EntitySet="pow_target" ReturnType="Collection(DBModel.pow_target)">
             <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
             <Parameter Name="Todate" Mode="In" Type="DateTime" />
+            <Parameter Name="powiat_miasto" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="woj_targetView" EntityType="DBModel.woj_targetView" />
           <FunctionImport Name="woj_filter_raport" ReturnType="Collection(DBModel.woj_filter_raport_Result)">

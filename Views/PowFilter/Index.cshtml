@@ -18,11 +18,25 @@
 
 @using (Html.BeginForm("Index", "PowFilter", FormMethod.Post))
 {
-    <h3>
-        <span>Data początkowa:</span><input type="date" name="From" min="2021-01-27" />
-        <span>Data końcowa:</span><input type="date" name="To" min="2021-01-27" />
-        <input type="submit" value="Wynik">
-    </h3>
+<h4>
+    <span>Data początkowa:</span><input type="date" name="From" value="2021-01-27" min="2021-01-27" />
+    <span>Data końcowa:</span><input type="date" name="To" value="2021-01-27" min="2021-01-27" /><br/>
+    <span>Miasto:</span>
+    <select id="powiat_miasto" name="powiat_miasto">
+        <option value="Bydgoszcz">Bydgoszcz</option>
+        <option value="Gdansk">Gdansk</option>
+        <option value="Katowice">Katowice</option>
+        <option value="Krakow">Krakow</option>
+        <option value="Lodz">Lodz</option>
+        <option value="Lublin">Lublin</option>
+        <option value="Poznan">Poznan</option>
+        <option value="Szczecin">Szczecin</option>
+        <option value="Warszawa">Warszawa</option>
+        <option value="Wroclaw">Wroclaw</option>
+    </select><br/><br/>
+
+    <input type="submit" value="Wyszukaj">
+</h4>
 
     <table style="position: relative;" class="table table-bordered table-hover;">
         <tr>

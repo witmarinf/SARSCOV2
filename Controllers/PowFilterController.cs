@@ -16,9 +16,9 @@ namespace SARSCOV2.Controllers
             return View(db.pow_target.ToList());
         }
         [HttpPost]
-        public ActionResult Index(DateTime From, DateTime To)
+        public ActionResult Index(DateTime From, DateTime To, string powiat_miasto)
         {
-            return View(db.function_pow_filter_records(From, To));
+            return View(db.function_pow_filter_records(From, To, powiat_miasto));
         }
     }
 }

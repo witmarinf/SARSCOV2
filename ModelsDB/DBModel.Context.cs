@@ -86,7 +86,7 @@ namespace SARSCOV2.ModelsDB
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_target>("function_woj_filter_records", mergeOption, fromdateParameter, todateParameter, wojewodztwoParameter);
         }
     
-        public virtual ObjectResult<pow_filter_records_Result> pow_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        public virtual ObjectResult<pow_filter_records_Result> pow_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, string powiat_miasto)
         {
             var fromdateParameter = fromdate.HasValue ?
                 new ObjectParameter("Fromdate", fromdate) :
@@ -96,10 +96,14 @@ namespace SARSCOV2.ModelsDB
                 new ObjectParameter("Todate", todate) :
                 new ObjectParameter("Todate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pow_filter_records_Result>("pow_filter_records", fromdateParameter, todateParameter);
+            var powiat_miastoParameter = powiat_miasto != null ?
+                new ObjectParameter("powiat_miasto", powiat_miasto) :
+                new ObjectParameter("powiat_miasto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pow_filter_records_Result>("pow_filter_records", fromdateParameter, todateParameter, powiat_miastoParameter);
         }
     
-        public virtual ObjectResult<pow_target> function_pow_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        public virtual ObjectResult<pow_target> function_pow_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, string powiat_miasto)
         {
             var fromdateParameter = fromdate.HasValue ?
                 new ObjectParameter("Fromdate", fromdate) :
@@ -109,10 +113,14 @@ namespace SARSCOV2.ModelsDB
                 new ObjectParameter("Todate", todate) :
                 new ObjectParameter("Todate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pow_target>("function_pow_filter_records", fromdateParameter, todateParameter);
+            var powiat_miastoParameter = powiat_miasto != null ?
+                new ObjectParameter("powiat_miasto", powiat_miasto) :
+                new ObjectParameter("powiat_miasto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pow_target>("function_pow_filter_records", fromdateParameter, todateParameter, powiat_miastoParameter);
         }
     
-        public virtual ObjectResult<pow_target> function_pow_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, MergeOption mergeOption)
+        public virtual ObjectResult<pow_target> function_pow_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, string powiat_miasto, MergeOption mergeOption)
         {
             var fromdateParameter = fromdate.HasValue ?
                 new ObjectParameter("Fromdate", fromdate) :
@@ -122,7 +130,11 @@ namespace SARSCOV2.ModelsDB
                 new ObjectParameter("Todate", todate) :
                 new ObjectParameter("Todate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pow_target>("function_pow_filter_records", mergeOption, fromdateParameter, todateParameter);
+            var powiat_miastoParameter = powiat_miasto != null ?
+                new ObjectParameter("powiat_miasto", powiat_miasto) :
+                new ObjectParameter("powiat_miasto", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pow_target>("function_pow_filter_records", mergeOption, fromdateParameter, todateParameter, powiat_miastoParameter);
         }
     
         public virtual ObjectResult<woj_filter_raport_Result> woj_filter_raport(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, string wojewodztwo)
