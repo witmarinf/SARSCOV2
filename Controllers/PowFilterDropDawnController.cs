@@ -22,7 +22,7 @@ namespace SARSCOV2.Controllers
             ViewBag.miesiac = (from r in db.pow_target select r.stan_rekordu_na.Value.Month).Distinct().OrderBy(r=>r);
 
             var model = from r in db.pow_target
-                        orderby r.powiat_miasto
+                        orderby r.powiat_miasto, r.stan_rekordu_na
                         where r.powiat_miasto == miasto || miasto == "" || miasto == null
                         where r.stan_rekordu_na.Value.Year.ToString() == rok || rok == "" || rok == null
                         where r.stan_rekordu_na.Value.Month.ToString() == miesiac || miesiac == "" || miesiac == null
