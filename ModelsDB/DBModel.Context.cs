@@ -35,7 +35,7 @@ namespace SARSCOV2.ModelsDB
         public virtual DbSet<wojewodztwa> wojewodztwa { get; set; }
         public virtual DbSet<woj_targetView> woj_targetView { get; set; }
     
-        public virtual ObjectResult<woj_filter_records_Result> woj_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        public virtual ObjectResult<woj_filter_records_Result> woj_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, string wojewodztwo)
         {
             var fromdateParameter = fromdate.HasValue ?
                 new ObjectParameter("Fromdate", fromdate) :
@@ -45,10 +45,14 @@ namespace SARSCOV2.ModelsDB
                 new ObjectParameter("Todate", todate) :
                 new ObjectParameter("Todate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_filter_records_Result>("woj_filter_records", fromdateParameter, todateParameter);
+            var wojewodztwoParameter = wojewodztwo != null ?
+                new ObjectParameter("wojewodztwo", wojewodztwo) :
+                new ObjectParameter("wojewodztwo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_filter_records_Result>("woj_filter_records", fromdateParameter, todateParameter, wojewodztwoParameter);
         }
     
-        public virtual ObjectResult<woj_target> function_woj_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        public virtual ObjectResult<woj_target> function_woj_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, string wojewodztwo)
         {
             var fromdateParameter = fromdate.HasValue ?
                 new ObjectParameter("Fromdate", fromdate) :
@@ -58,10 +62,14 @@ namespace SARSCOV2.ModelsDB
                 new ObjectParameter("Todate", todate) :
                 new ObjectParameter("Todate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_target>("function_woj_filter_records", fromdateParameter, todateParameter);
+            var wojewodztwoParameter = wojewodztwo != null ?
+                new ObjectParameter("wojewodztwo", wojewodztwo) :
+                new ObjectParameter("wojewodztwo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_target>("function_woj_filter_records", fromdateParameter, todateParameter, wojewodztwoParameter);
         }
     
-        public virtual ObjectResult<woj_target> function_woj_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, MergeOption mergeOption)
+        public virtual ObjectResult<woj_target> function_woj_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, string wojewodztwo, MergeOption mergeOption)
         {
             var fromdateParameter = fromdate.HasValue ?
                 new ObjectParameter("Fromdate", fromdate) :
@@ -71,7 +79,11 @@ namespace SARSCOV2.ModelsDB
                 new ObjectParameter("Todate", todate) :
                 new ObjectParameter("Todate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_target>("function_woj_filter_records", mergeOption, fromdateParameter, todateParameter);
+            var wojewodztwoParameter = wojewodztwo != null ?
+                new ObjectParameter("wojewodztwo", wojewodztwo) :
+                new ObjectParameter("wojewodztwo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_target>("function_woj_filter_records", mergeOption, fromdateParameter, todateParameter, wojewodztwoParameter);
         }
     
         public virtual ObjectResult<pow_filter_records_Result> pow_filter_records(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)

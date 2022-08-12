@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<SARSCOV2.ModelsDB.woj_target>
+
 <!--WojFilter-->
 @{
     ViewBag.Title = "Index";
@@ -18,51 +19,69 @@
 
 @using (Html.BeginForm("Index", "WojFilter", FormMethod.Post))
 {
-    <h3>
-        <span>Data początkowa:</span><input type="date" name="From" />
-        <span>Data końcowa:</span><input type="date" name="To" />
-        <input type="submit" value="Wynik">
-    </h3>
+<h3>
+
+    <!--Html.DropDownList("To", (SelectList)ViewBag.To)-->
+    <!--Html.DropDownListFor("wojewodztwo", new SelectList(ViewBag.wojewodztwo))-->
+    <span>Data początkowa:</span><input type="date" name="From" value="2021-01-27" min="2021-01-27" />
+    <span>Data końcowa:</span><input type="date" name="To" value="2021-01-27" min="2021-01-27" /><br/>
+    <span>Wojewodztwo:</span>
+    <select id="wojewodztwo" name="wojewodztwo">
+        <option value="dolnoslaskie">dolnoslaskie</option>
+        <option value="kujawsko-pomorskie">kujawsko-pomorskie</option>
+        <option value="lodzkie">lodzkie</option>
+        <option value="lubelskie">lubelskie</option>
+        <option value="malopolskie">malopolskie</option>
+        <option value="mazowieckie">mazowieckie</option>
+        <option value="opolskie">opolskie</option>
+        <option value="podkarpackie">podkarpackie</option>
+        <option value="podlaskie">podlaskie</option>
+        <option value="pomorskie">pomorskie</option>
+        <option value="slaskie">slaskie</option>
+        <option value="swietokrzyskie">swietokrzyskie</option>
+        <option value="warminsko-mazurskie">warminsko-mazurskie</option>
+        <option value="wielkopolskie">wielkopolskie</option>
+        <option value="zachodniopomorskie">zachodniopomorskie</option>
+    </select><br><br>
+    <input type="submit" value="Wyszukaj">
+</h3>
 
         <table  style="position: relative;" class="table table-bordered table-hover;">
             <tr>
                 <th>
-                    <div>
-                        <!--
-                    @Html.DisplayNameFor(model => model.stan_rekordu_na)
-                        -->
-                        stan rekordu na
-                        </div>
+                    <div>data
+                    <!--atHtml.DisplayNameFor(model => model.stan_rekordu_na)-->
+                    </div>
                 </th>
                 <th><div>
-                    @Html.DisplayNameFor(model => model.wojewodztwo)
+                    województwo
+                    <!--atHtml.DisplayNameFor(model => model.wojewodztwo)-->
                     </div>
                 </th>
                 <th>
                     <div>
-                        <!--
-                    @Html.DisplayNameFor(model => model.liczba_przypadkow)
-                      -->
-                        liczba przypadkow
+                     liczba przypadkow
+                   <!-- atHtml.DisplayNameFor(model => model.liczba_przypadkow)-->
                 </div>
                 </th>
                 <th>
                     <div>
-                    @Html.DisplayNameFor(model => model.zgony)
+                    zgony
+                    <!--atHtml.DisplayNameFor(model => model.zgony)-->
                     </div>
                 </th>
                 <th>
                     <div>
-                    <!--    
-                    @Html.DisplayNameFor(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)
-                    -->
                     zgony w wyniku covid bez chorob wspolistniejacych
+                        <!--
+                    atHtml.DisplayNameFor(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)
+                    -->
                     </div>
                 </th>
                 <th>
                     <div>
                         <!--
-                        @Html.DisplayNameFor(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)
+                        atHtml.DisplayNameFor(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)
                         -->
                         zgony w wyniku covid bez chorob wspolistniejacych
 
@@ -71,7 +90,7 @@
                 <th>
                     <div>
                     <!--
-                    @Html.DisplayNameFor(model => model.liczba_zlecen_poz)
+                    atHtml.DisplayNameFor(model => model.liczba_zlecen_poz)
                     --> 
                     liczba zlecen pozytywnych 
                     </div>               
@@ -79,7 +98,7 @@
                 <th>
                     <div>
                     <!-- 
-                    @Html.DisplayNameFor(model => model.liczba_ozdrowiencow)
+                    atHtml.DisplayNameFor(model => model.liczba_ozdrowiencow)
                     -->
                     liczba ozdrowiencow   
                     </div>
@@ -88,7 +107,7 @@
                     
                     <div>
                         <!--
-                    @Html.DisplayNameFor(model => model.liczba_osob_objetych_kwarantanna)
+                    atHtml.DisplayNameFor(model => model.liczba_osob_objetych_kwarantanna)
                     -->
                         liczba osob objetych kwarantanna
                     </div>
@@ -96,7 +115,7 @@
                 <th>
                     <div> 
                         <!--
-                    @Html.DisplayNameFor(model => model.liczba_wykonanych_testow)
+                    atHtml.DisplayNameFor(model => model.liczba_wykonanych_testow)
                     -->
                         liczba wykonanych testow
                     </div>
@@ -104,14 +123,15 @@
                 <th>
                     <div>
                         liczba testow z wynikiem pozytywnym
-                     <!--   @Html.DisplayNameFor(model => model.liczba_testow_z_wynikiem_pozytywnym)
+                     <!--   
+                         atHtml.DisplayNameFor(model => model.liczba_testow_z_wynikiem_pozytywnym)
                     -->
                          </div>
                 </th>
                 <th>
                     <div>
                         <!--
-                    @Html.DisplayNameFor(model => model.liczba_testow_z_wynikiem_negatywnym)
+                    atHtml.DisplayNameFor(model => model.liczba_testow_z_wynikiem_negatywnym)
                     -->
                     liczba testow z wynikiem pozytywnym
                     </div>
@@ -159,7 +179,5 @@
                     </td>
                 </tr>
             }
-
         </table>
-
         }
