@@ -20,8 +20,6 @@
 @using (Html.BeginForm("Index", "WojFilter", FormMethod.Post))
 {
 <h4>
-    <!--Html.DropDownList("To", (SelectList)ViewBag.To)-->
-    <!--Html.DropDownListFor("wojewodztwo", new SelectList(ViewBag.wojewodztwo))-->
     <span>Data początkowa:</span><input type="date" name="From" value="2021-01-27" min="2021-01-27" />
     <span>Data końcowa:</span><input type="date" name="To" value="2021-01-27" min="2021-01-27" /><br/>
     <span>Wojewodztwo:</span>
