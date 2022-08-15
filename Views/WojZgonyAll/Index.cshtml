@@ -51,7 +51,7 @@
 
 @using (Html.BeginForm("AjaxMethod", "WojZgonyAll", FormMethod.Post))
 {
-    <h3>Zgony według 10-ciu największych miast w Polsce</h3>
+    <h3>Zgony według województw w Polsce</h3>
 
     @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control", style = "width:300px; height:35px;" })
 
