@@ -18,7 +18,6 @@ namespace SARSCOV2.Controllers
         {
             return View(db.woj_target.ToList());
         }
-
         
         public ActionResult Raport(string wojewodztwo, DateTime? start, DateTime? stop)
         {

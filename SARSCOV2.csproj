@@ -265,6 +265,9 @@
     <Compile Include="ModelsDB\woj_source.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelsDB\woj_stat_report_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelsDB\woj_target.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>

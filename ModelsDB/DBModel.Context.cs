@@ -170,5 +170,22 @@ namespace SARSCOV2.ModelsDB
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_filter_raport1_Result>("woj_filter_raport1", fromdateParameter, todateParameter, wojewodztwoParameter);
         }
+    
+        public virtual ObjectResult<woj_stat_report_Result> woj_stat_report(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, string x)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("Fromdate", fromdate) :
+                new ObjectParameter("Fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("Todate", todate) :
+                new ObjectParameter("Todate", typeof(System.DateTime));
+    
+            var xParameter = x != null ?
+                new ObjectParameter("x", x) :
+                new ObjectParameter("x", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<woj_stat_report_Result>("woj_stat_report", fromdateParameter, todateParameter, xParameter);
+        }
     }
 }

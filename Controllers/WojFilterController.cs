@@ -20,5 +20,12 @@ namespace SARSCOV2.Controllers
             return View(db.function_woj_filter_records(From, To, wojewodztwo));
         }
 
+        [HttpPost]
+        public ActionResult StatReport(DateTime Fromdate, DateTime Todate, string x)
+        {
+            return View(db.woj_stat_report(Fromdate, Todate, x));
+        }
+
+
     }
 }
