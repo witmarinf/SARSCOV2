@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<SARSCOV2.ModelsDB.woj_target>
-<!--model SARSCOV2.ModelsDB.woj_target-->
 <!--Raport całkowity według województwu-->
 
 @{
@@ -18,22 +17,26 @@
 </head>
 
 
-<h2>Raport całkowity według województw</h2>
+<h2>Raport statystyczny dla województw</h2>
 
 @using (Html.BeginForm("Raport", "Woj", FormMethod.Get))
 {
-    <span>wojewodztwo</span>@Html.DropDownList("wojewodztwo", new SelectList(ViewBag.wojewodztwo))
-
+    <span>wojewodztwo: </span>@Html.DropDownList("wojewodztwo", new SelectList(ViewBag.wojewodztwo))
+    <span>data początkowa: </span>
+    <input type="date" name="start" value="2021-01-27" min="2021-01-27" />
+    <span>data końcowa: </span>
+    <input type="date" name="stop" value="2021-01-28" min="2021-01-28" />
     <input type="submit" value="wyszukaj" />
 
-    <!--dane wazne-->
+
+    <!--dane wazne--><br/>
     <table class="table table-bordered table-hover">
         <tr>
-            <th>data pierwszej aktualizacji:</th>
+            <th>data początkowa:</th>
             <td>@Model.Min(model => model.stan_rekordu_na)</td>
         </tr>
         <tr>
-            <th>data ostatniej aktualizacji:</th>
+            <th>data końcowa:</th>
             <td>@Model.Max(model => model.stan_rekordu_na)</td>
         </tr>
 
@@ -41,13 +44,13 @@
         @foreach (var item in Model)
         { RowNo++; }
         <tr>
-            <th>liczba rekordów:</th>
+            <th>liczba dni:</th>
             <td>@RowNo </td>
         </tr>
     </table>
 
 
-    <br />
+    <br/>
     <table class="table table-hover table-bordered">
         <thead>
         <tbody>

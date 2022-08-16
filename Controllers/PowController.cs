@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -17,12 +18,13 @@ namespace SARSCOV2.Controllers
             return View(db.pow_target.ToList());
         }
 
-        public ActionResult Raport(string miasto)
+        public ActionResult Raport(string miasto, DateTime? start, DateTime? stop)
         {
             ViewBag.miasto = (from r in db.miasta select r.miasto);
 
             var model = from r in db.pow_target
                         orderby r.powiat_miasto
+                        where r.stan_rekordu_na >= start && r.stan_rekordu_na <= stop
                         where r.powiat_miasto == miasto || miasto == "" || miasto == null
                         select r;
             return View(model);

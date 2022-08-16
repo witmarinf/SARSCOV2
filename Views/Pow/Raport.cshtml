@@ -14,22 +14,25 @@
         }
     </style>
 </head>
-<h2>Całkowity raport dotyczący 10-ciu największych miast w Polsce</h2>
+<h2>Raport statystyczny dla 10-ciu największych miast w Polsce</h2>
 @using (Html.BeginForm("Raport", "Pow", FormMethod.Get))
 {
-    @Html.Label("miasto: ")
-    @Html.DropDownList("miasto", new MultiSelectList(ViewBag.miasto))
-    <input type="submit" value="Wynik">
-
+   
+    <span>miasto: </span>@Html.DropDownList("miasto", new MultiSelectList(ViewBag.miasto))
+    <span>data początkowa: </span>
+    <input type="date" name="start" value="2021-01-27" min="2021-01-27" />
+    <span>data końcowa: </span>
+    <input type="date" name="stop" value="2021-01-28" min="2021-01-28" />
+    <input type="submit" value="wyszukaj" />
 
     <!--dane wazne-->
     <table class="table table-bordered table-hover width:30%;">
         <tr>
-            <th>data pierwszej aktualizacji:</th>
+            <th>data początkowa:</th>
             <td>@Model.Min(model => model.stan_rekordu_na)</td>
         </tr>
         <tr>
-            <th>data ostatniej aktualizacji:</th>
+            <th>data końcowa:</th>
             <td>@Model.Max(model => model.stan_rekordu_na)</td>
         </tr>
 
@@ -37,7 +40,7 @@
         @foreach (var item in Model)
         { RowNo++; }
         <tr>
-            <th>liczba rekordów:</th>
+            <th>liczba dni:</th>
             <td>@RowNo </td>
         </tr>
     </table>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace SARSCOV2.Controllers
         }
 
         
-        public ActionResult Raport(string wojewodztwo)//, DateTime start, DateTime stop)
+        public ActionResult Raport(string wojewodztwo, DateTime? start, DateTime? stop)
         {
             ViewBag.wojewodztwo = new List<string>(from r in db.woj_target select r.wojewodztwo).Distinct().OrderBy(r=>r);
             //ViewBag.start = (from r in db.woj_targetView select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
@@ -27,6 +28,7 @@ namespace SARSCOV2.Controllers
 
             var model = from r in db.woj_target
                         orderby r.wojewodztwo
+                        where r.stan_rekordu_na >=start && r.stan_rekordu_na <= stop
                         where r.wojewodztwo == wojewodztwo || wojewodztwo == "" || wojewodztwo == null
                         select r;
 
