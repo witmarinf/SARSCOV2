@@ -41,7 +41,6 @@ namespace GooglePie.Controllers
                         {   "kod",
                             "województwo",
                             "liczba osób objętych kwarantanną",
-
                         });
             using (SqlConnection connection = new SqlConnection(constructor))
             {

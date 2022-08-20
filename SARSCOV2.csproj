@@ -171,6 +171,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\WojHistogramController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PolandController.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Controllers\WojFilterDropdawnController.cs" />
     <Compile Include="Controllers\WojLastDayAvgController.cs" />
     <Compile Include="Controllers\WojPieController.cs" />
+    <Compile Include="Controllers\WojProcStatController.cs" />
     <Compile Include="Controllers\WojRegressionDay14Controller.cs" />
     <Compile Include="Controllers\WojTestyAllController.cs" />
     <Compile Include="Controllers\WojTrendDay14Controller.cs" />
@@ -412,6 +414,8 @@
     <Content Include="Views\PowTestyAll\Index.cshtml" />
     <Content Include="Views\HistWoj\Index.cshtml" />
     <Content Include="Views\WojZgonyHistogram\Index.cshtml" />
+    <Content Include="Views\WojHistogram\Index.cshtml" />
+    <Content Include="Views\WojProcStat\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

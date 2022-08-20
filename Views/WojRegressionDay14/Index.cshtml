@@ -1,18 +1,9 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<html>
+
 <!--WojRegressionDay14-->
-<head>
-<style>
-    table, th, td {
-        border: 2px solid black;
-        border-collapse: collapse;
-        font-size: 10px;
-    }
-</style>
-</head>
-<body>
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 
@@ -121,34 +112,18 @@
 </script>
 
 @using (Html.BeginForm("AjaxMethod", "WojRegressionDay14", FormMethod.Post))
-{  <br/>
-    <table align="center" style="width:30%">
-        <tr>
-            <th>Wartość bezwzględna współczynnika r-Pearsona</th>
-            <th>Moc korelacji</th>
-        </tr>
-        <tr>
-            <td>0,2< </td>
-            <td>słaba</td>
-        </tr>
-        <tr>
-            <td>0,3 - 0,5</td>
-            <td>dostateczna</td>
-        </tr>
-        <tr>
-            <td>0,6 - 0,7</td>
-            <td>umiarkowana</td>
-        </tr>
-        <tr>
-            <td>0,8 - 0,9</td>
-            <td>bardzo silna</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>idealna</td>
-        </tr>
-    </table>
-    <hr/>
+{
+    <br />
+    <hr />
+    <span>
+        <b>Dopasowanie wg. współczynnika determinacji R<sup>2</sup></b> <br />
+        0.0-0.5 niezadowalające<br />
+        0.5-0.6 słabe<br />
+        0.6-0.8 zadowalające<br />
+        0.8-0.9 dobre<br />
+        0.9-1.0 bardzo dobre<br />
+    </span>
+    <hr />
     @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control", style = "width:150px; height:35px;" })
     <h4> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni </h4>
     <div id="chartLinear" style="height: 500px; width: auto"></div>
@@ -157,6 +132,3 @@
     <div id="chartLinear1" style="height: 500px; width: auto"></div>
     <div id="chartExponential1" style="height: 500px; width: auto"></div>
 }
-
-</body>
-</html>

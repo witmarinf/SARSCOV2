@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<!--Histogram dla województw-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        google.charts.load("current", { packages: ["corechart"] });
+        $('#btnDisplay').on('click', function () {
+            var start = $("#start option:selected").data();
+            var stop = $("#stop option:selected").data();
+            var wojewodztwo = $("#wojewodztwo option:selected").val();
+            drawChart(start, stop, wojewodztwo);
+            return false;
+        });
+
+        function drawChart(start, stop, wojewodztwo) {
+            var obj = {};
+            obj.start = start;
+            obj.stop = stop;
+            obj.wojewodztwo = wojewodztwo;
+            $.ajax({
+                type: "POST",
+                url: "/WojHistogram/AjaxMethod",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            }).done(function (data) {
+                var data = google.visualization.arrayToDataTable(data.d);
+                var chart = new google.visualization.Histogram(document.getElementById('divChart'));
+                chart.draw(data, options);
+            }).fail(function (err) {
+                console.log(err);
+            }).error(function (err) {
+                console.log(err);
+            });
+        }
+    });
+</script>
+
+@using (Html.BeginForm("AjaxMethod", "WojHistogram", FormMethod.Post))
+{
+    <h4>Histogram zgonów dla województw</h4>
+    @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control" })
+    <span>Data początkowa:</span>
+    <input type="date" id="start" name="start" value="2021-01-28" min="2021-01-28" />
+    <span>Data końcowa:</span>
+    <input type="date" id="stop" name="stop" value="2021-01-28" min="2021-01-28" />
+    <input type="submit" id="btnDisplay" value="Wyszukaj" CssClass="btn btn-link">
+    <br />
+    <div id="divChart">
+    </div>
+}

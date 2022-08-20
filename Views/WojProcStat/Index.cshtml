@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<!--Szczegółowy raport statystyczny dla wojewodztw-->
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        google.charts.load("current", { packages: ["table"] });
+        $('#btnDisplay').on('click', function () {
+            var start = $("#start option:selected").data();
+            var stop = $("#stop option:selected").data();
+            var x = $("#x option:selected").val();
+            drawChart(start, stop, x);
+            return false;
+        });
+
+        function drawChart(start, stop, x) {
+
+            var obj = {};
+            obj.Fromdate = Fromdate;
+            obj.Todate = Todate;
+            obj.x = x;
+
+            $.ajax({
+                type: "POST",
+                url: "/WojProcStat/AjaxMethod",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            }).done(function (data) {
+                var data = google.visualization.arrayToDataTable(data.d);
+                var chart = new google.visualization.Table(document.getElementById('divChart'));
+                table.draw(data, { showRowNumber: true, width: '40%', height: '100%' });
+                chart.draw(data, options);
+            }).fail(function (err) {
+                console.log(err);
+            }).error(function (err) {
+                console.log(err);
+            });
+        }
+    });
+</script>
+
+@using (Html.BeginForm("AjaxMethod", "WojProcStat", FormMethod.Post))
+{
+    <h4>Szczegółowy raport statystyczny dla województw - charakterystyka liczbowa zbiorowości</h4>
+    <span>Data początkowa: </span>
+    <input type="date" id="start" name="start" value="2021-01-28" min="2021-01-28" />
+    <span>Data końcowa: </span>
+    <input type="date" id="stop" name="stop" value="2021-01-28" min="2021-01-28" />
+    <span>Badana cecha zbiorowości: </span>
+    <select id="x" name="x">
+        <option value="woj.liczba_przypadkow">liczba_przypadkow</option>
+        <option value="woj.liczba_osob_objetych_kwarantanna">liczba osob objetych kwarantanna</option>
+        <option value="woj.liczba_testow_z_wynikiem_negatywnym">liczba testow z wynikiem negatywnym</option>
+        <option value="woj.liczba_testow_z_wynikiem_pozytywnym">liczba testow z wynikiem pozytywnym</option>
+        <option value="woj.zgony">zgony</option>
+        <option value="woj.zgony_w_wyniku_covid_i_chorob_wspolistniejacych">zgony w wyniku covid i chorob wspolistniejacych</option>
+        <option value="woj.zgony_w_wyniku_covid_lub_chorob_wspolistniejacych">zgony w wyniku covid lub chorob wspolistniejacych</option>
+    </select>
+
+    <input type="submit" id="btnDisplay" value="Raport statystyczny">
+    <br />
+    <div id="divChart">
+    </div>
+}
