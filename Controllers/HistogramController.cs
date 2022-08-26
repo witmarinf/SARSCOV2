@@ -3,43 +3,35 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Mvc;
-using SARSCOV2.ModelsDB;
 using System.Linq;
+using SARSCOV2.ModelsDB;
+using System;
 
-
-namespace Filter.Controllers
+namespace SARSCOV2.Controllers
 {
-    public class WojPieController : Controller
+    public class HistogramController : Controller
     {
-        readonly DBEntities db = new DBEntities();
+        DBEntities db = new DBEntities();
 
-        // GET: WojPie
         public ActionResult Index()
         {
-            var termin = (from r in db.woj_target
-                          select r.stan_rekordu_na).Distinct().OrderByDescending(r => r).ToList();
-            List<string> stan_rekordu_na = new List<string>();
-
-            foreach (var da in termin)
-            {
-                stan_rekordu_na.Add(da.Value.ToString("d"));
-            }
-
-            ViewBag.stan_rekordu_na = new SelectList(stan_rekordu_na, "stan_rekordu_na");
-
+            var wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
+            ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
             return View();
         }
 
         [HttpPost]
-        public JsonResult AjaxMethod(string stan_rekordu_na)
+        public JsonResult AjaxMethod(DateTime start, DateTime stop, String wojewodztwo)
         {
-            string query = "SELECT b, j FROM PolandMapView WHERE stan_rekordu_na=@stan_rekordu_na";
-
+            string query = "SELECT zgony FROM woj_target WHERE wojewodztwo =@wojewodztwo  AND " +
+                "stan_rekordu_na BETWEEN " +
+                "@start AND @stop";
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
             chart_data.Add(new object[]
-                        {
-                            "województwo", "zgony"
+                        {  //"stan_rekordu_na",
+                            "zgony"
+
                         });
             using (SqlConnection connection = new SqlConnection(constructor))
             {
@@ -47,7 +39,9 @@ namespace Filter.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
-                    cmd.Parameters.AddWithValue("@stan_rekordu_na", stan_rekordu_na);
+                    cmd.Parameters.AddWithValue("@start", start);
+                    cmd.Parameters.AddWithValue("@stop", stop);
+                    cmd.Parameters.AddWithValue("@wojewodztwo", wojewodztwo);
                     connection.Open();
                     using (SqlDataReader sql_data_reader = cmd.ExecuteReader())
                     {
@@ -55,12 +49,13 @@ namespace Filter.Controllers
                         {
                             chart_data.Add(new object[]
                         {
-                            sql_data_reader["b"], //wojewodztwo 
-                            sql_data_reader["j"]  //zgony
+                           // sql_data_reader["stan_rekordu_na"].ToString(),
+
+                            sql_data_reader["zgony"]
+
                         });
                         }
                     }
-
                     connection.Close();
                 }
             }
@@ -68,14 +63,3 @@ namespace Filter.Controllers
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-

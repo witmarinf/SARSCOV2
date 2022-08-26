@@ -171,6 +171,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HistogramController.cs" />
     <Compile Include="Controllers\WojHistogramController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -412,10 +413,10 @@
     <Content Include="Views\PowZgonyAll\Index.cshtml" />
     <Content Include="Views\WojTestyAll\Index.cshtml" />
     <Content Include="Views\PowTestyAll\Index.cshtml" />
-    <Content Include="Views\HistWoj\Index.cshtml" />
     <Content Include="Views\WojZgonyHistogram\Index.cshtml" />
     <Content Include="Views\WojHistogram\Index.cshtml" />
     <Content Include="Views\WojProcStat\Index.cshtml" />
+    <Content Include="Views\Histogram\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

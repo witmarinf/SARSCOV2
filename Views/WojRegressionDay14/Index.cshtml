@@ -35,6 +35,7 @@
                 var maksimum = Math.max(dt);
                 var data = google.visualization.arrayToDataTable(dt);
                 var options = {
+                    legend: { textStyle: { fontSize: 10 } },
                     hAxis: { minValue: 0, maxValue: maksimum },
                     vAxis: { minValue: 0, maxValue: maksimum },
                     chartArea: { width: '50%' },
@@ -45,6 +46,7 @@
                             visibleInLegend: true
                         }
                     }
+
                 };
 
                 var chartLinear = new google.visualization.ScatterChart(document.getElementById('chartLinear'));
@@ -125,10 +127,14 @@
     </span>
     <hr />
     @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control", style = "width:150px; height:35px;" })
-    <h4> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni </h4>
-    <div id="chartLinear" style="height: 500px; width: auto"></div>
-    <div id="chartExponential" style="height: 500px; width: auto"></div>
+    <h4> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni </h4><br/>
+    <h4 style="text-align:center;"> Wykres regresji liniowej dla danych z ostatnich 14 dni </h4>
+    <div id="chartLinear" style="height: 500px; width: auto;"></div>
+    <h4 style="text-align:center;"> Wykres regresji wykładniczej dla danych z ostatnich 14 dni </h4>
+    <div id="chartExponential" style="height: 500px; width: auto; "></div>
     <h4> Badanie regresji liniowej i wykładniczej dla danych z ostatnich 14 dni <br /> bez danych z sobót i niedziel  </h4>
-    <div id="chartLinear1" style="height: 500px; width: auto"></div>
-    <div id="chartExponential1" style="height: 500px; width: auto"></div>
+    <h4 style="text-align:center;"> Wykres regresji liniowej dla danych z ostatnich 14 dni </h4>
+    <div id="chartLinear1" style="height: 500px; width: auto;"></div>
+    <h4 style="text-align:center;"> Wykres regresji wykładniczej dla danych z ostatnich 14 dni </h4>
+    <div id="chartExponential1" style="height: 500px; width: auto;"></div>
 }
