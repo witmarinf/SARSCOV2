@@ -14,7 +14,6 @@ namespace SARSCOV2.Controllers
             {
 
             ViewBag.wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r);
-            
             ViewBag.rok = (from r in db.woj_target select r.stan_rekordu_na.Value.Year).Distinct().OrderBy(r => r);
             ViewBag.miesiac = (from r in db.woj_target select r.stan_rekordu_na.Value.Month).Distinct().OrderBy(r => r);
 

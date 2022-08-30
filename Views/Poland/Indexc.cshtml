@@ -20,9 +20,7 @@
         });
 
     function drawRegionsMap() {
-
         var stan_rekordu_na = $("#stan_rekordu_na option:selected").val();
-
         $.ajax({
             type: "POST",
             url: "/Poland/AjaxMethodc",
@@ -31,7 +29,7 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (dt) {
-
+               // console.log(dt);
                 var maksimum = Math.max(dt);
 
                 var data = google.visualization.arrayToDataTable(dt);

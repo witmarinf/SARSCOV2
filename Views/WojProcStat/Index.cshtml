@@ -20,14 +20,17 @@
         function drawChart(start, stop, x) {
 
             var obj = {};
-            obj.Fromdate = Fromdate;
-            obj.Todate = Todate;
+            obj.start = start;
+            obj.stop = stop;
             obj.x = x;
 
             $.ajax({
                 type: "POST",
                 url: "/WojProcStat/AjaxMethod",
                 data: JSON.stringify(obj),
+                //data: "{start: '" + $('#start').val() + "', " +
+                 //   "stop: '" + $('#stop').val() + "', " +
+                  //  "x: '" + $('x').val() + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             }).done(function (data) {

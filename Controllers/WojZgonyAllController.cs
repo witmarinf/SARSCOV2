@@ -30,11 +30,11 @@ namespace SARSCOV2.Controllers
                     + " AS zgony_w_wyniku_covid_bez_chorob_wspolistniejacych"
                     + " , SUM(zgony_w_wyniku_covid_i_chorob_wspolistniejacych) "
                     + " AS zgony_w_wyniku_covid_i_chorob_wspolistniejacych "
-                    + " FROM WojZgonyAllView group by stan_rekordu_na";
+                    + " FROM WojInfoAllView group by stan_rekordu_na";
             }
             else {
                 query = "SELECT stan_rekordu_na, zgony_w_wyniku_covid_bez_chorob_wspolistniejacych,"
-                    + " zgony_w_wyniku_covid_i_chorob_wspolistniejacych FROM WojZgonyAllView "
+                    + " zgony_w_wyniku_covid_i_chorob_wspolistniejacych FROM WojInfoAllView "
                     + " WHERE wojewodztwo=@wojewodztwo ";
             }
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;

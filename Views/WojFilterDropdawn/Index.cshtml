@@ -15,7 +15,7 @@
     </style>
 </head>
 
-<h2>Filtrowanie danych wg. województw oraz daty</h2>
+<h2>Filtrowanie danych wg. województw oraz miesiąca</h2>
 
 @using (Html.BeginForm("Index", "WojFilterDropdawn", FormMethod.Post))
 {   
@@ -26,17 +26,15 @@
     @Html.Label("miesiac: ")
     @Html.DropDownList("miesiac", new SelectList(ViewBag.miesiac))
 
-    <input type="submit" value="wyszukaj" />
+    <input type="submit" value="Filtruj dane" />
 
     <table style="position: relative;" class="table table-bordered table-hover;">
         <tr>
-
             <th>
                 <div>
                     @Html.DisplayNameFor(model => model.wojewodztwo)
                 </div>
             </th>
-
             <th>
                 <div>
                     <!--

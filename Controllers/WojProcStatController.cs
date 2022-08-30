@@ -1,5 +1,4 @@
-﻿//szczegolowy raport satystyczny licz, suma, srednia, min, max, Q1,Q2,Q3
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;

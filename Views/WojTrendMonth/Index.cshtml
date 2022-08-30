@@ -29,17 +29,17 @@
                 var data = google.visualization.arrayToDataTable(r);
 
                 options = {
-                    title: 'Trend miesieczny zgonów według województw w Polsce',
                     is3D: true,
                     height: 400 ,
                     legend: {
                         position: 'bottom',
                         alignment: 'center',
                         orientation: 'vertical',
-                    }
+                    },
+                    isStacked: true,
                 };
 
-                chart = new google.visualization.ColumnChart($("#chart")[0]);
+                chart = new google.visualization.ColumnChart(document.getElementById('chart'));
                 chart.draw(data, options);
             },
             failure: function (r) {
@@ -55,7 +55,7 @@
 @using (Html.BeginForm("AjaxMethod", "WojTrendMonth", FormMethod.Post))
 {
     @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control", style = "width:300px; height:35px;" })
-
+    <h4>Zgony według miesięcy</h4>
     <div id="chart" style="border: 1px solid;">
     </div>
     <div>

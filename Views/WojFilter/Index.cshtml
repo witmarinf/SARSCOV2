@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<SARSCOV2.ModelsDB.woj_target>
-
 <!--WojFilter-->
 @{
     ViewBag.Title = "Index";
@@ -8,10 +7,10 @@
 <head>
     <style>
         th div {
-            transform: rotate(270deg);
-            height: 200px;
-            width: 200px;
+            height: 100px;
+            width: 100px;
             padding: 0px 0px 0px 0px;
+            margin: 0px 0px 0px 0px;
         }
     </style>
 </head>
@@ -20,8 +19,9 @@
 @using (Html.BeginForm("Index", "WojFilter", FormMethod.Post))
 {
 <h4>
+    <span>Filtorowanie danych dla województw wg. zakresu dat</span><br />
     <span>Data początkowa:</span><input type="date" name="From" value="2021-01-28" min="2021-01-28" />
-    <span>Data końcowa:</span><input type="date" name="To" value="2021-01-28" min="2021-01-28" /><br/>
+    <span>Data końcowa:</span><input type="date" name="To" value="2021-01-28" min="2021-01-28" /><br />
     <span>Wojewodztwo:</span>
     <select id="wojewodztwo" name="wojewodztwo">
         <option value="dolnoslaskie">dolnoslaskie</option>
@@ -39,8 +39,8 @@
         <option value="warminsko-mazurskie">warminsko-mazurskie</option>
         <option value="wielkopolskie">wielkopolskie</option>
         <option value="zachodniopomorskie">zachodniopomorskie</option>
-    </select><br/><br/>
-    <input type="submit" value="Wyszukaj">
+    </select><br /><br />
+    <input type="submit" value="Filtruj dane">
 </h4>
 
         <table  style="position: relative;" class="table table-bordered table-hover;">

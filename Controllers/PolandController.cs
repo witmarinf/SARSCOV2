@@ -59,8 +59,6 @@ namespace GooglePie.Controllers
                             sql_data_reader["a"].ToString(),
                             sql_data_reader["b"].ToString(),
                             sql_data_reader["c"]
-
-
                         });
                         }
                     }

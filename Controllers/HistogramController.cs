@@ -21,17 +21,16 @@ namespace SARSCOV2.Controllers
         }
 
         [HttpPost]
-        public JsonResult AjaxMethod(DateTime start, DateTime stop, String wojewodztwo)
+        public JsonResult AjaxMethod(DateTime start, DateTime stop, string wojewodztwo)
+        //public JsonResult AjaxMethod(string start, string stop, string wojewodztwo)
         {
-            string query = "SELECT zgony FROM woj_target WHERE wojewodztwo =@wojewodztwo  AND " +
-                "stan_rekordu_na BETWEEN " +
-                "@start AND @stop";
+            string query = "SELECT stan_rekordu_na ,zgony FROM woj_target WHERE wojewodztwo =@wojewodztwo  AND " +
+                "stan_rekordu_na BETWEEN @start AND @stop";
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
             List<object> chart_data = new List<object>();
-            chart_data.Add(new object[]
-                        {  //"stan_rekordu_na",
-                            "zgony"
-
+                        chart_data.Add(new object[]
+                        {  "zgony"
+                           
                         });
             using (SqlConnection connection = new SqlConnection(constructor))
             {
@@ -47,19 +46,16 @@ namespace SARSCOV2.Controllers
                     {
                         while (sql_data_reader.Read())
                         {
-                            chart_data.Add(new object[]
-                        {
-                           // sql_data_reader["stan_rekordu_na"].ToString(),
-
-                            sql_data_reader["zgony"]
-
-                        });
+                            chart_data.Add(new object[]{ 
+                                sql_data_reader["zgony"]}
+                            
+                            );
                         }
                     }
                     connection.Close();
                 }
             }
-            return Json(chart_data);
+            return Json(chart_data, JsonRequestBehavior.AllowGet);
         }
     }
 }

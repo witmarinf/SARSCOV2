@@ -31,13 +31,13 @@ namespace SARSCOV2.Controllers
                 query = "SELECT stan_rekordu_na, SUM(liczba_testow_z_wynikiem_negatywnym) "
                   + " AS liczba_testow_z_wynikiem_negatywnym "
                   + " , SUM(liczba_testow_z_wynikiem_pozytywnym) "
-                  + " AS liczba_testow_z_wynikiem_pozytywnym FROM WojZgonyAllView "
+                  + " AS liczba_testow_z_wynikiem_pozytywnym FROM WojInfoAllView "
                   + " group by stan_rekordu_na ";
             }
             else
             {
                 query = "SELECT stan_rekordu_na, liczba_testow_z_wynikiem_negatywnym,"
-                  + " liczba_testow_z_wynikiem_pozytywnym FROM WojZgonyAllView "
+                  + " liczba_testow_z_wynikiem_pozytywnym FROM WojInfoAllView "
                   + " WHERE wojewodztwo=@wojewodztwo ";
             }
             string constructor = ConfigurationManager.ConnectionStrings["C2"].ConnectionString;
