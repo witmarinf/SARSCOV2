@@ -9,6 +9,8 @@ using System;
 
 namespace SARSCOV2.Controllers
 {
+    //[Authorize(Roles = "Manager, Administrator")]
+    [Authorize(Roles = "admin, manager, student")]
     public class HistogramController : Controller
     {
         DBEntities db = new DBEntities();

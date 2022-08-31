@@ -8,6 +8,7 @@ using SARSCOV2.ModelsDB;
 
 namespace SARSCOV2.Controllers
 {
+    [Authorize(Roles = "admin, manager")]
     public class PowController : Controller
     {
         readonly DBEntities db = new DBEntities();

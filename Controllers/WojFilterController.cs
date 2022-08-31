@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace SARSCOV2.Controllers
 {
+    [Authorize(Roles = "admin, manager, student")]
     public class WojFilterController : Controller
     {
         private DBEntities db = new DBEntities();

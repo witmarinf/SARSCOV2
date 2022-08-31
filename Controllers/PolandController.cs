@@ -9,6 +9,7 @@ using SARSCOV2.ModelsDB;
 
 namespace GooglePie.Controllers
 {
+    [Authorize(Roles = "admin, manager, student")]
     public class PolandController : Controller
     {
         readonly DBEntities db = new DBEntities();

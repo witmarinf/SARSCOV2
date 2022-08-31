@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace SARSCOV2.Controllers
 {
+    [Authorize(Roles = "admin, manager, student")]
     public class PowFilterController : Controller
     {
         readonly DBEntities db = new DBEntities();

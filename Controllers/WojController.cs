@@ -9,6 +9,7 @@ using SARSCOV2.ModelsDB;
 
 namespace SARSCOV2.Controllers
 {
+    [Authorize(Roles = "admin, manager")]
     public class WojController : Controller
     {
         readonly DBEntities db = new DBEntities();

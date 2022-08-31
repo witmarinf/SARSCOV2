@@ -157,6 +157,7 @@ namespace SARSCOV2.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        //[Authorize(Roles = "admin, manager")]
         public ActionResult Register()
         {
             List<SelectListItem> list = new List<SelectListItem>();
