@@ -17,6 +17,7 @@ namespace SARSCOV2.Controllers
         {
             var wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
             ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
+            
             return View();
         }
 
@@ -55,7 +56,8 @@ namespace SARSCOV2.Controllers
                     connection.Close();
                 }
             }
-            return Json(chart_data, JsonRequestBehavior.AllowGet);
+            //return Json(chart_data.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(chart_data);
         }
     }
 }
