@@ -33,6 +33,7 @@ namespace SARSCOV2.Controllers
                 _roleManager = value;
             }
         }
+       
         [Authorize(Roles = "admin")]
         // GET: Role
         public ActionResult Index()

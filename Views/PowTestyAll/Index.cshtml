@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!--PowTestyAll ZOOM-->
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type='text/javascript'>
+    google.charts.load('current', { 'packages': ['annotationchart'] });
+
+    google.charts.setOnLoadCallback(function () {
+        drawChart();
+        $("#powiat_miasto").on("change", function () {
+            drawChart();
+        });
+    });
+
+    function drawChart() {
+
+    var powiat_miasto = $("#powiat_miasto option:selected").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/PowTestyAll/AjaxMethod",
+        data: "{powiat_miasto: '" + powiat_miasto + "'}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (dt) {
+
+            for (var i = 0; i < dt.length; i++)
+                dt[i][0] = new Date(dt[i][0]);
+
+            var data = google.visualization.arrayToDataTable(dt);
+
+            var options = {
+                displayAnnotations: false,
+                height: 400
+            };
+
+            var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        },
+        failure: function (dt) {
+            alert(dt.d);
+        },
+        error: function (dt) {
+            alert(dt.d);
+        }
+    });
+    }
+</script>
+
+@using (Html.BeginForm("AjaxMethod", "PowZgonyAll", FormMethod.Post))
+{
+    <h4>Testy według 10-ciu największych miast w Polsce</h4>
+
+    @Html.DropDownList("powiat_miasto", (SelectList)ViewBag.powiat_miasto, new { @class = "form-control", style = "width:300px; height:35px;" })
+
+    <div id="chart_div">
+    </div>
+}
+
+
+

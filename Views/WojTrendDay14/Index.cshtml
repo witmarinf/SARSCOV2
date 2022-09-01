@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!--WojTrendDay14-->
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.setOnLoadCallback(function () {
+        drawChart();
+        $("#wojewodztwo").on("change", function () {
+            drawChart();
+        });
+    });
+
+    function drawChart() {
+
+        var wojewodztwo = $("#wojewodztwo option:selected").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/WojTrendDay14/AjaxMethod",
+            data: "{wojewodztwo: '" + wojewodztwo + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (dt) {
+                var data = google.visualization.arrayToDataTable(dt);
+
+                var options = {
+                    legend: {
+                        position: 'bottom',
+                        alignment: 'center',
+                        orientation: 'vertical',
+                    },
+                    vAxis: { title: 'ilość przypadków' },
+                    hAxis: { title: 'data dnia' },
+                    seriesType: 'bars',
+                    series: { 5: { type: 'line' } }
+                };
+                chart = new google.visualization.ComboChart(document.getElementById('chart'));
+                chart.draw(data, options);
+            },
+            failure: function (dt) {
+                alert(dt.d);
+            },
+            error: function (dt) {
+                alert(dt.d);
+            }
+        });
+    }
+</script>
+
+@using (Html.BeginForm("AjaxMethod", "WojTrendDay14", FormMethod.Post))
+{   <center><h4>Trend dzienny zgonów dla Polski i województw - ostatnie 14 dni</h4></center>
+    @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class="form-control",style="width:150px; height:35px;"})
+    <div id="chart" style="width: 1000px; height: 600px; border: 1px solid;">
+    </div>
+}
+

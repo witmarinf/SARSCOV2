@@ -1,0 +1,148 @@
+﻿@model IEnumerable<SARSCOV2.ModelsDB.pow_target>
+
+@{
+    ViewBag.Title = "RaportWoj";
+}
+
+<h2>Raport wg. 10-ciu największych miast w Polsce z uwzględnieniem miesięcy</h2>
+
+@using (Html.BeginForm("RaportWoj", "Woj", FormMethod.Get))
+{
+    @Html.Label("wojewodztwo: ")
+    @Html.DropDownList("wojewodztwo", new MultiSelectList(ViewBag.miasto))
+
+    @Html.Label("rok: ")
+    @Html.DropDownList("rok", new SelectList(ViewBag.rok))
+
+    @Html.Label("miesiąc: ")
+    @Html.DropDownList("miesiac", new SelectList(ViewBag.miesiac))
+
+    <input type="submit" value="wyszukaj" />
+
+    <!--dane wazne-->
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>dane od dnia:</th>
+            <td>@Model.Min(model => model.stan_rekordu_na)</td>
+        </tr>
+        <tr>
+            <th>dane do dnia:</th>
+            <td>@Model.Max(model => model.stan_rekordu_na)</td>
+        </tr>
+
+        @{int RowNo = 0;}
+        @foreach (var item in Model)
+        { RowNo++; }
+        <tr>
+            <th>liczba rekordów w danym okresie:</th>
+            <td>@RowNo </td>
+        </tr>
+    </table>
+
+
+
+    <br />
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tbody>
+            <tr>
+                <th></th>
+                <th>Suma</th>
+                <th>Minimum</th>
+                <th>Średnia</th>
+                <th>Maksimum</th>
+            </tr>
+
+            <tr>
+                <th>liczba przypadków</th>
+                <td>@Model.Sum(model => model.liczba_przypadkow)</td>
+                <td>@Model.Min(model => model.liczba_przypadkow)</td>
+                <td>@((int?)Model.Average(model => model.liczba_przypadkow))</td>
+                <td>@Model.Max(model => model.liczba_przypadkow)</td>
+            </tr>
+
+            <tr>
+                <th>zgony</th>
+                <td>@Model.Sum(model => model.zgony)</td>
+                <td>@Model.Min(model => model.zgony)</td>
+                <td>@((int?)Model.Average(model => model.zgony))</td>
+                <td>@Model.Max(model => model.zgony)</td>
+            </tr>
+
+            <tr>
+                <th>zgony w wyniku covid bez chorób współistniejących</th>
+                <td>@Model.Sum(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)</td>
+                <td>@Model.Min(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)</td>
+                <td>@((int?)Model.Average(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych))</td>
+                <td>@Model.Max(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)</td>
+            </tr>
+
+            <tr>
+                <th>zgony w wyniku covid i chorób współistniejących</th>
+                <td>@Model.Sum(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)</td>
+                <td>@Model.Min(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)</td>
+                <td>@((int?)Model.Average(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych))</td>
+                <td>@Model.Max(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)</td>
+            </tr>
+
+            <tr>
+                <th>liczba zlecen</th>
+                <td>@Model.Sum(model => model.liczba_zlecen_poz)</td>
+                <td>@Model.Min(model => model.liczba_zlecen_poz)</td>
+                <td>@((int?)Model.Average(model => model.liczba_zlecen_poz))</td>
+                <td>@Model.Max(model => model.liczba_zlecen_poz)</td>
+            </tr>
+
+            <tr>
+                <th>liczba ozdrowieńców</th>
+                <td>@Model.Sum(model => model.liczba_ozdrowiencow)</td>
+                <td>@Model.Min(model => model.liczba_ozdrowiencow)</td>
+                <td>@((int?)Model.Average(model => model.liczba_ozdrowiencow))</td>
+                <td>@Model.Max(model => model.liczba_ozdrowiencow)</td>
+            </tr>
+
+            <tr>
+                <th>liczba osób objętych kwarantanną</th>
+                <td>@Model.Sum(model => model.liczba_osob_objetych_kwarantanna)</td>
+                <td>@Model.Min(model => model.liczba_osob_objetych_kwarantanna)</td>
+                <td>@((int?)Model.Average(model => model.liczba_osob_objetych_kwarantanna))</td>
+                <td>@Model.Max(model => model.liczba_osob_objetych_kwarantanna)</td>
+            </tr>
+
+            <tr>
+                <th>liczba wykonanych testów</th>
+                <td>@Model.Sum(model => model.liczba_wykonanych_testow)</td>
+                <td>@Model.Min(model => model.liczba_wykonanych_testow)</td>
+                <td>@((int?)Model.Average(model => model.liczba_wykonanych_testow))</td>
+                <td>@Model.Max(model => model.liczba_wykonanych_testow)</td>
+            </tr>
+
+            <tr>
+                <th>liczba wykonanych testów z wynikiem pozytywnym</th>
+                <td>@Model.Sum(model => model.liczba_testow_z_wynikiem_pozytywnym)</td>
+                <td>@Model.Min(model => model.liczba_testow_z_wynikiem_pozytywnym)</td>
+                <td>@((int?)Model.Average(model => model.liczba_testow_z_wynikiem_pozytywnym))</td>
+                <td>@Model.Max(model => model.liczba_testow_z_wynikiem_pozytywnym)</td>
+            </tr>
+
+            <tr>
+                <th>liczba wykonanych testów z wynikiem negatywnym</th>
+                <td>@Model.Sum(model => model.liczba_testow_z_wynikiem_negatywnym)</td>
+                <td>@Model.Min(model => model.liczba_testow_z_wynikiem_negatywnym)</td>
+                <td>@((int?)Model.Average(model => model.liczba_testow_z_wynikiem_negatywnym))</td>
+                <td>@Model.Max(model => model.liczba_testow_z_wynikiem_negatywnym)</td>
+            </tr>
+
+            <tr>
+                <th>liczba pozostałych testów</th>
+                <td>@Model.Sum(model => model.liczba_pozostalych_testow)</td>
+                <td>@Model.Min(model => model.liczba_pozostalych_testow)</td>
+                <td>@((int?)Model.Average(model => model.liczba_pozostalych_testow))</td>
+                <td>@Model.Max(model => model.liczba_pozostalych_testow)</td>
+            </tr>
+        </tbody>
+        <thead />
+
+    </table>
+
+}

@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!--PowLastDayAvg-->
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    google.charts.load('current', { 'packages': ['annotationchart'] });
+    google.charts.setOnLoadCallback(function () {
+        drawChart();
+        $("#stan_rekordu_na").on("change", function () {
+            drawChart();
+        });
+    });
+
+    function drawChart() {
+
+        var stan_rekordu_na = $("#stan_rekordu_na option:selected").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/PowLastDayAvg/AjaxMethod",
+            data: "{stan_rekordu_na: '" + stan_rekordu_na + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                var data = google.visualization.arrayToDataTable(r);
+
+                var options = {
+                    title: 'Zgony w największych miastach - dane z ostatniego dnia aktualizacji',
+                    vAxis: { title: 'ilość' },
+                    hAxis: { title: 'miasto' },
+                    seriesType: 'bars',
+                    series: { 2: { type: 'line' } }
+                };
+                chart = new google.visualization.ComboChart($("#chart1")[0]);
+                chart.draw(data, options);
+            },
+            failure: function (r) {
+                alert(r.d);
+            },
+            error: function (r) {
+                alert(r.d);
+            }
+        });
+    }
+</script>
+
+
+
+@using (Html.BeginForm("AjaxMethod", "PowLastDayAvg", FormMethod.Post))
+{
+    @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:300px; height:35px;" })
+
+    <div id="chart1" style="width: auto; height: 500px;">
+    </div>
+}
+

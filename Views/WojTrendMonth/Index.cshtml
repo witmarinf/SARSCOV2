@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!--WojTrendMonth-->
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.setOnLoadCallback(function () {
+        drawChart();
+        $("#wojewodztwo").on("change", function () {
+            drawChart();
+        });
+    });
+
+    function drawChart() {
+        var wojewodztwo = $("#wojewodztwo option:selected").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/WojTrendMonth/AjaxMethod",
+            data: "{wojewodztwo: '" + wojewodztwo + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                var data = google.visualization.arrayToDataTable(r);
+
+                options = {
+                    is3D: true,
+                    height: 400 ,
+                    legend: {
+                        position: 'bottom',
+                        alignment: 'center',
+                        orientation: 'vertical',
+                    },
+                    isStacked: true,
+                };
+
+                chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+                chart.draw(data, options);
+            },
+            failure: function (r) {
+                alert(r.d);
+            },
+            error: function (r) {
+                alert(r.d);
+            }
+        });
+    }
+</script>
+
+@using (Html.BeginForm("AjaxMethod", "WojTrendMonth", FormMethod.Post))
+{
+    @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control", style = "width:300px; height:35px;" })
+    <h4>Zgony według miesięcy</h4>
+    <div id="chart" style="border: 1px solid;">
+    </div>
+    <div>
+        <b>LEGENDA:</b><br/>
+        <b>POLSKA</b> - sumaryczny wynik dla województw <br/>
+        <b>AVG</b> - średni wynik dla województw
+    </div>
+}

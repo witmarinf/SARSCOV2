@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Indexf";
+}
+
+<!--liczba osób, których wynik w ciągu ostatniej doby był negatywny-->
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {
+        'packages': ['geochart'],
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+    });
+
+    google.charts.setOnLoadCallback(
+        function () {
+            drawRegionsMap();
+            $("#stan_rekordu_na").on("change", function () {
+                drawRegionsMap();
+            });
+        });
+
+    function drawRegionsMap() {
+
+        var stan_rekordu_na = $("#stan_rekordu_na option:selected").val();
+
+        $.ajax({
+            type: "POST",
+            height: 400,
+            url: "/Poland/AjaxMethodf",
+            data: "{stan_rekordu_na: '" + stan_rekordu_na + "'}",
+            isStacked: true,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (dt) {
+                var maksimum = Math.max(dt);
+                var data = google.visualization.arrayToDataTable(dt);
+                var options = {
+                    region: "PL",
+                    height: 400,
+                    resolution: "provinces",
+                    datalessRegionColor: 'transparent',
+                    displayMode: 'regions',
+
+                    colorAxis: {
+                        minValue: 0,
+                        maxValue: maksimum
+                    }
+                }
+                var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+                chart.draw(data, options);
+            },
+            failure: function (dt) {
+                alert(dt.d);
+            },
+            error: function (dt) {
+                alert(dt.d);
+            }
+        });
+    }
+</script>
+
+
+@using (Html.BeginForm("AjaxMethodf", "Poland", FormMethod.Post))
+{
+    <h4>Testy z wynikiem negatywnym z ostatniej doby według raportów dziennych</h4>
+    @Html.Label("Wybierz datę dnia: ")
+    @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:150px; height:35px;" })
+
+    <div id="regions_div"></div>
+}
+

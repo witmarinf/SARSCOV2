@@ -1,0 +1,320 @@
+﻿@model IEnumerable<SARSCOV2.ModelsDB.pow_target>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <style>
+        th div {
+            transform: rotate(270deg);
+            height: 200px;
+            width: 200px;
+            padding: 0px 0px 0px 0px;
+        }
+    </style>
+</head>
+<h2>Info</h2>
+<!--dane wazne-->
+<table class="table table-bordered table-hover;">
+        <tr>
+            <th>data pierwszej aktualizacji:</th>
+            <td>@Model.Min(model => model.stan_rekordu_na)</td>
+        </tr>
+        <tr>
+
+            <th>data ostatniej aktualizacji:</th> 
+            <td>@Model.Max(model => model.stan_rekordu_na)</td>
+  
+
+            @{int RowNo = 0;}
+            @foreach (var item in Model)
+            { RowNo++; }
+         <tr>
+            <th>liczba rekordów:</th>
+            <td>@RowNo </td>
+    </tr>
+
+</table>
+
+<!--dane-->
+
+<p><b>Dane dzienne z poszczególnych miast</b></p>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            <div>
+                 data</div>
+                <!-- @Html.DisplayNameFor(model => model.stan_rekordu_na) -->
+        </th>
+
+        <th> <div>akcja</div></th>
+
+        <th>
+            <div>miasto</div>
+            <!--@Html.DisplayNameFor(model => model.powiat_miasto) -->
+
+        </th>
+
+        <th>
+            <div>liczba przypadków</div>
+            <!--@Html.DisplayNameFor(model => model.liczba_przypadkow)-->
+
+        </th>
+
+
+
+        <th>
+            <div> zgony </div>
+            <!--@Html.DisplayNameFor(model => model.zgony)-->
+
+        </th>
+
+        <th>
+            <div> zgony w wyniku covid bez chorób współistniejących </div>
+            <!--@Html.DisplayNameFor(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)-->
+
+        </th>
+
+        <th>
+            <div> zgony w wyniku covid i chorób współistniejących </div>
+
+            <!--@Html.DisplayNameFor(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)-->
+
+
+        </th>
+
+        <th>
+            <div> liczba zlecen </div>
+
+            <!--   @Html.DisplayNameFor(model => model.liczba_zlecen_poz) -->
+        </th>
+
+        <th>
+            <div>liczba ozdrowieńców </div>
+
+            <!--    @Html.DisplayNameFor(model => model.liczba_ozdrowiencow) -->
+
+        </th>
+
+        <th>
+            <div> liczba osób objętych kwarantanną</div>
+
+            <!--  @Html.DisplayNameFor(model => model.liczba_osob_objetych_kwarantanna) -->
+        </th>
+        <th>
+            <div>liczba wykonanych testów</div>
+
+            <!--    @Html.DisplayNameFor(model => model.liczba_wykonanych_testow)  -->
+        </th>
+        <th>
+            <div>liczba wykonanych testów z wynikiem pozytywnym</div>
+
+            <!--  @Html.DisplayNameFor(model => model.liczba_testow_z_wynikiem_pozytywnym)  -->
+        </th>
+        <th>
+            <div>liczba testów z wynikiem negatywnym</div>
+            <!--   @Html.DisplayNameFor(model => model.liczba_testow_z_wynikiem_negatywnym) -->
+        </th>
+        <th>
+            <div>liczba pozostałych testów</div>
+
+            <!--   @Html.DisplayNameFor(model => model.liczba_pozostalych_testow)  -->
+        </th>
+
+    </tr>
+
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.stan_rekordu_na)
+                    </td>
+
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.powiat_miasto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.liczba_przypadkow)
+                    </td>
+
+                    <!--
+                    <td>
+                        @Html.DisplayFor(modelItem => item.liczba_na_10_tys_mieszkancow)
+                    </td>
+                        -->
+
+                    <td>
+
+                @Html.DisplayFor(modelItem => item.zgony)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.liczba_zlecen_poz)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.liczba_ozdrowiencow)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.liczba_osob_objetych_kwarantanna)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.liczba_wykonanych_testow)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.liczba_testow_z_wynikiem_pozytywnym)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.liczba_testow_z_wynikiem_negatywnym)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.liczba_pozostalych_testow)
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+
+
+
+        <!--
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.wojewodztwo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.powiat_miasto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.liczba_przypadkow)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.liczba_na_10_tys_mieszkancow)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.zgony)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.liczba_zlecen_poz)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.liczba_ozdrowiencow)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.liczba_osob_objetych_kwarantanna)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.liczba_wykonanych_testow)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.liczba_testow_z_wynikiem_pozytywnym)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.liczba_testow_z_wynikiem_negatywnym)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.liczba_pozostalych_testow)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.teryt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.stan_rekordu_na)
+                </th>
+                <th></th>
+            </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.wojewodztwo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.powiat_miasto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.liczba_przypadkow)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.liczba_na_10_tys_mieszkancow)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.zgony)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.zgony_w_wyniku_covid_bez_chorob_wspolistniejacych)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.zgony_w_wyniku_covid_i_chorob_wspolistniejacych)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.liczba_zlecen_poz)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.liczba_ozdrowiencow)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.liczba_osob_objetych_kwarantanna)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.liczba_wykonanych_testow)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.liczba_testow_z_wynikiem_pozytywnym)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.liczba_testow_z_wynikiem_negatywnym)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.liczba_pozostalych_testow)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.teryt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.stan_rekordu_na)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.id })
+                </td>
+            </tr>
+        }
+
+        </table>
+
+        -->

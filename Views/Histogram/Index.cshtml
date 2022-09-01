@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<!--Histogram-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.load('visualization', '1', { 'packages': ['corechart'] });
+    //google.load("current", { packages: ["corechart"] });
+
+    google.charts.setOnLoadCallback(function () {
+        $("Display").on('click', function () {
+            var obj = {};
+            obj.start = $("start").find("option:selected").val();
+            obj.stop = $("stop").find("option:selected").val();
+            obj.wojewodztwo = $("wojewodztwo").find("option:selected").val();
+            drawChart();
+        });
+    });
+
+    function drawChart() {
+
+        //var obj = {};
+        //obj.start = $("start").find("option:selected").val();
+        //obj.stop = $("stop").find("option:selected").val();
+        //obj.wojewodztwo = $("wojewodztwo").find("option:selected").val();
+
+        $.ajax({
+
+            url: "/Histogram/AjaxMethod",
+            /*data: {
+                data__value = JSON.stringify(
+                    {
+                        start: $("start").find("option:selected").val(),
+                        stop: $("stop").find("option:selected").val(),
+                        wojewodztwo: $("wojewodztwo").find("option:selected").val()
+                    })
+            },*/
+            //data: JSON.stringify(obj),
+
+            data: JSON.stringify({
+                start: $("start").find("option:selected").val(),
+                stop: $("stop").find("option:selected").val(),
+                wojewodztwo: $("wojewodztwo").find("option:selected").val()
+            }),
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function (r) {
+            var options = {
+                title: 'Histogram',
+            };
+            //newdata = data.reduce((arr, x) => arr.concat({ "zgony": x[0] }), [])
+            var data = google.visualization.arrayToDataTable(r.d);
+            var chart = new google.visualization.Histogram(document.getElementById('divChart'));
+            chart.draw(data, options);
+        }).fail(function (err) {
+            console.log(err);
+        }).error(function (err) {
+            console.log(err);
+        });
+    }
+       // });
+</script>
+
+
+@using (Html.BeginForm("AjaxMethod", "Histogram", FormMethod.Post))
+{
+    <h4>Histogram zgonów dla województw</h4>
+    @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class = "form-control" })
+    <span>Data początkowa:</span>
+    <input type="date" id="start" name="start" value="2021-01-28" min="2021-01-28" />
+    <span>Data końcowa:</span>
+    <input type="date" id="stop" name="stop" value="2021-01-28" min="2021-01-28" />
+    <input type="submit" id="Display" name="Display" value="Wyszukaj">
+    <br />
+    <div id="divChart">
+    </div>
+}

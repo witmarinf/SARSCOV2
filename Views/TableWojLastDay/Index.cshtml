@@ -1,0 +1,40 @@
+﻿@using System.Data
+@model DataSet
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Dane dla województw z ostatniego dnia aktualizacji</h3>
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>data</th>
+        <th>województwo</th>
+        <th>liczba osób objętych kwarantanną</th>
+        <th>liczba ozdrowieńców</th>
+        <th>liczba przypadków</th>
+        <th>liczba testów z wynikiem negatywnym</th>
+        <th>liczba testów z wynikiem pozytywnym</th>
+        <th>liczba wykonanych testów</th>
+        <th>liczba zlecen pozytywnych</th>
+        <th>zgony</th>
+        <th>zgony w wyniku covid bez chorób współistniejących</th>
+        <th>zgony w wyniku covid i chorób współistniejących</th>
+    </tr>
+    @foreach (DataRow row in Model.Tables[0].Rows)
+    {
+        <tr>
+            <td>@row["x"]</td>
+            <td>@row["b"]</td>
+            <td>@row["c"]</td>
+            <td>@row["d"]</td>
+            <td>@row["e"]</td>
+            <td>@row["f"]</td>
+            <td>@row["g"]</td>
+            <td>@row["h"]</td>
+            <td>@row["i"]</td>
+            <td>@row["j"]</td>
+            <td>@row["k"]</td>
+            <td>@row["l"]</td>
+        </tr>
+    }
+</table>

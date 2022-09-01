@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<!--PowTrendMonth-->
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.setOnLoadCallback(function () {
+        drawChart();
+        $("#powiat_miasto").on("change", function () {
+            drawChart();
+        });
+    });
+
+
+    //google.charts.load("visualization", "1", { packages: ["corechart"] });
+    //google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        var powiat_miasto = $("#powiat_miasto option:selected").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/PowTrendMonth/AjaxMethod",
+            data: "{powiat_miasto: '" + powiat_miasto + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                var data = google.visualization.arrayToDataTable(r);
+
+
+                options = {
+                    title: 'Trend miesieczny zgonów dla 10-ciu największych miast w Polsce',
+                    is3D: true,
+                    legend: {
+                        position: 'bottom',
+                        alignment: 'center',
+                        orientation: 'vertical',
+                    }
+                };
+
+                chart = new google.visualization.ColumnChart($("#chart")[0]);
+                chart.draw(data, options);
+            },
+            failure: function (r) {
+                alert(r.d);
+            },
+            error: function (r) {
+                alert(r.d);
+            }
+        });
+    }
+</script>
+
+@using (Html.BeginForm("AjaxMethod", "PowTrendMonth", FormMethod.Post))
+{
+    // @Html.Label("miasto: ")
+    @Html.DropDownList("powiat_miasto", (SelectList)ViewBag.powiat_miasto, new { @class = "form-control", style = "width:300px; height:35px;" })
+
+    <div id="chart" style="width: 1200px; height: 600px; border: 1px solid;">
+    </div>
+}

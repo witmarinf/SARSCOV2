@@ -18,7 +18,8 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44319</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -55,6 +56,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -168,9 +171,37 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HistogramController.cs" />
+    <Compile Include="Controllers\WojHistogramController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PolandController.cs" />
+    <Compile Include="Controllers\PowController.cs" />
+    <Compile Include="Controllers\PowFilterController.cs" />
+    <Compile Include="Controllers\PowFilterDropDawnController.cs" />
+    <Compile Include="Controllers\PowLastDayAvgController.cs" />
+    <Compile Include="Controllers\PowPieController.cs" />
+    <Compile Include="Controllers\PowRegressionDay14Controller.cs" />
+    <Compile Include="Controllers\PowTestyAllController.cs" />
+    <Compile Include="Controllers\PowTrendDay14Controller.cs" />
+    <Compile Include="Controllers\PowTrendMonthController.cs" />
+    <Compile Include="Controllers\PowZgonyAllController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\StatController.cs" />
+    <Compile Include="Controllers\TablePowLastDayController.cs" />
+    <Compile Include="Controllers\TableWojLastDayController.cs" />
+    <Compile Include="Controllers\WojController.cs" />
+    <Compile Include="Controllers\WojFilterController.cs" />
+    <Compile Include="Controllers\WojFilterDropdawnController.cs" />
+    <Compile Include="Controllers\WojLastDayAvgController.cs" />
+    <Compile Include="Controllers\WojPieController.cs" />
+    <Compile Include="Controllers\WojProcStatController.cs" />
+    <Compile Include="Controllers\WojRegressionDay14Controller.cs" />
+    <Compile Include="Controllers\WojTestyAllController.cs" />
+    <Compile Include="Controllers\WojTrendDay14Controller.cs" />
+    <Compile Include="Controllers\WojTrendMonthController.cs" />
+    <Compile Include="Controllers\WojZgonyAllController.cs" />
+    <Compile Include="Controllers\WojZgonyHistogramController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,7 +221,62 @@
     <Compile Include="Migrations\202112302218134_role.Designer.cs">
       <DependentUpon>202112302218134_role.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201091814312_formatdate.cs" />
+    <Compile Include="Migrations\202201091814312_formatdate.Designer.cs">
+      <DependentUpon>202201091814312_formatdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModelsDB\DBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\DBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\DBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\miasta.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\pow_filter_records_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\pow_source.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\pow_target.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\wojewodztwa.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\woj_filter_raport1_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\woj_filter_raport_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\woj_filter_records_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\woj_source.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\woj_stat_report_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\woj_target.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsDB\woj_targetView.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -207,8 +293,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="ModelsDB\DBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelsDB\DBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBModel.edmx</DependentUpon>
+      <LastGenOutput>DBModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="ModelsDB\DBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="ModelsDB\DBModel.edmx.diagram">
+      <DependentUpon>DBModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -231,8 +334,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -259,6 +360,63 @@
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Details.cshtml" />
     <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Pow\Create.cshtml" />
+    <Content Include="Views\Pow\Delete.cshtml" />
+    <Content Include="Views\Pow\Details.cshtml" />
+    <Content Include="Views\Pow\Edit.cshtml" />
+    <Content Include="Views\Pow\Index.cshtml" />
+    <Content Include="Views\Pow\Raport.cshtml" />
+    <Content Include="Views\Woj\Create.cshtml" />
+    <Content Include="Views\Woj\Delete.cshtml" />
+    <Content Include="Views\Woj\Details.cshtml" />
+    <Content Include="Views\Woj\Edit.cshtml" />
+    <Content Include="Views\Woj\Index.cshtml" />
+    <Content Include="Views\Woj\Raport.cshtml" />
+    <Content Include="Views\WojFilter\Index.cshtml" />
+    <Content Include="Views\PowFilter\Index.cshtml" />
+    <Content Include="Views\WojFilterDropdawn\Create.cshtml" />
+    <Content Include="Views\WojFilterDropdawn\Delete.cshtml" />
+    <Content Include="Views\WojFilterDropdawn\Details.cshtml" />
+    <Content Include="Views\WojFilterDropdawn\Edit.cshtml" />
+    <Content Include="Views\WojFilterDropdawn\Index.cshtml" />
+    <Content Include="Views\PowFilterDropDawn\Create.cshtml" />
+    <Content Include="Views\PowFilterDropDawn\Delete.cshtml" />
+    <Content Include="Views\PowFilterDropDawn\Details.cshtml" />
+    <Content Include="Views\PowFilterDropDawn\Edit.cshtml" />
+    <Content Include="Views\PowFilterDropDawn\Index.cshtml" />
+    <Content Include="Views\Woj\RaportWoj.cshtml" />
+    <Content Include="Views\Pow\RaportPow.cshtml" />
+    <Content Include="Views\PowPie\Index.cshtml" />
+    <Content Include="Views\WojPie\Index.cshtml" />
+    <Content Include="Views\Stat\Index.cshtml" />
+    <Content Include="Views\Poland\Indexc.cshtml" />
+    <Content Include="Views\Poland\Indexd.cshtml" />
+    <Content Include="Views\Poland\Indexe.cshtml" />
+    <Content Include="Views\Poland\Indexf.cshtml" />
+    <Content Include="Views\Poland\Indexg.cshtml" />
+    <Content Include="Views\Poland\Indexi.cshtml" />
+    <Content Include="Views\Poland\Indexh.cshtml" />
+    <Content Include="Views\Poland\Indexl.cshtml" />
+    <Content Include="Views\Poland\Indexk.cshtml" />
+    <Content Include="Views\Poland\Indexj.cshtml" />
+    <Content Include="Views\WojTrendMonth\Index.cshtml" />
+    <Content Include="Views\PowTrendMonth\Index.cshtml" />
+    <Content Include="Views\WojTrendDay14\Index.cshtml" />
+    <Content Include="Views\PowTrendDay14\Index.cshtml" />
+    <Content Include="Views\WojRegressionDay14\Index.cshtml" />
+    <Content Include="Views\PowRegressionDay14\Index.cshtml" />
+    <Content Include="Views\TableWojLastDay\Index.cshtml" />
+    <Content Include="Views\WojLastDayAvg\Index.cshtml" />
+    <Content Include="Views\PowLastDayAvg\Index.cshtml" />
+    <Content Include="Views\TablePowLastDay\Index.cshtml" />
+    <Content Include="Views\WojZgonyAll\Index.cshtml" />
+    <Content Include="Views\PowZgonyAll\Index.cshtml" />
+    <Content Include="Views\WojTestyAll\Index.cshtml" />
+    <Content Include="Views\PowTestyAll\Index.cshtml" />
+    <Content Include="Views\WojZgonyHistogram\Index.cshtml" />
+    <Content Include="Views\WojHistogram\Index.cshtml" />
+    <Content Include="Views\WojProcStat\Index.cshtml" />
+    <Content Include="Views\Histogram\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -289,6 +447,12 @@
     <EmbeddedResource Include="Migrations\202112302218134_role.resx">
       <DependentUpon>202112302218134_role.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201091814312_formatdate.resx">
+      <DependentUpon>202201091814312_formatdate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -308,7 +472,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51201</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44319/</IISUrl>
+          <IISUrl>http://localhost:44319/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:44319/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,0 +1,22 @@
+﻿@using System.Data
+@model DataSet
+@{
+    ViewBag.Title = "Index";
+}
+<h3>Informacje o aplikacji internetowej SARS-Cov2</h3>
+<br/>
+    @foreach (DataRow row in Model.Tables[0].Rows)
+    {
+    <table style="font-weight: bold;">
+    <tr><td>Dane dla województw: </td>
+        <td> &nbsp; @row["minw"] - @row["maxw"] </td>
+    </tr>
+    <tr>    
+        <td>Dane dla 10-ciu najwięszkych miast: </td><td> &nbsp;  @row["minp"] - @row["maxp"] </td>
+    </tr>
+    </table>
+    }
+<br/>
+Oznaczenie: <b>M</b> - mapa interaktywna Polski, <b>T</b> - tabela danych,  <b>W</b> - wykres interaktywny danych  
+
+    
