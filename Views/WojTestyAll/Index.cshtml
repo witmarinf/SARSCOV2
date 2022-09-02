@@ -18,7 +18,7 @@
 
     function drawChart() {
 
-       var wojewodztwo = $("#wojewodztwo option:selected").val();
+        var wojewodztwo = $("#wojewodztwo option:selected").val();
         $.ajax({
             type: "POST",
             url: "/WojTestyAll/AjaxMethod",
@@ -58,6 +58,12 @@
 
     <div id="chart_div">
     </div>
+
+    <span>LEGENDA:</span>
+    <br />
+    <span>POLSKA - dzienna suma wartości dla województw</span>
+    <br />
+    <span>AVG - dzienna średnia wartość dla województw</span>
 }
 
 

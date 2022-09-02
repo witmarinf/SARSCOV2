@@ -28,10 +28,13 @@ namespace SARSCOV2.Controllers
         {
             string query;
             if (string.Equals(wojewodztwo, "POLSKA")) {
-              query = "SELECT c, SUM(f) AS f, SUM(g) AS g FROM WojTrendMonthView GROUP BY c";
+            //  query = "SELECT c, SUM(f) AS f, SUM(g) AS g FROM WojTrendMonthView GROUP BY c";
+              query = "SELECT CONCAT(a,'/',b) as c, SUM(f) AS f, SUM(g) AS g FROM WojTrendMonthView GROUP BY b,a ORDER BY b,a";
+
             }
-            else if(string.Equals(wojewodztwo, "AVG")){ 
-              query = "SELECT c, AVG(f) AS f, AVG(g) AS g FROM WojTrendMonthView GROUP BY c";
+            else if(string.Equals(wojewodztwo, "AVG")){
+                //query = "SELECT c, AVG(f) AS f, AVG(g) AS g FROM WojTrendMonthView GROUP BY c";
+              query = "SELECT CONCAT(a,'/',b) as c, AVG(f) AS f, AVG(g) AS g FROM WojTrendMonthView GROUP BY b, a ORDER BY b, a";
             }
             else {
               query = "SELECT c,f,g FROM WojTrendMonthView WHERE wojewodztwo=@wojewodztwo";

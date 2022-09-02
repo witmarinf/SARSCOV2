@@ -17,6 +17,7 @@ namespace SARSCOV2.Controllers
         {
             List<string> wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
             wojewodztwo.Insert(0, "POLSKA");
+            wojewodztwo.Insert(1, "AVG");
             ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
             return View();
         }
@@ -34,6 +35,15 @@ namespace SARSCOV2.Controllers
                   + " AS liczba_testow_z_wynikiem_pozytywnym FROM WojInfoAllView "
                   + " group by stan_rekordu_na ";
             }
+            else if (string.Equals(wojewodztwo, "AVG"))
+            {
+                query = "SELECT stan_rekordu_na, AVG(liczba_testow_z_wynikiem_negatywnym) "
+                  + " AS liczba_testow_z_wynikiem_negatywnym "
+                  + " , AVG(liczba_testow_z_wynikiem_pozytywnym) "
+                  + " AS liczba_testow_z_wynikiem_pozytywnym FROM WojInfoAllView "
+                  + " group by stan_rekordu_na ";
+            }
+
             else
             {
                 query = "SELECT stan_rekordu_na, liczba_testow_z_wynikiem_negatywnym,"

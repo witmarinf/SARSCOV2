@@ -16,6 +16,7 @@ namespace SARSCOV2.Controllers
         {
             List<string> wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
             wojewodztwo.Insert(0, "POLSKA");
+            wojewodztwo.Insert(1, "AVG");
             ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
             return View();
         }
@@ -29,6 +30,14 @@ namespace SARSCOV2.Controllers
                 query = "SELECT stan_rekordu_na, SUM(zgony_w_wyniku_covid_bez_chorob_wspolistniejacych) "
                     + " AS zgony_w_wyniku_covid_bez_chorob_wspolistniejacych"
                     + " , SUM(zgony_w_wyniku_covid_i_chorob_wspolistniejacych) "
+                    + " AS zgony_w_wyniku_covid_i_chorob_wspolistniejacych "
+                    + " FROM WojInfoAllView group by stan_rekordu_na";
+            }
+            else if (string.Equals(wojewodztwo, "AVG"))
+            {
+                query = "SELECT stan_rekordu_na, AVG(zgony_w_wyniku_covid_bez_chorob_wspolistniejacych) "
+                    + " AS zgony_w_wyniku_covid_bez_chorob_wspolistniejacych"
+                    + " , AVG(zgony_w_wyniku_covid_i_chorob_wspolistniejacych) "
                     + " AS zgony_w_wyniku_covid_i_chorob_wspolistniejacych "
                     + " FROM WojInfoAllView group by stan_rekordu_na";
             }
