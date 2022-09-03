@@ -26,8 +26,10 @@
         obj.wojewodztwo = $("wojewodztwo").find("option:selected").val();
 
         $.ajax({
-
-            url: "/Histogram/AjaxMethod",
+            type: 'POST',
+            url: '/Histogram/AjaxMethod',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'JSON',
             /*
             data: JSON.stringify({
                 start: $("start").find("option:selected").val(),
@@ -35,9 +37,8 @@
                 wojewodztwo: $("wojewodztwo").find("option:selected").val()
             }),*/
             data: '{"start":"' + start + '","stop":"' + stop + '","wojewodztwo":"' + wojewodztwo + '"}',
-            type: "POST",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+
+
         }).done(function (r) {
             var options = {
                 title: 'Histogram',
