@@ -6,8 +6,11 @@
 
 <!--using (Html.BeginForm("Index", "TableWojLastDay", FormMethod.Post)){-->
 
-   <!--Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { (at)class = "form-control", style = "width:150px; height:35px;" })-->
-<h3>Dane dla województw z ostatniego dnia aktualizacji</h3>
+
+    <!--Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { (at)class = "form-control", style = "width:150px; height:35px;" })-->
+
+
+    <h3>Dane dla województw z ostatniego dnia aktualizacji</h3>
     <table class="table table-hover table-bordered">
         <tr>
             <th>data</th>
@@ -23,10 +26,11 @@
             <th>zgony w wyniku covid bez chorób współistniejących</th>
             <th>zgony w wyniku covid i chorób współistniejących</th>
         </tr>
+
         @foreach (DataRow row in Model.Tables[0].Rows)
         {
             <tr>
-                <td>@row["x"]</td>
+                <td>@row["stan_rekordu_na"]</td>
                 <td>@row["b"]</td>
                 <td>@row["c"]</td>
                 <td>@row["d"]</td>
@@ -40,5 +44,6 @@
                 <td>@row["l"]</td>
             </tr>
         }
+
+
     </table>
-<!--}-->
