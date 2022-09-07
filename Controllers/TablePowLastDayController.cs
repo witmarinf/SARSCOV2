@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace SARSCOV2.Controllers
 {
     public class TablePowLastDayController : Controller
-    {
+    {    //[Authorize(Roles = "admin, manager, student")]
         // GET: TablePowLastDay
         public ActionResult Index()
         {

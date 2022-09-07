@@ -8,17 +8,17 @@ using SARSCOV2.ModelsDB;
 
 namespace SARSCOV2.Controllers
 {
-    [Authorize(Roles = "admin, manager")]
+    
     public class PowController : Controller
     {
         readonly DBEntities db = new DBEntities();
-
+        //[Authorize(Roles = "admin, manager, student")]
         // GET: Pow
         public ActionResult Index()
         {
             return View(db.pow_target.ToList());
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Raport(string miasto, DateTime? start, DateTime? stop)
         {
             ViewBag.miasto = (from r in db.miasta select r.miasto);
@@ -31,7 +31,7 @@ namespace SARSCOV2.Controllers
             return View(model);
         }
 
-
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult RaportPow(string miasto, string rok, string miesiac)
         {
             ViewBag.miasto = (from r in db.miasta select r.miasto).OrderBy(r=>r);
@@ -52,7 +52,7 @@ namespace SARSCOV2.Controllers
 
 
 
-
+        //[Authorize(Roles = "admin, manager, student")]
         // GET: Pow/Details/5
         public ActionResult Details(int? id)
         {
@@ -68,12 +68,15 @@ namespace SARSCOV2.Controllers
             return View(pow_target);
         }
 
+
+        //[Authorize(Roles = "admin, manager, student")]
         // GET: Pow/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        //[Authorize(Roles = "admin, manager, student")]
         // POST: Pow/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -91,6 +94,7 @@ namespace SARSCOV2.Controllers
             return View(pow_target);
         }
 
+        //[Authorize(Roles = "admin, manager, student")]
         // GET: Pow/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -106,6 +110,9 @@ namespace SARSCOV2.Controllers
             return View(pow_target);
         }
 
+
+
+        //[Authorize(Roles = "admin, manager, student")]
         // POST: Pow/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

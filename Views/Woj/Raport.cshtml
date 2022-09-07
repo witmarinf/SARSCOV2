@@ -19,7 +19,7 @@
 
 <h2>Raport danych dla województw</h2>
 
-@using (Html.BeginForm("Raport", "Woj", FormMethod.Get))
+@using (Html.BeginForm("Raport", "Woj", FormMethod.Post))
 {
     <span>wojewodztwo: </span>@Html.DropDownList("wojewodztwo", new SelectList(ViewBag.wojewodztwo))
     <span>data początkowa: </span>

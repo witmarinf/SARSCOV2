@@ -10,6 +10,7 @@ namespace SARSCOV2.Controllers
     public class WojFilterController : Controller
     {
         private DBEntities db = new DBEntities();
+        //[Authorize(Roles = "admin, manager, student")]
         //GET: WojFilter
         public ActionResult Index()
         {

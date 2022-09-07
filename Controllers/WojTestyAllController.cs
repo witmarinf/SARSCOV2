@@ -12,6 +12,7 @@ namespace SARSCOV2.Controllers
     public class WojTestyAllController : Controller
     {
         readonly DBEntities db = new DBEntities();
+        //[Authorize(Roles = "admin, manager, student")]
 
         public ActionResult Index()
         {
@@ -21,6 +22,8 @@ namespace SARSCOV2.Controllers
             ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
             return View();
         }
+
+        //[Authorize(Roles = "admin, manager, student")]
 
         [HttpPost]
         public JsonResult AjaxMethod(string wojewodztwo)

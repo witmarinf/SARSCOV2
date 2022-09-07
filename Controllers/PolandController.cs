@@ -9,11 +9,12 @@ using SARSCOV2.ModelsDB;
 
 namespace GooglePie.Controllers
 {
-    [Authorize(Roles = "admin, manager, student")]
+    
     public class PolandController : Controller
     {
         readonly DBEntities db = new DBEntities();
 
+        //[Authorize(Roles = "admin, manager, student")]
         //Osoby objęte kwarantanną
         public ActionResult Indexc()
         {
@@ -31,7 +32,7 @@ namespace GooglePie.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethodc(string stan_rekordu_na)
         {
@@ -70,12 +71,12 @@ namespace GooglePie.Controllers
             return Json(chart_data);
         }
 
-        
-         
-        
+
+
+
 
         //liczba ozdrowieńców
-
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Indexd()
         {
 
@@ -92,7 +93,7 @@ namespace GooglePie.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethodd(string stan_rekordu_na)
         {
@@ -143,7 +144,7 @@ namespace GooglePie.Controllers
 
 
         //liczba osób, których poprzedniej doby wynik był pozytwny
-
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Indexe()
         {
 
@@ -160,7 +161,7 @@ namespace GooglePie.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethode(string stan_rekordu_na)
         {
@@ -209,8 +210,9 @@ namespace GooglePie.Controllers
 
 
 
- 
+
         //liczba osób z wynikiem negatywnym 
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Indexf()
         {
 
@@ -227,7 +229,7 @@ namespace GooglePie.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethodf(string stan_rekordu_na)
         {
@@ -277,7 +279,8 @@ namespace GooglePie.Controllers
 
 
 
-        //liczba osób, których wynik w ciągu ostatniej doby był pozytwny 
+        //liczba osób, których wynik w ciągu ostatniej doby był pozytwny
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Indexg()
         {
 
@@ -294,7 +297,7 @@ namespace GooglePie.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethodg(string stan_rekordu_na)
         {
@@ -339,6 +342,7 @@ namespace GooglePie.Controllers
 
 
         //liczba wykonanych testów w ciągu ostatniej doby
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Indexh()
         {
 
@@ -355,7 +359,7 @@ namespace GooglePie.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethodh(string stan_rekordu_na)
         {
@@ -406,7 +410,7 @@ namespace GooglePie.Controllers
 
 
         //liczba testów zleconych przez podstawową opiekę zdrowotną
-
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Indexi()
         {
 
@@ -423,7 +427,7 @@ namespace GooglePie.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethodi(string stan_rekordu_na)
         {
@@ -475,7 +479,7 @@ namespace GooglePie.Controllers
 
 
         //liczba zgonów
-
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Indexj()
         {
             var termin = (from r in db.woj_target
@@ -491,7 +495,7 @@ namespace GooglePie.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethodj(string stan_rekordu_na)
         {
@@ -530,11 +534,11 @@ namespace GooglePie.Controllers
             }
             return Json(chart_data);
         }
-         
 
 
 
 
+        //[Authorize(Roles = "admin, manager, student")]
         //zgony_w_wyniku_covid_bez_chorob_wspolistniejacych
         public ActionResult Indexk()
         {
@@ -553,7 +557,7 @@ namespace GooglePie.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethodk(string stan_rekordu_na)
         {
@@ -595,7 +599,7 @@ namespace GooglePie.Controllers
         }
 
 
-
+        //[Authorize(Roles = "admin, manager, student")]
         //zgony_w_wyniku_covid_bez_chorob_wspolistniejacych
         public ActionResult Indexl()
         {
@@ -612,7 +616,7 @@ namespace GooglePie.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethodl(string stan_rekordu_na)
         {

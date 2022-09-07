@@ -33,6 +33,7 @@
                         alignment: 'center',
                         orientation: 'vertical',
                     },
+                    isStacked: true,
                     vAxis: { title: 'ilość przypadków' },
                     hAxis: { title: 'data dnia' },
                     seriesType: 'bars',
@@ -54,7 +55,7 @@
 @using (Html.BeginForm("AjaxMethod", "WojTrendDay14", FormMethod.Post))
 {   <center><h4>Trend dzienny zgonów dla Polski i województw - ostatnie 14 dni</h4></center>
     @Html.DropDownList("wojewodztwo", (SelectList)ViewBag.wojewodztwo, new { @class="form-control",style="width:150px; height:35px;"})
-    <div id="chart" style="width: 1000px; height: 600px; border: 1px solid;">
+    <div id="chart" style="width: auto; height: 600px; border: 1px solid;">
     </div>
 }
 

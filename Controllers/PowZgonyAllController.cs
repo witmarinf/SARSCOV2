@@ -13,7 +13,7 @@ namespace SARSCOV2.Controllers
     public class PowZgonyAllController : Controller
     {
         readonly DBEntities db = new DBEntities();
-
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Index()
         {
             var powiat_miasto = (from r in db.miasta select r.miasto).OrderBy(r => r).ToList();
@@ -21,7 +21,7 @@ namespace SARSCOV2.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethod(string powiat_miasto)
         {

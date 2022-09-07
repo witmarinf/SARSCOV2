@@ -17,9 +17,6 @@
         });
     });
 
-
-    //google.charts.load("visualization", "1", { packages: ["corechart"] });
-    //google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
 
         var powiat_miasto = $("#powiat_miasto option:selected").val();
@@ -37,6 +34,7 @@
                 options = {
                     title: 'Trend miesieczny zgonów dla 10-ciu największych miast w Polsce',
                     is3D: true,
+                    isStacked: true,
                     legend: {
                         position: 'bottom',
                         alignment: 'center',
@@ -59,7 +57,6 @@
 
 @using (Html.BeginForm("AjaxMethod", "PowTrendMonth", FormMethod.Post))
 {
-    // @Html.Label("miasto: ")
     @Html.DropDownList("powiat_miasto", (SelectList)ViewBag.powiat_miasto, new { @class = "form-control", style = "width:300px; height:35px;" })
 
     <div id="chart" style="width: 1200px; height: 600px; border: 1px solid;">

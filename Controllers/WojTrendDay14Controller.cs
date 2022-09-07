@@ -14,6 +14,8 @@ namespace SARSCOV2.Controllers
         readonly DBEntities db = new DBEntities();
 
         // GET: WojTrendDay14
+        //[Authorize(Roles = "admin, manager, student")]
+
         public ActionResult Index()
         {
             List<string> wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).
@@ -22,6 +24,8 @@ namespace SARSCOV2.Controllers
             ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
             return View();
         }
+
+        //[Authorize(Roles = "admin, manager, student")]
 
         [HttpPost]
         public JsonResult AjaxMethod(string wojewodztwo)

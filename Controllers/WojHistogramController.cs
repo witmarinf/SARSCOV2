@@ -13,12 +13,16 @@ namespace SARSCOV2.Controllers
     {
         DBEntities db = new DBEntities();
 
+        //[Authorize(Roles = "admin, manager, student")]
+
         public ActionResult Index()
         {
             var wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
             ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
             return View();
         }
+
+        //[Authorize(Roles = "admin, manager, student")]
 
         [HttpPost]
         public JsonResult AjaxMethod(DateTime start, DateTime stop, String wojewodztwo)

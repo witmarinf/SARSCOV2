@@ -4,9 +4,9 @@
     ViewBag.Title = "RaportWoj";
 }
 <!--Raport wg. województw z uwzględnieniem miesięcy-->
-<h2>Raport wg. województw z uwzględnieniem miesięcy</h2>
+<h2>Raport danych wg. województw z uwzględnieniem miesięcy</h2>
 
-@using (Html.BeginForm("RaportWoj", "Woj", FormMethod.Get))
+@using (Html.BeginForm("RaportWoj", "Woj", FormMethod.Post))
 {
     <span>wojewodztwo</span>@Html.DropDownList("wojewodztwo", new MultiSelectList(ViewBag.wojewodztwo))
     <span>rok</span>@Html.DropDownList("rok", new SelectList(ViewBag.rok))

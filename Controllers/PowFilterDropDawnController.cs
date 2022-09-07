@@ -15,6 +15,7 @@ namespace SARSCOV2.Controllers
     {
         // GET: PowFilterDropdawn
         readonly DBEntities db = new DBEntities();
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Index(string miasto, string rok, string miesiac)
         {
             ViewBag.miasto = (from r in db.miasta select r.miasto).OrderBy(r=>r);

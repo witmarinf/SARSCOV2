@@ -7,10 +7,11 @@ using System.Web.Mvc;
 
 namespace SARSCOV2.Controllers
 {
-    [Authorize(Roles = "admin, manager, student")]
+    
     public class PowFilterController : Controller
     {
         readonly DBEntities db = new DBEntities();
+        //[Authorize(Roles = "admin, manager, student")]
         // GET: PowFilter
         public ActionResult Index()
         {

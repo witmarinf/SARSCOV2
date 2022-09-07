@@ -13,8 +13,9 @@ namespace SARSCOV2.Controllers
     {
         readonly DBEntities db = new DBEntities();
 
-        // GET: WojRegressionDay14
+        //[Authorize(Roles = "admin, manager, student")]
 
+        // GET: WojRegressionDay14
         public ActionResult Index()
         {
             List<string> wojewodztwo = (from r in db.wojewodztwa select r.wojewodztwo).OrderBy(r => r).ToList();
@@ -23,6 +24,8 @@ namespace SARSCOV2.Controllers
 
             return View();
         }
+
+        //[Authorize(Roles = "admin, manager, student")]
 
         [HttpPost]
         public JsonResult AjaxMethod(string wojewodztwo)

@@ -12,6 +12,8 @@ namespace SARSCOV2.Controllers.Controllers
     {
         DBEntities db = new DBEntities();
 
+
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Index()
         {
             List<string> wojewodztwo = (from r in db.woj_target select r.wojewodztwo)
@@ -22,6 +24,8 @@ namespace SARSCOV2.Controllers.Controllers
             return View();
         }
 
+
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethod(string wojewodztwo)
         {

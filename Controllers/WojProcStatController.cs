@@ -9,10 +9,14 @@ namespace SARSCOV2.Controllers
 {
     public class WojProcStatController : Controller
     {
+        //[Authorize(Roles = "admin, manager, student")]
+
         public ActionResult Index()
         {
             return View();
         }
+        
+        //[Authorize(Roles = "admin, manager, student")]
 
         [HttpPost]
         public JsonResult AjaxMethod(DateTime start, DateTime stop, string x)

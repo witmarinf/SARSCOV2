@@ -9,17 +9,17 @@ using SARSCOV2.ModelsDB;
 
 namespace SARSCOV2.Controllers
 {
-    [Authorize(Roles = "admin, manager")]
+    //[Authorize(Roles = "admin, manager")]
     public class WojController : Controller
     {
         readonly DBEntities db = new DBEntities();
-
+        //[Authorize(Roles = "admin, manager, student")]
         // GET: Woj
         public ActionResult Index()
         {
             return View(db.woj_target.ToList());
         }
-        
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Raport(string wojewodztwo, DateTime? start, DateTime? stop)
         {
             ViewBag.wojewodztwo = new List<string>(from r in db.woj_target select r.wojewodztwo).Distinct().OrderBy(r=>r);
@@ -34,7 +34,7 @@ namespace SARSCOV2.Controllers
 
             return View(model);
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult RaportWoj(string wojewodztwo, string rok, string miesiac)
         {
             ViewBag.wojewodztwo = new List<string>(from r in db.woj_target select r.wojewodztwo).Distinct().OrderBy(r => r);
@@ -52,7 +52,7 @@ namespace SARSCOV2.Controllers
             return View(model);
         }
 
-
+        //[Authorize(Roles = "admin, manager, student")]
         // GET: Woj/Details/5
         public ActionResult Details(int? id)
         {
@@ -74,7 +74,7 @@ namespace SARSCOV2.Controllers
             return View();
         }
 
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,wojewodztwo,liczba_przypadkow,liczba_na_10_tys_mieszkancow,zgony,zgony_w_wyniku_covid_bez_chorob_wspolistniejacych,zgony_w_wyniku_covid_i_chorob_wspolistniejacych,liczba_zlecen_poz,liczba_ozdrowiencow,liczba_osob_objetych_kwarantanna,liczba_wykonanych_testow,liczba_testow_z_wynikiem_pozytywnym,liczba_testow_z_wynikiem_negatywnym,liczba_pozostalych_testow,teryt,stan_rekordu_na")] woj_target woj_target)
@@ -89,6 +89,7 @@ namespace SARSCOV2.Controllers
             return View(woj_target);
         }
 
+        //[Authorize(Roles = "admin, manager, student")]
         // GET: Woj/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -104,7 +105,7 @@ namespace SARSCOV2.Controllers
             return View(woj_target);
         }
 
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,wojewodztwo,liczba_przypadkow,liczba_na_10_tys_mieszkancow,zgony,zgony_w_wyniku_covid_bez_chorob_wspolistniejacych,zgony_w_wyniku_covid_i_chorob_wspolistniejacych,liczba_zlecen_poz,liczba_ozdrowiencow,liczba_osob_objetych_kwarantanna,liczba_wykonanych_testow,liczba_testow_z_wynikiem_pozytywnym,liczba_testow_z_wynikiem_negatywnym,liczba_pozostalych_testow,teryt,stan_rekordu_na")] woj_target woj_target)

@@ -12,7 +12,7 @@ namespace SARSCOV2.Controllers
     {
 
         readonly DBEntities db = new DBEntities();
-
+        //[Authorize(Roles = "admin, manager, student")]
         // GET: PowTrendDay14
         public ActionResult Index()
         {
@@ -21,7 +21,7 @@ namespace SARSCOV2.Controllers
             
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethod(string powiat_miasto)
         {

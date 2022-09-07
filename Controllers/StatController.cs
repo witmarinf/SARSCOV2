@@ -7,7 +7,7 @@ namespace SARSCOV2.Controllers
 {
     public class StatController : Controller
     {
-
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Index()
         {
             DataSet ds = new DataSet();

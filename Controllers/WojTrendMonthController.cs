@@ -11,6 +11,7 @@ namespace SARSCOV2.Controllers
         public class WojTrendMonthController : Controller
         {
         readonly DBEntities db = new DBEntities();
+        //[Authorize(Roles = "admin, manager, student")]
 
         public ActionResult Index()
             {
@@ -22,6 +23,8 @@ namespace SARSCOV2.Controllers
                 ViewBag.wojewodztwo = new SelectList(wojewodztwo, "wojewodztwo");
                 return View();
             }
+
+        //[Authorize(Roles = "admin, manager, student")]
 
         [HttpPost]
         public JsonResult AjaxMethod(string wojewodztwo)
@@ -60,20 +63,18 @@ namespace SARSCOV2.Controllers
                             while (sql_data_reader.Read())
                             {
                                 chart_data.Add(new object[]
-                            { 
+                            {
                             sql_data_reader["c"].ToString(),
                             sql_data_reader["f"],
                             sql_data_reader["g"]
                             });
                             }
                         }
-
                         connection.Close();
                     }
-                }
+            }
                 return Json(chart_data);
             }
-
         }
     }
 

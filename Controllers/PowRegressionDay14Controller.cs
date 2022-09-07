@@ -12,14 +12,14 @@ namespace SARSCOV2.Controllers
     {
         readonly DBEntities db = new DBEntities();
         // GET: PowRegressionDay14
-
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Index()
         {
             var powiat_miasto = (from r in db.miasta select r.miasto).OrderBy(r => r).ToList();
             ViewBag.powiat_miasto = new SelectList(powiat_miasto, "powiat_miasto");
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethod(string powiat_miasto)
         {
@@ -57,6 +57,7 @@ namespace SARSCOV2.Controllers
             return Json(chart_data);
         }
 
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethod1(string powiat_miasto)
         {

@@ -13,6 +13,7 @@ namespace SARSCOV2.Controllers
         readonly DBEntities db = new DBEntities();
         // GET: PowLastDayAvg
 
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Index()
         {
             var termin = (from r in db.woj_target

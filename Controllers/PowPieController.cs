@@ -14,6 +14,7 @@ namespace SARSCOV2.Controllers
         readonly DBEntities db = new DBEntities();
 
         // GET: WojPie
+        //[Authorize(Roles = "admin, manager, student")]
         public ActionResult Index()
         {
             var termin = (from r in db.pow_target
@@ -29,7 +30,7 @@ namespace SARSCOV2.Controllers
 
             return View();
         }
-
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethod(string stan_rekordu_na)
         {

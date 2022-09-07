@@ -11,6 +11,9 @@ namespace SARSCOV2.Controllers
     public class WojLastDayAvgController : Controller
     {
         readonly DBEntities db = new DBEntities();
+
+        //[Authorize(Roles = "admin, manager, student")]
+
         // GET: WojLastDayAvg
         public ActionResult Index()
         {
@@ -27,6 +30,8 @@ namespace SARSCOV2.Controllers
 
             return View();
         }
+
+        //[Authorize(Roles = "admin, manager, student")]
 
         [HttpPost]
         public JsonResult AjaxMethod(string stan_rekordu_na)

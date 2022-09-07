@@ -23,6 +23,7 @@ namespace SARSCOV2.Controllers
             return View();
         }
 
+        //[Authorize(Roles = "admin, manager, student")]
         [HttpPost]
         public JsonResult AjaxMethod(DateTime start, DateTime stop, string wojewodztwo)
         //public JsonResult AjaxMethod(string start, string stop, string wojewodztwo)

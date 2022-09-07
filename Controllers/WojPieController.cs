@@ -12,7 +12,8 @@ namespace Filter.Controllers
     public class WojPieController : Controller
     {
         readonly DBEntities db = new DBEntities();
-
+        
+        //[Authorize(Roles = "admin, manager, student")]
         // GET: WojPie
         public ActionResult Index()
         {
@@ -29,6 +30,7 @@ namespace Filter.Controllers
 
             return View();
         }
+        //[Authorize(Roles = "admin, manager, student")]
 
         [HttpPost]
         public JsonResult AjaxMethod(string stan_rekordu_na)
