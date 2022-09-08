@@ -52,9 +52,9 @@
 
 @using (Html.BeginForm("AjaxMethod", "PowLastDayAvg", FormMethod.Post))
 {
-    @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:300px; height:35px;" })
+    @Html.DropDownList("stan_rekordu_na", (SelectList)ViewBag.stan_rekordu_na, new { @class = "form-control", style = "width:150px; height:35px;" })
 
-    <div id="chart1" style="width: auto; height: 500px;">
+    <div id="chart1" style="border: 1px solid; width: auto; height: 600px;">
     </div>
 }
 
